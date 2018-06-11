@@ -70,6 +70,14 @@ class Form{
     public $self_children_files;
     public $self_soldier_files;
     public $self_student_files;
+    public $social_harig;
+    public $social_harig_file;
+    public $medical_harig;
+    public $medical_harig_file;
+    public $family_harig;
+    public $family_harig_file;
+
+
 
 
     public $datas;
@@ -117,6 +125,12 @@ class Form{
         $this->self_children_files = $row['self_children_files'];
         $this->self_soldier_files = $row['self_soldier_files'];
         $this->self_student_files = $row['self_student_files'];
+        $this->social_harig_file = $row['social_harig_file'];
+        $this->medical_harig_file = $row['medical_harig_file'];
+        $this->family_harig_file = $row['family_harig_file'];
+
+
+        $this->datas = $row['datas'];
        
         $xcx = json_decode($row['datas']);
         if($xcx){
@@ -155,8 +169,9 @@ class Form{
         $this->self_children = $xcx->self_children; 
         $this->self_soldier = $xcx->self_soldier; 
         $this->self_student = $xcx->self_student; 
-
-        
+        $this->social_harig = $xcx->social_harig; 
+        $this->medical_harig = $xcx->medical_harig; 
+        $this->family_harig = $xcx->family_harig; 
         };
         
     }
@@ -331,7 +346,7 @@ class Form{
 
       
     }
-
+   
     public function file_update($files_arr, $fieldname){
         
         $file = $files_arr[$fieldname]["name"];
@@ -428,6 +443,21 @@ class Form{
             case 'self_student_files': 
             $fieldvalue = $this->self_student_files;
             break;
+           
+            case 'social_harig_file': 
+            $fieldvalue = $this->social_harig_file;
+            break;
+           
+            case 'medical_harig_file': 
+            $fieldvalue = $this->medical_harig_file;
+            break;
+           
+            case 'family_harig_file': 
+            $fieldvalue = $this->family_harig_file;
+            break;
+
+
+
         }
         $array_count = count(json_decode($fieldvalue));
         

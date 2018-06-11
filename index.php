@@ -85,9 +85,39 @@ if(isset($_POST['save'])){
     'self_children' => $_POST['self_children'],
     'self_soldier' => $_POST['self_soldier'],
     'self_student' => $_POST['self_student'],
+    'social_harig' => $_POST['social_harig'],
+    'family_harig' => $_POST['family_harig'],
+    'medical_harig' => $_POST['medical_harig'],
+    'tzfile' =>  json_decode($Form->tzfile),
+    'isalonefile' =>  json_decode($Form->isalonefile),
+    'islochemfile' =>  json_decode($Form->islochemfile),
+    'is_army_ptor_file' =>  json_decode($Form->is_army_ptor_file),
+    'is_miluim_file' =>  json_decode($Form->is_miluim_file),
+    'self_employ_files' =>  json_decode($Form->self_employ_files),
+    'self_salary_files' =>  json_decode($Form->self_salary_files),
+    'lo_oved_files' =>  json_decode($Form->lo_oved_files),
+    'mezonot_files' =>  json_decode($Form->mezonot_files),
+    'mezonot_height_files' =>  json_decode($Form->mezonot_height_files),
+    'is_siua_file' =>  json_decode($Form->is_siua_file),
+    'lo_oved_av_files' =>  json_decode($Form->lo_oved_av_files),
+    'self_av_salary_files' =>  json_decode($Form->self_av_salary_files),
+    'self_av_employ_files' =>  json_decode($Form->self_av_employ_files),
+    'lo_oved_em_files' =>  json_decode($Form->lo_oved_em_files),
+    'self_em_salary_files' =>  json_decode($Form->self_em_salary_files),
+    'self_em_employ_files' =>  json_decode($Form->self_em_employ_files),
+    'lo_oved_zug_files' =>  json_decode($Form->lo_oved_zug_files),
+    'self_zug_salary_files' =>  json_decode($Form->self_zug_salary_files),
+    'self_zug_employ_files' =>  json_decode($Form->self_zug_employ_files),
+    'self_children_files' =>  json_decode($Form->self_children_files),
+    'self_soldier_files' =>  json_decode($Form->self_soldier_files),
+    'self_student_files' =>  json_decode($Form->self_student_files),
+    'social_harig_file' =>  json_decode($Form->social_harig_file),
+    'medical_harig_file' =>  json_decode($Form->medical_harig_file),
+    'family_harig_file' =>  json_decode($Form->family_harig_file)
     
   
   );
+
 
 
   $meida = json_encode($datas);
@@ -137,9 +167,12 @@ if(isset($_POST['save'])){
   $Form->self_children = $datas['self_children'];
   $Form->self_soldier = $datas['self_soldier'];
   $Form->self_student = $datas['self_student'];
+  $Form->social_harig = $datas['social_harig'];
+  $Form->family_harig = $datas['family_harig'];
+  $Form->medical_harig = $datas['medical_harig'];
   
   
-
+  
       
       //$Form->tzfile = serialize($files);
 
@@ -214,10 +247,10 @@ if(isset($_POST['submit'])){
       'self_zug_employ_avg' => $_POST['self_zug_employ_avg'],
       'self_children' => $_POST['self_children'],
       'self_soldier' => $_POST['self_soldier'],
-      'self_student' => $_POST['self_student']
-
-      
-      
+      'self_student' => $_POST['self_student'],
+      'social_harig' => $_POST['social_harig'],
+      'family_harig' => $_POST['family_harig'],
+      'medical_harig' => $_POST['medical_harig']
     );
 
 
@@ -268,7 +301,10 @@ if(isset($_POST['submit'])){
     $Form->self_children = $datas['self_children'];
     $Form->self_soldier = $datas['self_soldier'];
     $Form->self_student = $datas['self_student'];
-    
+    $Form->social_harig = $datas['social_harig'];
+    $Form->family_harig = $datas['family_harig'];
+    $Form->medical_harig = $datas['medical_harig'];
+
     
 
         
@@ -374,7 +410,7 @@ if(isset($_POST['submit'])){
 
 
         </div> -->
-        <div class="col-md-8 order-md-1">
+        <div class="col-md-12 order-md-1">
          
           <form action="" id="studentForm" method="POST" class="needs-validation" enctype="multipart/form-data" ovalidate="" action="<?php $_SERVER['PHP_SELF'];?>" >
         
@@ -1308,6 +1344,150 @@ if(isset($_POST['submit'])){
         </div>
     </div>
 </div> <!-- section9 -->
+
+<div><!--section 10 --> 
+<div class="row" id="is_social_harig">
+          <div class="col-md-6 mb-3">
+           <label>מצב סוציאלי חריג</label>
+            <div class="custom-control custom-radio">
+             
+           
+              <input id="no_social_harig" value="0" name="social_harig" type="radio" class="custom-control-input ff" <?php echo($Form->social_harig == '0' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="no_social_harig">לא</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="yes_social_harig" value="1" name="social_harig" type="radio" class="custom-control-input ff" <?php echo($Form->social_harig == '1' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="yes_social_harig">כן</label>
+            </div>
+          </div>
+           
+        
+          <div class="col-md-6 mb-3">
+            <div class="custom-file" id="social_harig_file_cont">
+              <label class="custom-file-label" for="social_harig_file">אישור מצב סוציאלי חריג</label>
+              <p>למצבים סוציאלים חריגים עליך לצרף אישור רלוונטי- דו"ח סוציאלי או מסמך של רשויות הרווחה</p>
+              <ul class="file-list">
+                <?php  if($Form->social_harig_file != '' || $Form->social_harig_file != NULL){
+                    //var_dump(unserialize($Form->tzfile));
+                    $thefile = json_decode($Form->social_harig_file);
+                    $i = 0;
+                    foreach($thefile as $filename){
+                      
+                      echo '
+                        <li>
+                          <a href="./uploads/'.$Form->tz.'/'.$filename.'" target="_blank"> '.$filename.' </a>
+                          <span class="item-file" id="'.$Form->year.'-'.$Form->tz.'-'.$Form->id.'-'.$i.'" href="'.$Form->id.'/'.$i.'">הסר קובץ</span>
+                        </li>';
+                      $i++;
+                    }
+                }; ?>
+                
+                </ul>
+
+            
+                <input type="file" class="custom-file-input" id="social_harig_file" name="social_harig_file" />
+
+                <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="is_medical_harig">
+          <div class="col-md-6 mb-3">
+           <label>מצב רפואי חריג סטודנט</label>
+            <div class="custom-control custom-radio">
+             
+           
+              <input id="no_medical_harig" value="0" name="medical_harig" type="radio" class="custom-control-input ff" <?php echo($Form->medical_harig == '0' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="no_medical_harig">לא</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="yes_medical_harig" value="1" name="medical_harig" type="radio" class="custom-control-input ff" <?php echo($Form->medical_harig == '1' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="yes_medical_harig">כן</label>
+            </div>
+          </div>
+           
+        
+          <div class="col-md-6 mb-3">
+            <div class="custom-file" id="medical_harig_file_cont">
+              <label class="custom-file-label" for="medical_harig_file">אישור מצב רפואי חריג</label>
+              <p>למצבים רפואיים חריגים עליך לצרף מסמך מרופא מומחה</p>
+              <ul class="file-list">
+                <?php  if($Form->medical_harig_file != '' || $Form->medical_harig_file != NULL){
+                    //var_dump(unserialize($Form->tzfile));
+                    $thefile = json_decode($Form->medical_harig_file);
+                    $i = 0;
+                    foreach($thefile as $filename){
+                      
+                      echo '
+                        <li>
+                          <a href="./uploads/'.$Form->tz.'/'.$filename.'" target="_blank"> '.$filename.' </a>
+                          <span class="item-file" id="'.$Form->year.'-'.$Form->tz.'-'.$Form->id.'-'.$i.'" href="'.$Form->id.'/'.$i.'">הסר קובץ</span>
+                        </li>';
+                      $i++;
+                    }
+                }; ?>
+                
+                </ul>
+
+            
+                <input type="file" class="custom-file-input" id="medical_harig_file" name="medical_harig_file" />
+
+                <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row" id="is_family_harig">
+          <div class="col-md-6 mb-3">
+           <label>
+      מצב רפואי חריג בן משפחה
+           </label>
+            <div class="custom-control custom-radio">
+             
+           
+              <input id="no_family_harig" value="0" name="family_harig" type="radio" class="custom-control-input ff" <?php echo($Form->family_harig == '0' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="no_family_harig">לא</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="yes_family_harig" value="1" name="family_harig" type="radio" class="custom-control-input ff" <?php echo($Form->family_harig == '1' ?  'checked' : '' ); ?>>
+              <label class="custom-control-label" for="yes_family_harig">כן</label>
+            </div>
+          </div>
+          
+          <div class="col-md-6 mb-3">
+            <div class="custom-file" id="family_harig_file_cont">
+              <label class="custom-file-label" for="family_harig_file">אישור מצב רפואי חריג בן משפחה</label>
+              <p>במידה ומי מבני משפחתך הקרובה בעל מצב רפואי חריג יש לצרף מסמכים מרופא מומחה/p>
+              <ul class="file-list">
+                <?php  if($Form->family_harig_file != '' || $Form->family_harig_file != NULL){
+                    //var_dump(unserialize($Form->tzfile));
+                    $thefile = json_decode($Form->family_harig_file);
+                    $i = 0;
+                    foreach($thefile as $filename){
+                      
+                      echo '
+                        <li>
+                          <a href="./uploads/'.$Form->tz.'/'.$filename.'" target="_blank"> '.$filename.' </a>
+                          <span class="item-file" id="'.$Form->year.'-'.$Form->tz.'-'.$Form->id.'-'.$i.'" href="'.$Form->id.'/'.$i.'">הסר קובץ</span>
+                        </li>';
+                      $i++;
+                    }
+                }; ?>
+                
+                </ul>
+
+            
+                <input type="file" class="custom-file-input" id="family_harig_file" name="family_harig_file" />
+
+                <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
+
+              </div>
+            </div>
+          </div>
+      </div><!--/section 10 --> 
       <input type="submit" name="submit">
       <input type="submit" name="save" value="save" id="savebtn">
     </form>
