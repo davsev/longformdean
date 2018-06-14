@@ -65,6 +65,7 @@ class Dashboard{
                     <th>מסלול לימודים</th>  
                     <th>מצב משפחתי</th>  
                     <th>שנת לימודים</th>  
+                    <th></th>  
                 </tr>
             </thead>
             <tbody>';
@@ -77,11 +78,15 @@ class Dashboard{
             <tr>
                 <td>'. $data['fname'].'</td>  
                 <td>'. $data['lname'].'</td>  
-                <td data-key="'. $row['tz'].'">'. $row['tz'].'</td>  
+                <td data-year="'.$row['year'].'" data-type="file" data-filetype="tzfile" data-id="'. $row['tz'].'">'. $row['tz'].'</td>  
                 <td>'. date("d.m.Y", $row['created']).'</td>  
                 <td>'. $data['study_field'].'</td>  
                 <td>'. $data['family_state'].'</td>  
                 <td>'. $data['study_year'].'</td>  
+                <td>
+                  <a href="studentdata.php?id='.$row['id'].'">צפייה בכל הנתונים</a>
+
+                </td>  
                   
 
             </tr>';
@@ -94,6 +99,23 @@ class Dashboard{
        echo '</tbody>';
 
         
+    }
+
+
+    public function load_image($id, $type, $year){
+ 
+        // echo '<br />tz is '.$tz;
+        // echo '<br />year is '. $year;
+        $query = "SELECT ${type} FROM " . $this->table_name . " WHERE year = ${year} AND tz = ${id}";
+   
+        $stmt = $this->conn->prepare($query);     
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $file = $row[$type];
+        $decoded_file = json_decode($file);
+        return '/dean/uploads/'.$id.'/'.$decoded_file[0];
+
+
     }
 }
 

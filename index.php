@@ -1,5 +1,5 @@
 <?php
-$tz = '322211122';
+$tz = '032233223';
 echo $tz;
 $year = 2018;
 require './api/inc.php';
@@ -454,11 +454,11 @@ if(isset($_POST['submit'])){
               <div class="col-md-12 mb-3">
                 <label>מין</label>
                 <div class="custom-control custom-radio">
-                  <input id="female" name="gender" value="נקבה" type="radio" class="custom-control-input" <?php echo 'gender='.$Form->gender; ?>  required="" <?php echo($Form->gender == 'נקבה' ?  'checked' : '' ); ?>>
+                  <input id="female" name="gender" value="נקבה" type="radio" class="custom-control-input" <?php echo 'gender='.$Form->gender; ?>  <?php echo($Form->gender == 'נקבה' ?  'checked' : '' ); ?> required="">
                   <label class="custom-control-label" for="debit">נקבה</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input id="male" name="gender" value="זכר" type="radio" class="custom-control-input" required="" <?php echo($Form->gender == 'זכר' ?  'checked' : '' ); ?>>
+                  <input id="male" name="gender" value="זכר" type="radio" class="custom-control-input" <?php echo($Form->gender == 'זכר' ?  'checked' : '' ); ?> required="">
                   <label class="custom-control-label" for="credit">זכר</label>
                 </div>
               </div>
@@ -1412,7 +1412,7 @@ if(isset($_POST['submit'])){
           <div class="col-md-12 mb-3">
             <div class="custom-file" id="family_harig_file_cont">
               <label class="custom-file-label" for="family_harig_file">אישור מצב רפואי חריג בן משפחה</label>
-              <p>במידה ומי מבני משפחתך הקרובה בעל מצב רפואי חריג יש לצרף מסמכים מרופא מומחה/p>
+              <p>במידה ומי מבני משפחתך הקרובה בעל מצב רפואי חריג יש לצרף מסמכים מרופא מומחה</p>
               <ul class="file-list">
                 <?php  if($Form->family_harig_file != '' || $Form->family_harig_file != NULL){
                     //var_dump(unserialize($Form->tzfile));

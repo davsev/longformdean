@@ -1,9 +1,9 @@
-<?php
-include './api/inc.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+  <title>מלגות דיקן</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -32,5 +32,3 @@ include './api/inc.php';
     <!-- Custom Theme Style -->
     <link href="./gentela/build/css/custom.min.css" rel="stylesheet">
     <link href="./gentela/build/css/achva.css" rel="stylesheet">
-  </head>
-  <body class="nav-md">

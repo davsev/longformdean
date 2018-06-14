@@ -1,15 +1,29 @@
 <?php
-    include 'head.php'; 
-
-
+    include './api/incg.php';
     $Dash = new Dashboard($db);
-    ?>
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>דשבורד |  מערכת ניהול מלגות דיקן</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+     <?php include 'head.php'; ?> 
+
+  </head>
+  <body class="nav-md">
    <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index.html" class="site_title"><img src="./assets/images/logow.png" class="dash-logo" alt=""><span>ניהול מלגות דיקן</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -20,8 +34,8 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>היי</span>
+                <span>אירית</span>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -162,7 +176,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">

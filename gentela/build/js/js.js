@@ -5,3 +5,10 @@ $(document).ready( function () {
         }
     });
 } );
+
+
+$(document).ready(function(){
+    $(document).on('mouseout','td[data-type="file"]', function(e){
+        $('body').remove('div.xxx');
+    });
+});

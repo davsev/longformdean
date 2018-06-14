@@ -1,5 +1,5 @@
 $(function(){
-    $('.item-file').on('click', function(e){
+    $(document).on('click','.item-file', function(e){
         var me = this;
         var id = $(me).attr('id');
         //Get the I d of the file field.

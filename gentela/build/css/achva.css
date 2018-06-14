@@ -18,3 +18,27 @@
 th{
     text-align: right;
 }
+
+img.dash-logo {
+    width: 22px;
+    margin: 0 10px;
+}
+
+.menu_section>ul {
+    margin-top: 10px;
+    -webkit-padding-start: 0;
+}
+
+body.login-page{
+    background-color: lightgrey;
+    /* background-image: url('../../../assets/images/out-achva.jpg'); */
+    background-size: cover;
+}
+
+.login_content h1:after, .login_content h1:before{
+    width: 0%;
+}
+
+#content form .submit, .login_content form input[type=submit]{
+    float: right;
+}
