@@ -17,6 +17,7 @@ class Form{
     public $id;
     public $tz;
     public $year;
+    public $submitted;
     public $lname;
     public $fname;
     public $gender;
@@ -46,6 +47,7 @@ class Form{
     public $self_employ_avg;
     public $self_employ_files;
     public $mezonot_state;
+    public $mezonot_height;
     public $taasukati_av_state;
     public $self_av_salary_avg;
     public $self_av_employ_avg;
@@ -100,6 +102,7 @@ class Form{
         $this->id = $row['id'];
         $this->tz = $row['tz'];
         $this->year = $row['year'];
+        $this->submitted= $row['submitted'];
         $this->isalonefile = $row['isalonefile'];
         $this->tzfile = $row['tzfile'];
         $this->islochemfile = $row['islochemfile'];
@@ -129,49 +132,89 @@ class Form{
         $this->medical_harig_file = $row['medical_harig_file'];
         $this->family_harig_file = $row['family_harig_file'];
 
+        // $this->lname = $row['lname']; 
+        // $this->fname = $row['fname']; 
+        // $this->birth_country = $row['birth_country']; 
+        // $this->gender = $row['gender'];
+        // $this->city = $row['city']; 
+        // $this->cellular = $row['cellular'];
+        // $this->email = $row['email'];
+        // $this->family_state = $row['family_state'];
+        // $this->isalone = $row['isalone']; 
+        // $this->study_field = $row['study_field']; 
+        // $this->asked_schol = $row['asked_schol']; 
+        // $this->is_army = $row['is_army'];
+        // $this->length_army = $row['length_army']; 
+        // $this->is_lochem = $row['is_lochem'];
+        // $this->is_army_ptor = $row['is_army_ptor']; 
+        // $this->is_miluim = $row['is_miluim']; 
+        // $this->mimun_nosaf = $row['mimun_nosaf']; 
+        // $this->taasukati_state = $row['taasukati_state']; 
+        // $this->self_salary_avg = $row['self_salary_avg']; 
+        // $this->self_employ_avg = $row['self_employ_avg']; 
+        // $this->mezonot_state = $row['mezonot_state']; 
+        // $this->mezonot_height = $row['mezonot_height'];
+        // $this->is_siua = $row['is_siua']; 
+        // $this->taasukati_av_state = $row['taasukati_av_state'];
+        // $this->self_av_salary_avg = $row['self_av_salary_avg;']; 
+        // $this->self_av_employ_avg = $row['self_av_employ_avg']; 
+        // $this->taasukati_em_state = $row['taasukati_em_state']; 
+        // $this->self_em_salary_avg = $row['self_em_salary_avg'];
+        // $this->self_em_employ_avg = $xcx['self_em_employ_avg']; 
+        // $this->taasukati_zug_state = $row['taasukati_zug_state']; 
+        // $this->self_zug_salary_avg = $row['self_zug_salary_avg']; 
+        // $this->self_zug_employ_avg = $row['self_zug_employ_avg']; 
+        // $this->self_children = $row['self_children']; 
+        // $this->self_soldier = $row['self_soldier'];
+        // $this->self_student = $row['self_student']; 
+        // $this->social_harig = $row['social_harig'];
+        // $this->medical_harig = $row['medical_harig'];
+        // $this->family_harig = $row['family_harig']; 
+
+
 
         $this->datas = $row['datas'];
-       
-        $xcx = json_decode($row['datas']);
+      
+        $xcx = unserialize($row['datas']);
         if($xcx){
-        $this->lname = $xcx->lname; 
-        $this->fname = $xcx->fname; 
-        $this->birth_country = $xcx->birth_country; 
-        $this->gender = $xcx->gender;
-        $this->city = $xcx->city; 
-        $this->cellular = $xcx->cellular; 
-        $this->email = $xcx->email; 
-        $this->family_state = $xcx->family_state; 
-        $this->isalone = $xcx->isalone; 
-        $this->study_field = $xcx->study_field; 
-        $this->asked_schol = $xcx->asked_schol; 
-        $this->is_army = $xcx->is_army; 
-        $this->length_army = $xcx->length_army; 
-        $this->is_lochem = $xcx->is_lochem; 
-        $this->is_army_ptor = $xcx->is_army_ptor; 
-        $this->is_miluim = $xcx->is_miluim; 
-        $this->mimun_nosaf = $xcx->mimun_nosaf; 
-        $this->taasukati_state = $xcx->taasukati_state; 
-        $this->self_salary_avg = $xcx->self_salary_avg; 
-        $this->self_employ_avg = $xcx->self_employ_avg; 
-        $this->mezonot_state = $xcx->mezonot_state; 
-        $this->mezonot_height = $xcx->mezonot_height; 
-        $this->is_siua = $xcx->is_siua; 
-        $this->taasukati_av_state = $xcx->taasukati_av_state; 
-        $this->self_av_salary_avg = $xcx->self_av_salary_avg; 
-        $this->self_av_employ_avg = $xcx->self_av_employ_avg; 
-        $this->taasukati_em_state = $xcx->taasukati_em_state; 
-        $this->self_em_salary_avg = $xcx->self_em_salary_avg; 
-        $this->self_em_employ_avg = $xcx->self_em_employ_avg; 
-        $this->taasukati_zug_state = $xcx->taasukati_zug_state; 
-        $this->self_zug_salary_avg = $xcx->self_zug_salary_avg; 
-        $this->self_zug_employ_avg = $xcx->self_zug_employ_avg; 
-        $this->self_children = $xcx->self_children; 
-        $this->self_soldier = $xcx->self_soldier; 
-        $this->self_student = $xcx->self_student; 
-        $this->social_harig = $xcx->social_harig; 
-        $this->medical_harig = $xcx->medical_harig; 
-        $this->family_harig = $xcx->family_harig; 
+        $this->lname = $xcx['lname']; 
+        $this->fname = $xcx['fname']; 
+        $this->birth_country = $xcx['birth_country']; 
+        $this->gender = $xcx['gender'];
+        $this->city = $xcx['city']; 
+        $this->cellular = $xcx['cellular'];
+        $this->email = $xcx['email'];
+        $this->family_state = $xcx['family_state'];
+        $this->isalone = $xcx['isalone']; 
+        $this->study_field = $xcx['study_field']; 
+        $this->asked_schol = $xcx['asked_schol']; 
+        $this->is_army = $xcx['is_army'];
+        $this->length_army = $xcx['length_army']; 
+        $this->is_lochem = $xcx['is_lochem'];
+        $this->is_army_ptor = $xcx['is_army_ptor']; 
+        $this->is_miluim = $xcx['is_miluim']; 
+        $this->mimun_nosaf = $xcx['mimun_nosaf']; 
+        $this->taasukati_state = $xcx['taasukati_state']; 
+        $this->self_salary_avg = $xcx['self_salary_avg']; 
+        $this->self_employ_avg = $xcx['self_employ_avg']; 
+        $this->mezonot_state = $xcx['mezonot_state']; 
+        $this->mezonot_height = $xcx['mezonot_height'];
+        $this->is_siua = $xcx['is_siua']; 
+        $this->taasukati_av_state = $xcx['taasukati_av_state'];
+        $this->self_av_salary_avg = $xcx['self_av_salary_avg']; 
+        $this->self_av_employ_avg = $xcx['self_av_employ_avg']; 
+        $this->taasukati_em_state = $xcx['taasukati_em_state']; 
+        $this->self_em_salary_avg = $xcx['self_em_salary_avg'];
+        $this->self_em_employ_avg = $xcx['self_em_employ_avg']; 
+        $this->taasukati_zug_state = $xcx['taasukati_zug_state']; 
+        $this->self_zug_salary_avg = $xcx['self_zug_salary_avg']; 
+        $this->self_zug_employ_avg = $xcx['self_zug_employ_avg']; 
+        $this->self_children = $xcx['self_children']; 
+        $this->self_soldier = $xcx['self_soldier'];
+        $this->self_student = $xcx['self_student']; 
+        $this->social_harig = $xcx['social_harig'];
+        $this->medical_harig = $xcx['medical_harig'];
+        $this->family_harig = $xcx['family_harig']; 
         };
         
     }
@@ -179,7 +222,9 @@ class Form{
 
     public function new_line($tz, $year){
                     // query to insert record
-                    $query = "INSERT INTO " . $this->table_name . " (tz, year) VALUES (?, ?)";
+
+                    $created = time();
+                    $query = "INSERT INTO " . $this->table_name . " (tz, year,created) VALUES (?, ?, ?)";
         
                     // prepare query
                     $stmt = $this->conn->prepare($query);
@@ -188,6 +233,7 @@ class Form{
                     // bind values
                     $stmt->bindParam(1, $tz);
                     $stmt->bindParam(2, $year);
+                    $stmt->bindParam(3, $created);
 
                 
                     // var_dump($stmt);
@@ -331,17 +377,60 @@ class Form{
 
 
     public function update(){
-        $query = "UPDATE form SET datas=? WHERE tz = ? AND year = ?";
+        // $this->submitted = $submitted;
+        // if(!$submitted){
+        //     $submitted == 0;
+        // }
+        $query = "UPDATE form SET datas=?, submitted=? WHERE tz = ? AND year = ?";
         $stmt = $this->conn->prepare($query);
         
-        $stmt->bindParam(1, $this->datas);
-        $stmt->bindParam(2, $this->tz);
-        $stmt->bindParam(3, $this->year);
+        // $stmt->bindParam(1, $this->datas);
+        // $stmt->bindParam(2, $this->submitted);
+        // $stmt->bindParam(2, $this->lname']; 
+        // $stmt->bindParam(2, $this->fname']; 
+        // $stmt->bindParam(2, $this->birth_country']; 
+        // $stmt->bindParam(2, $this->gender'];
+        // $stmt->bindParam(2, $this->city']; 
+        // $stmt->bindParam(2, $this->cellular'];
+        // $stmt->bindParam(2, $this->email'];
+        // $stmt->bindParam(2, $this->family_state'];
+        // $stmt->bindParam(2, $this->isalone']; 
+        // $stmt->bindParam(2, $this->study_field']; 
+        // $stmt->bindParam(2, $this->asked_schol']; 
+        // $stmt->bindParam(2, $this->is_army'];
+        // $stmt->bindParam(2, $this->length_army']; 
+        // $stmt->bindParam(2, $this->is_lochem'];
+        // $stmt->bindParam(2, $this->is_army_ptor']; 
+        // $stmt->bindParam(2, $this->is_miluim']; 
+        // $stmt->bindParam(2, $this->mimun_nosaf']; 
+        // $stmt->bindParam(2, $this->taasukati_state']; 
+        // $stmt->bindParam(2, $this->self_salary_avg']; 
+        // $stmt->bindParam(2, $this->self_employ_avg']; 
+        // $stmt->bindParam(2, $this->mezonot_state']; 
+        // $stmt->bindParam(2, $this->mezonot_height'];
+        // $stmt->bindParam(2, $this->is_siua']; 
+        // $stmt->bindParam(2, $this->taasukati_av_state'];
+        // $stmt->bindParam(2, $this->self_av_salary_avg;']; 
+        // $stmt->bindParam(2, $this->self_av_employ_avg']; 
+        // $stmt->bindParam(2, $this->taasukati_em_state']; 
+        // $stmt->bindParam(2, $this->self_em_salary_avg'];
+        // $stmt->bindParam(2, $this->self_em_employ_avg']; 
+        // $stmt->bindParam(2, $this->taasukati_zug_state']; 
+        // $stmt->bindParam(2, $this->self_zug_salary_avg']; 
+        // $stmt->bindParam(2, $this->self_zug_employ_avg']; 
+        // $stmt->bindParam(2, $this->self_children']; 
+        // $stmt->bindParam(2, $this->self_soldier'];
+        // $stmt->bindParam(2, $this->self_student']; 
+        // $stmt->bindParam(2, $this->social_harig'];
+        // $stmt->bindParam(2, $this->medical_harig'];
+        // $stmt->bindParam(2, $this->family_harig']; 
+        // $stmt->bindParam(3, $this->tz);
+        // $stmt->bindParam(4, $this->year);
         
         
         // $stmt->bindParam(9, $this->email);
-        
-        $stmt->execute();
+        echo '$this->submitted '.$this->submitted .'cc';
+        $stmt->execute([$this->datas, $this->submitted, $this->tz, $this->year]);
         
 
       

@@ -1,9 +1,8 @@
 <?php
-$tz = '555555555';
+$tz = '322211122';
 echo $tz;
 $year = 2018;
 require './api/inc.php';
-
 
 $Form =new Form($db,$tz, $year);
 
@@ -18,35 +17,13 @@ if(empty($thedata)){
  $Form->new_line($tz, $year);
   }
 
-?>
-<html>
-    <head>
-
-<?php
 
 if(isset($_POST['save'])){
 
 
+  
   $tz = $_POST['tz'];
   $year = $_POST['year'];
-  // $fname = $_POST['fname'];
-  // $lname = $_POST['lname'];
-  // $cellular = $_POST['cellular'];
-  // $gender = $_POST['gender'];
-  // $birth_country = $_POST['birth_country'];
-  // $city = $_POST['city'];
-  // $email = $_POST['email'];
-  // $isalone = $_POST['isalone'];
-  // $study_field = $_POST['study_field'];
-  // $study_year = $_POST['study_year'];
-  // $asked_schol = $_POST['asked_schol'];
-  // $received_schol = $_POST['received_schol'];
-  // $is_lochem = $_POST['is_lochem'];
-  // $is_army = $_POST['is_army'];
-  // $length_army = $_POST['length_army'];
-  // $is_army_ptor = $_POST['is_army_ptor'];
-  // $is_miluim = $_POST['is_miluim'];
-  
   $datas =  array(
     'fname' => $_POST['fname'],
     'lname' => $_POST['lname'],
@@ -113,9 +90,8 @@ if(isset($_POST['save'])){
     'self_student_files' =>  json_decode($Form->self_student_files),
     'social_harig_file' =>  json_decode($Form->social_harig_file),
     'medical_harig_file' =>  json_decode($Form->medical_harig_file),
-    'family_harig_file' =>  json_decode($Form->family_harig_file)
+    'family_harig_file' =>  json_decode($Form->family_harig_file),
     
-  
   );
 
 
@@ -123,12 +99,12 @@ if(isset($_POST['save'])){
   $meida = json_encode($datas);
   //$is_miluim = $_POST['is_miluim'];
   //properties retrived by consructor
-  $Form->id = $id;
+
   $Form->tz = $tz;
   $Form->year = $year;
-  $Form->datas = $meida;
+  $Form->datas = serialize($datas);
   // echo '<pre>';
-  // var_dump($datas);
+  // var_dump($_POST);
   // echo '</pre>';
   $Form->fname = $datas['fname'];
   $Form->lname = $datas['lname'];
@@ -171,11 +147,6 @@ if(isset($_POST['save'])){
   $Form->family_harig = $datas['family_harig'];
   $Form->medical_harig = $datas['medical_harig'];
   
-  
-  
-      
-      //$Form->tzfile = serialize($files);
-
 
   if(!empty($thedata)){
        //if the data is already in the database retrive and update on save
@@ -186,30 +157,14 @@ if(isset($_POST['save'])){
       echo 'comleted';
       $Form->create();
 
-  }
-}
+  };
+};
 
 if(isset($_POST['submit'])){
     $tz = $_POST['tz'];
     $year = $_POST['year'];
-    // $fname = $_POST['fname'];
-    // $lname = $_POST['lname'];
-    // $cellular = $_POST['cellular'];
-    // $gender = $_POST['gender'];
-    // $birth_country = $_POST['birth_country'];
-    // $city = $_POST['city'];
-    // $email = $_POST['email'];
-    // $isalone = $_POST['isalone'];
-    // $study_field = $_POST['study_field'];
-    // $study_year = $_POST['study_year'];
-    // $asked_schol = $_POST['asked_schol'];
-    // $received_schol = $_POST['received_schol'];
-    // $is_lochem = $_POST['is_lochem'];
-    // $is_army = $_POST['is_army'];
-    // $length_army = $_POST['length_army'];
-    // $is_army_ptor = $_POST['is_army_ptor'];
-    // $is_miluim = $_POST['is_miluim'];
-    
+    $submitted = $_POST['submitted'];
+
     $datas =  array(
       'fname' => $_POST['fname'],
       'lname' => $_POST['lname'],
@@ -250,20 +205,22 @@ if(isset($_POST['submit'])){
       'self_student' => $_POST['self_student'],
       'social_harig' => $_POST['social_harig'],
       'family_harig' => $_POST['family_harig'],
-      'medical_harig' => $_POST['medical_harig']
+      'medical_harig' => $_POST['medical_harig'],
+      
     );
 
 
     $meida = json_encode($datas);
-    //$is_miluim = $_POST['is_miluim'];
     //properties retrived by consructor
     $Form->id = $id;
     $Form->tz = $tz;
     $Form->year = $year;
-    $Form->datas = $meida;
-    // echo '<pre>';
-    // var_dump($datas);
-    // echo '</pre>';
+    $Form->submitted = $submitted;
+    
+    // $Form->datas = $meida;
+
+    $Form->datas = serialize($datas);
+
     $Form->fname = $datas['fname'];
     $Form->lname = $datas['lname'];
     $Form->gender = $datas['gender'];
@@ -320,35 +277,35 @@ if(isset($_POST['submit'])){
         echo 'comleted';
         $Form->create();
 
-    }
-}
+    };
+};
 
 ?>
-
-
+<html>
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-                <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
+        <title>בקשה למלגת דיקן</title>
 
         <link rel="stylesheet" href="./vendors/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="./vendors/parsleyjs/dist/parsley.css">
+
         
         <link rel="stylesheet" href="./assets/style/style.css">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            *{
-                direction: rtl;
-            }
-
-        </style>
     </head>
     <body>
 
     
       <div class="container">
-      <div class="py-5 text-center">
+        <div class="row">
+          <div class="col-xs-12 text-left">
+            <img src="./assets/images/logo.png" alt="לוגו המכללה האקדמית אחוה">
+          </div>
+        </div>
+      <div class="py-5 text-right">
         <h2>בקשה למלגות דיקן- טופס מקוון</h2>
         <p class="lead">        תאריך אחרון להגשה: 31.10.2018
           <br />
@@ -412,33 +369,31 @@ if(isset($_POST['submit'])){
         </div> -->
         <div class="col-md-12 order-md-1">
          
-          <form action="" id="studentForm" method="POST" class="needs-validation" enctype="multipart/form-data" ovalidate="" action="<?php $_SERVER['PHP_SELF'];?>" >
+          <form action="" id="studentForm" method="POST" class="needs-validation" enctype="multipart/form-data" data-parsley-validate="" ovalidate="" action="<?php $_SERVER['PHP_SELF'];?>" >
         
           <div><!-- section1 -->
           <h3>פרטים אישיים</h3>
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
               <?php echo $Form->fname; ?>
                 <label for="fname">שם פרטי</label>
                 <input type="text" name="fname" class="form-control" id="fname" autocomplete='given-name' placeholder="" required="" value="<?php echo $Form->fname; ?>">
-                <div class="invalid-feedback">
-                  חובה להזין שם פרטי תקני
-                </div>
+
 
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
               <label for="lname">שם משפחה</label>
                 <input type="text" name="lname" class="form-control" id="lname" placeholder="" required="" value="<?php echo $Form->lname; ?>">
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
               <label for="tz">תעודת זהות</label>
                 <input type="text" name="tz" class="form-control" id="tz" autocomplete='given-name' placeholder="" required="" value="<?php echo $tz; ?>" readonly>
                
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
  
                 <div class="custom-file" id="tz-file">
                     <label class="custom-file-label" for="tzfile">צילום ת.ז (לחצו כאן)</label>
@@ -471,32 +426,32 @@ if(isset($_POST['submit'])){
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
   
                 <label for="birth_country">ארץ לידה</label>
                 <input type="text" name="birth_country" class="form-control" id="birth_country" placeholder="" required="" value="<?php echo $Form->birth_country; ?>">
 
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
               <label for="city">מקום מגורים</label>
                 <input type="text" name="city" class="form-control" id="city" placeholder="" required="" value="<?php echo $Form->city; ?>">
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
   
                 <label for="cellular">טלפון נייד</label>
                 <input type="text" name="cellular" class="form-control" id="cellular" placeholder="" required="" value="<?php echo $Form->cellular; ?>">
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
               <label for="email">דואר אלקטרוני</label>
                 <input type="email" name="email" class="form-control" id="email" placeholder="" required="" value="<?php echo $Form->email; ?>">
               </div>
             </div>
 
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
                 <label>מין</label>
                 <div class="custom-control custom-radio">
                   <input id="female" name="gender" value="נקבה" type="radio" class="custom-control-input" <?php echo 'gender='.$Form->gender; ?>  required="" <?php echo($Form->gender == 'נקבה' ?  'checked' : '' ); ?>>
@@ -507,11 +462,11 @@ if(isset($_POST['submit'])){
                   <label class="custom-control-label" for="credit">זכר</label>
                 </div>
               </div>
-              <div class="col-md-6 mb-3" id="family_state_cont">
+              <div class="col-md-12 mb-3" id="family_state_cont">
             <label for="family_state">מצב משפחתי</label>
             
-              <select name="family_state" class="ff" id="family_state">
-                <option value="0">יש לבחור ערך</option>
+              <select name="family_state" class="ff" id="family_state" required="">
+                <option value="">יש לבחור ערך</option>
                 <option value="1" <?php echo($Form->family_state == '1' ? 'selected' : '')?>>רווק</option>
                 <option value="2" <?php echo($Form->family_state == '2' ? 'selected' : '')?>>נשוי</option>
                 <option value="3" <?php echo($Form->family_state == '3' ? 'selected' : '')?>>גרוש</option>
@@ -520,7 +475,7 @@ if(isset($_POST['submit'])){
             </div>
             </div>
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-3">
                 <label>בודד בארץ</label>
                 <div class="custom-control custom-radio">
                   <input id="alone" value="בודד" name="isalone" type="radio" class="custom-control-input" required="" <?php echo($Form->isalone == 'בודד' ?  'checked' : '' ); ?>>
@@ -534,7 +489,7 @@ if(isset($_POST['submit'])){
             </div>
 
             <div class="row" id="is_alone_file" style="display: none">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-12 mb-3">
                 <div class="custom-file" id="iisalonefile">
                     <label class="custom-file-label" for="isalonefile">סטודנט בודד בארץ (לחצו כאן)</label>
                     <p>סטודנט בודד בארץ, או מי שהוכר כחייל בודד, יש להביא אישורים המעידים על כך</p>
@@ -564,10 +519,7 @@ if(isset($_POST['submit'])){
                 </div>
               </div>
             </div>
-            <div>
-            
-            <input type="hidden" name="year" class="form-control" id="year" autocomplete='given-year' placeholder="" required="" value="<?php echo $year; ?>" readonly>
-            </div>
+
         </div><!-- section1 -->
 
         <div><!-- section2 -->
@@ -576,24 +528,24 @@ if(isset($_POST['submit'])){
          
           <!-- <label for="study-field">תחום לימודים</label>
           <select class="custom-select" name="study_field" id="study-field"> -->
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="study-field">תחום לימודים</label>
             </div>
-            <select class="custom-select" name="study_field" id="study-field">
+            <select class="custom-select" name="study_field" id="study-field" required>
 
-                <option value="0">נא לבחור ערך</option>
+                <option value="">נא לבחור ערך</option>
                 <?php $Form->get_study_field(); ?>
             </select>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" for="study_year">שנת לימודים</label>
             </div>
 
            
-            <select class="custom-select" name="study_year" id="study_year">    
-                <option value="0">נא לבחור ערך</option>
+            <select class="custom-select" name="study_year" id="study_year" required>    
+                <option value="">נא לבחור ערך</option>
                 <option value="א"  <?php echo($Form->study_year == 'א' ? 'selected' : '')?>>א</option>
                 <option value="ב"  <?php echo($Form->study_year == 'ב' ? 'selected' : '')?>>ב</option>
                 <option value="ג"  <?php echo($Form->study_year == 'ג' ? 'selected' : '')?>>ג</option>
@@ -602,26 +554,26 @@ if(isset($_POST['submit'])){
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <label>האם בקשת בעבר מלגת דיקאן</label>
             <div class="custom-control custom-radio">
-                <input id="asked_schol" value="כן" name="asked_schol" type="radio" class="custom-control-input" required="" <?php echo($Form->asked_schol == 'כן' ?  'checked' : '' ); ?>>
+                <input id="asked_schol" value="1" name="asked_schol" type="radio" class="custom-control-input" required="" <?php echo($Form->asked_schol == '1' ?  'checked' : '' ); ?>>
                 <label class="custom-control-label" for="debit">כן</label>
             </div>
             <div class="custom-control custom-radio">
-                <input id="not_asked_schol" value="לא" name="asked_schol" type="radio" class="custom-control-input" required="" <?php echo($Form->asked_schol == 'לא' ?  'checked' : '' ); ?>>
+                <input id="not_asked_schol" value="0" name="asked_schol" type="radio" class="custom-control-input" required="" <?php echo($Form->asked_schol == '0' ?  'checked' : '' ); ?>>
                 <label class="custom-control-label" for="credit">לא</label>
             </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div id="asked-schol-div">
               <label>האם קיבלת בעבר מלגת דיקאן</label>
               <div class="custom-control custom-radio">
-                  <input id="received_schol" value="כן" name="received_schol" type="radio" class="custom-control-input" <?php echo($Form->received_schol == 'כן' ?  'checked' : '' ); ?>>
+                  <input id="received_schol" value="1" name="received_schol" type="radio" class="custom-control-input" <?php echo($Form->received_schol == '1' ?  'checked' : '' ); ?>>
                   <label class="custom-control-label" for="debit">כן</label>
               </div>
               <div class="custom-control custom-radio">
-                  <input id="not_received_schol" value="לא" name="received_schol" type="radio" class="custom-control-input" <?php echo($Form->received_schol == 'לא' ?  'checked' : '' ); ?>>
+                  <input id="not_received_schol" value="0" name="received_schol" type="radio" class="custom-control-input" <?php echo($Form->received_schol == '0' ?  'checked' : '' ); ?>>
                   <label class="custom-control-label" for="credit">לא</label>
               </div>
             </div>
@@ -631,23 +583,23 @@ if(isset($_POST['submit'])){
       <div><!-- section3 -->
         <div class="row">
         <h3>שרות צבאי</h3>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <label for="is_army">סוג השירות</label>
-            <select name="is_army" id="is_army">
-              <option value="0">יש לבחור ערך</option>
+            <select name="is_army" id="is_army" required>
+              <option value="">יש לבחור ערך</option>
               <option value="צבאי" <?php echo($Form->is_army == 'צבאי' ? 'selected' : '')?>>צבאי</option>
               <option value="לאומי" <?php echo($Form->is_army == 'לאומי' ? 'selected' : '')?>>לאומי</option>
               <option value="ללא" <?php echo($Form->is_army == 'ללא' ? 'selected' : '')?>>ללא</option>
             </select>
           </div>
 
-          <div class="col-md-6 mb-3 army" id="length_army">
+          <div class="col-md-12 mb-3 army" id="length_army">
             <label for="length_army">משך השירות בחודשים</label>
             <input type="text" name="length_army" class="form-control" value="<?php echo $Form->length_army; ?>">
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3 hidden" id="is_lochem">
+          <div class="col-md-12 mb-3 hidden" id="is_lochem">
           <label>לוחם/ת או תומך/ת לחימה</label>
                 <div class="custom-control custom-radio">
                   <input id="lochem" name="is_lochem" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->is_lochem == '1' ?  'checked' : '' ); ?>>
@@ -658,7 +610,7 @@ if(isset($_POST['submit'])){
                   <label class="custom-control-label" for="credit">לא</label>
                 </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="is-lochem-file">
               <label class="custom-file-label" for="islochemfile">קובץ לוחם (לחצו כאן)</label>
              
@@ -681,7 +633,7 @@ if(isset($_POST['submit'])){
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3" id="army_ptor">
+          <div class="col-md-12 mb-3" id="army_ptor">
           <label>פטור משירות מסיבה רפואית בלבד</label>
                 <div class="custom-control custom-radio">
                   <input id="is_army_ptor" name="is_army_ptor" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->is_army_ptor == '1' ?  'checked' : '' ); ?>>
@@ -692,7 +644,7 @@ if(isset($_POST['submit'])){
                   <label class="custom-control-label" for="credit">לא</label>
                 </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="is_army_ptor_file">
               <label class="custom-file-label" for="is_army_ptor_file">נא לצרף מסמכי פטור</label>
               <p>במידה וקיבלת פטור משירות מסיבה רפואית, צרף מסמכים</p>
@@ -715,7 +667,7 @@ if(isset($_POST['submit'])){
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 mb-3" id="miluim_pail">
+          <div class="col-md-12 mb-3" id="miluim_pail">
           <label>שירות מילואים פעיל</label>
                 <div class="custom-control custom-radio">
                   <input id="is_miluim" name="is_miluim" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->is_miluim == '1' ?  'checked' : '' ); ?>>
@@ -726,7 +678,7 @@ if(isset($_POST['submit'])){
                   <label class="custom-control-label" for="credit">לא</label>
                 </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="is-miluim-file">
               <label class="custom-file-label" for="is_miluim_file">במידה והנך משרת שרות מילואים פעיל צרף אישורים (לחצו כאן)</label>
               <ul class="file-list">
@@ -750,14 +702,14 @@ if(isset($_POST['submit'])){
       </div><!-- section3 -->
       <h3>לימודים אקדמיים בשנה"ל הנוכחית</h3><!-- section4 -->
         <div class="row">
-          <div class="col-md-6 mb-3" id="mimun_nosaf">
+          <div class="col-md-12 mb-3" id="mimun_nosaf">
           <label>בשנת הלימודים הנוכחית אקבל השתתפות במימון לימודי על ידי גוף כלשהו</label>
             <div class="custom-control custom-radio">
-              <input id="mimun_nosaf" name="mimun_nosaf" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->mimun_nosaf == '1' ?  'checked' : '' ); ?>>
+              <input id="mimun_nosaf" name="mimun_nosaf" value="1" type="radio" class="custom-control-input"  required="" <?php echo($Form->mimun_nosaf == '1' ?  'checked' : '' ); ?>>
               <label class="custom-control-label" for="debit">כן</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="lo_mimun_nosaf" name="mimun_nosaf" value="0" type="radio" class="custom-control-input" required="" <?php echo($Form->mimun_nosaf == '0' ?  'checked' : '' ); ?>>
+              <input id="lo_mimun_nosaf" name="mimun_nosaf" value="0" type="radio" class="custom-control-input" checked required="" <?php echo($Form->mimun_nosaf == '0' ?  'checked' : '' ); ?>>
               <label class="custom-control-label" for="credit">לא</label>
             </div>
           </div>
@@ -768,16 +720,16 @@ if(isset($_POST['submit'])){
           <div class="taasuka">
             <div class="row"> <!-- taasukati -->
          
-            <div class="col-md-6 mb-3" id="taasukati_state_cont">
+            <div class="col-md-12 mb-3" id="taasukati_state_cont">
             <label for="taasukati_state">מצב תעסוקתי</label>
-              <select name="taasukati_state"  class="taas" id="taasukati_state">
-                <option value="0">יש לבחור ערך</option>
+              <select name="taasukati_state"  class="taas" id="taasukati_state" required>
+                <option value="">יש לבחור ערך</option>
                 <option value="1" <?php echo($Form->taasukati_state == '1' ? 'selected' : '')?>>שכיר</option>
                 <option value="2" <?php echo($Form->taasukati_state == '2' ? 'selected' : '')?>>עצמאי</option>
                 <option value="3" <?php echo($Form->taasukati_state == '3' ? 'selected' : '')?>>לא עובד</option>
               </select>
             </div>
-            <div class="col-md-6 mb-3 hidden starthidden lo-oved" id="lo_oved_files_cont">
+            <div class="col-md-12 mb-3 hidden starthidden lo-oved" id="lo_oved_files_cont">
               <div class="custom-file" id="lo_oved_files">
                 <label class="custom-file-label" for="lo_oved_files">במידה ולא עובד</label>
                 <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
@@ -801,12 +753,12 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row salary starthidden" id="self_salary">
-            <div class="col-md-6 mb-3" id="self_salary_avg_cont">
+            <div class="col-md-12 mb-3" id="self_salary_avg_cont">
             <label for="self_salary_avg">שכר ברוטו</label>
             <p>יש להזין ממוצע שלושה חודשי שכר אחרונים</p>
               <input type="text" class="form-control" name="self_salary_avg" id="self_salary_avg" value="<?php echo $Form->self_salary_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_salary_files_cont">
+            <div class="col-md-12 mb-3" id="self_salary_files_cont">
               <div class="custom-file" id="self_salary_files">
                 <label class="custom-file-label" for="self_salary_files">שלושה תלושי שכר אחרונים</label>
                 <p>יש לצרף שלושה תלושי שכר אחרונים</p>
@@ -830,12 +782,12 @@ if(isset($_POST['submit'])){
           </div>
 
            <div class="row hidden starthidden employ" id="self_employ_cont">
-            <div class="col-md-6 mb-3" id="self_employ_avg_cont">
+            <div class="col-md-12 mb-3" id="self_employ_avg_cont">
             <label for="self_employ_avg">הכנסה שנתית</label>
             
               <input type="text" class="form-control" name="self_employ_avg" id="self_employ_avg" value="<?php echo $Form->self_employ_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_employ_files_cont">
+            <div class="col-md-12 mb-3" id="self_employ_files_cont">
               <div class="custom-file" id="self_employ_files">
                 <label class="custom-file-label" for="self_employ_files">דוח שומה</label>
               
@@ -860,7 +812,7 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row hidden" id="mezonot_state_row_cont">
-            <div class="col-md-6 mb-3" id="mezonot_state_cont">
+            <div class="col-md-12 mb-3" id="mezonot_state_cont">
             <label for="mezonot">מזונות</label>
             
               <select name="mezonot_state" id="mezonot_state">
@@ -870,7 +822,7 @@ if(isset($_POST['submit'])){
                 <option value="3" <?php echo($Form->mezonot_state == '3' ? 'selected' : '')?>>נותן מזונות</option>
               </select>
             </div>
-            <div class="col-md-6 mb-3" id="mezonot_files_cont">
+            <div class="col-md-12 mb-3" id="mezonot_files_cont">
               <div class="custom-file hidden" id="mezonot_files_div">
                 <label class="custom-file-label" for="mezonot_files">אסמכתא על אי קבלת מזונות</label>
               
@@ -895,12 +847,12 @@ if(isset($_POST['submit'])){
 
 
           <div class="row hidden" id="mezonot_height_cont">
-            <div class="col-md-6 mb-3" id="mezonot_height_div">
+            <div class="col-md-12 mb-3" id="mezonot_height_div">
             <label for="mezonot_height">גובה מזונות (חודשי? שנתי?)</label>
             
               <input type="text" class="form-control" name="mezonot_height" id="mezonot_height" value="<?php echo $Form->mezonot_height; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="mezonot_height_files_cont">
+            <div class="col-md-12 mb-3" id="mezonot_height_files_cont">
               <div class="custom-file" id="mezonot_height_files_div">
                 <label class="custom-file-label" for="mezonot_height_files">אישור גובה מזונות</label>
               
@@ -926,7 +878,7 @@ if(isset($_POST['submit'])){
         <div><!-- section6 -->
         <h3>פרטי משפחה</h3>
         <div class="row hidden" id="is_siua_cont">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <label>מקבל סיוע</label>
             <p>סטודנט אשר אינו נתמך על ידי הוריו, עליו לצרף אישור מגורמי רווחה או עו"ד בלבד</p>
             <div class="custom-control custom-radio">
@@ -940,7 +892,7 @@ if(isset($_POST['submit'])){
           </div>
            
         
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="is_siua_file_cont">
               <label class="custom-file-label" for="is_siua_file">אישור מגורמי הרווחה</label>
               <p>סטודנט אשר אינו נתמך על ידי הוריו, עליו לצרף אישור מגורמי הרווחה או עו"ד בלבד</p>
@@ -973,7 +925,7 @@ if(isset($_POST['submit'])){
 
         <div class="taasuka hidden taasuka-parents" id="the-taasuka-cont">
          <div class="row"> <!-- taasukati  av-->
-            <div class="col-md-6 mb-3" id="taasukati_av_state_cont">
+            <div class="col-md-12 mb-3" id="taasukati_av_state_cont">
             <label for="taasukati_av_state">מצב תעסוקתי אב</label>
               <select name="taasukati_av_state" class="taas" id="taasukati_av_state">
                 <option value="0">יש לבחור ערך</option>
@@ -982,7 +934,7 @@ if(isset($_POST['submit'])){
                 <option value="3" <?php echo($Form->taasukati_av_state == '3' ? 'selected' : '')?>>לא עובד</option>
               </select>
             </div>
-            <div class="col-md-6 mb-3 hidden starthidden lo-oved" id="lo_oved_av_files_cont">
+            <div class="col-md-12 mb-3 hidden starthidden lo-oved" id="lo_oved_av_files_cont">
               <div class="custom-file" id="lo_oved_av_files_div">
                 <label class="custom-file-label" for="lo_oved_av_files">במידה ולא עובד</label>
                 <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
@@ -1006,12 +958,12 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row salary starthidden" id="self_av_salary">
-            <div class="col-md-6 mb-3" id="self_av_salary_avg_cont">
+            <div class="col-md-12 mb-3" id="self_av_salary_avg_cont">
             <label for="self_av_salary_avg">שכר ברוטו</label>
             <p>יש להזין ממוצע שלושה חודשי שכר אחרונים</p>
               <input type="text" class="form-control" name="self_av_salary_avg" id="self_av_salary_avg" value="<?php echo $Form->self_av_salary_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_av_salary_files_cont">
+            <div class="col-md-12 mb-3" id="self_av_salary_files_cont">
               <div class="custom-file" id="self_av_salary_files_div">
                 <label class="custom-file-label" for="self_av_salary_files">שלושה תלושי שכר אחרונים</label>
                 <p>יש לצרף שלושה תלושי שכר אחרונים</p>
@@ -1035,12 +987,12 @@ if(isset($_POST['submit'])){
           </div>
 
            <div class="row hidden starthidden employ" id="self_av_employ_cont">
-            <div class="col-md-6 mb-3" id="self_av_employ_avg_cont">
+            <div class="col-md-12 mb-3" id="self_av_employ_avg_cont">
             <label for="self_av_employ_avg">הכנסה שנתית</label>
             
               <input type="text" class="form-control" name="self_av_employ_avg" id="self_av_employ_avg" value="<?php echo $Form->self_av_employ_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_av_employ_avg_files_cont">
+            <div class="col-md-12 mb-3" id="self_av_employ_avg_files_cont">
               <div class="custom-file" id="self_av_employ_avg_files_div">
                 <label class="custom-file-label" for="self_av_employ_files">דוח שומה</label>
               
@@ -1066,7 +1018,7 @@ if(isset($_POST['submit'])){
 
          <div class="taasuka hidden taasuka-parents" id="the-taasuka-cont">
          <div class="row"> <!-- taasukati  em-->
-            <div class="col-md-6 mb-3" id="taasukati_em_state_cont">
+            <div class="col-md-12 mb-3" id="taasukati_em_state_cont">
             <label for="taasukati_em_state">מצב תעסוקתי אם</label>
               <select name="taasukati_em_state" class="taas" id="taasukati_em_state">
                 <option value="0">יש לבחור ערך</option>
@@ -1075,7 +1027,7 @@ if(isset($_POST['submit'])){
                 <option value="3" <?php echo($Form->taasukati_em_state == '3' ? 'selected' : '')?>>לא עובדת</option>
               </select>
             </div>
-            <div class="col-md-6 mb-3 hidden starthidden lo-oved" id="lo_oved_em_files_cont">
+            <div class="col-md-12 mb-3 hidden starthidden lo-oved" id="lo_oved_em_files_cont">
               <div class="custom-file" id="lo_oved_em_files_div">
                 <label class="custom-file-label" for="lo_oved_em_files">במידה ולא עובד</label>
                 <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
@@ -1099,12 +1051,12 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row salary starthidden" id="self_em_salary">
-            <div class="col-md-6 mb-3" id="self_em_salary_avg_cont">
+            <div class="col-md-12 mb-3" id="self_em_salary_avg_cont">
             <label for="self_em_salary_avg">שכר ברוטו</label>
             <p>יש להזין ממוצע שלושה חודשי שכר אחרונים</p>
               <input type="text" class="form-control" name="self_em_salary_avg" id="self_em_salary_avg" value="<?php echo $Form->self_em_salary_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_em_salary_files_cont">
+            <div class="col-md-12 mb-3" id="self_em_salary_files_cont">
               <div class="custom-file" id="self_em_salary_files_div">
                 <label class="custom-file-label" for="self_em_salary_files">שלושה תלושי שכר אחרונים</label>
                 <p>יש לצרף שלושה תלושי שכר אחרונים</p>
@@ -1128,12 +1080,12 @@ if(isset($_POST['submit'])){
           </div>
 
            <div class="row hidden starthidden employ" id="self_em_employ_cont">
-            <div class="col-md-6 mb-3" id="self_em_employ_avg_cont">
+            <div class="col-md-12 mb-3" id="self_em_employ_avg_cont">
             <label for="self_em_employ_avg">הכנסה שנתית</label>
             
               <input type="text" class="form-control" name="self_em_employ_avg" id="self_av_employ_avg" value="<?php echo $Form->self_em_employ_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_em_employ_avg_files_cont">
+            <div class="col-md-12 mb-3" id="self_em_employ_avg_files_cont">
               <div class="custom-file" id="self_em_employ_avg_files_div">
                 <label class="custom-file-label" for="self_em_employ_files">דוח שומה</label>
               
@@ -1159,7 +1111,7 @@ if(isset($_POST['submit'])){
 
          <div class="taasuka hidden taasuka-zug" id="the-taasuka-zug">
          <div class="row"> <!-- taasukati  bat/benzug-->
-            <div class="col-md-6 mb-3" id="taasukati_zug_state_cont">
+            <div class="col-md-12 mb-3" id="taasukati_zug_state_cont">
             <label for="taasukati_zug_state">מצב תעסוקתי בן/בת זוג</label>
               <select name="taasukati_zug_state" class="taas" id="taasukati_zug_state">
                 <option value="0">יש לבחור ערך</option>
@@ -1168,7 +1120,7 @@ if(isset($_POST['submit'])){
                 <option value="3" <?php echo($Form->taasukati_zug_state == '3' ? 'selected' : '')?>>לא עובדת</option>
               </select>
             </div>
-            <div class="col-md-6 mb-3 hidden starthidden lo-oved" id="lo_oved_zug_files_cont">
+            <div class="col-md-12 mb-3 hidden starthidden lo-oved" id="lo_oved_zug_files_cont">
               <div class="custom-file" id="lo_oved_zug_files_div">
                 <label class="custom-file-label" for="lo_oved_zug_files">במידה ולא עובד</label>
                 <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
@@ -1192,12 +1144,12 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row salary starthidden" id="self_zug_salary">
-            <div class="col-md-6 mb-3" id="self_zug_salary_avg_cont">
+            <div class="col-md-12 mb-3" id="self_zug_salary_avg_cont">
             <label for="self_zug_salary_avg">שכר ברוטו</label>
             <p>יש להזין ממוצע שלושה חודשי שכר אחרונים</p>
               <input type="text" class="form-control" name="self_zug_salary_avg" id="self_zug_salary_avg" value="<?php echo $Form->self_zug_salary_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_zug_salary_files_cont">
+            <div class="col-md-12 mb-3" id="self_zug_salary_files_cont">
               <div class="custom-file" id="self_zug_salary_files_div">
                 <label class="custom-file-label" for="self_zug_salary_files">שלושה תלושי שכר אחרונים</label>
                 <p>יש לצרף שלושה תלושי שכר אחרונים</p>
@@ -1221,12 +1173,12 @@ if(isset($_POST['submit'])){
           </div>
 
            <div class="row hidden starthidden employ" id="self_zug_employ_cont">
-            <div class="col-md-6 mb-3" id="self_zug_employ_avg_cont">
+            <div class="col-md-12 mb-3" id="self_zug_employ_avg_cont">
             <label for="self_zug_employ_avg">הכנסה שנתית</label>
             
               <input type="text" class="form-control" name="self_zug_employ_avg" id="self_zug_employ_avg" value="<?php echo $Form->self_zug_employ_avg; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_zug_employ_avg_files_cont">
+            <div class="col-md-12 mb-3" id="self_zug_employ_avg_files_cont">
               <div class="custom-file" id="self_zug_employ_avg_files_div">
                 <label class="custom-file-label" for="self_zug_employ_files">דוח שומה</label>
               
@@ -1251,14 +1203,14 @@ if(isset($_POST['submit'])){
         </div>
         </div><!-- section6 -->
         <div class="row starthidden" id="children_cont"><!-- section7 -->
-            <div class="col-md-6 mb-3" id="self_children_cont">
+            <div class="col-md-12 mb-3" id="self_children_cont">
             <label for="self_children" id="self_children_cont_label" >
             
             </label>
             
               <input type="text" class="form-control" name="self_children" id="self_children" value="<?php echo $Form->self_children; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_children_files_cont">
+            <div class="col-md-12 mb-3" id="self_children_files_cont">
               <div class="custom-file" id="self_children_files_div">
                 <label class="custom-file-label" for="self_children_files">חייב בהעלאת קובץ ספח תעודות זהות</label>
               
@@ -1281,14 +1233,14 @@ if(isset($_POST['submit'])){
             </div>
           </div> <!-- section7 -->
           <div class="row starthidden" id="soldier_cont"><!-- section8 -->
-            <div class="col-md-6 mb-3" id="self_soldier_cont">
+            <div class="col-md-12 mb-3" id="self_soldier_cont">
                 <label for="self_soldier" id="self_soldier_cont_label" >
 
                 </label>
             <p>במידה ואין להשאיר ריק</p>
                 <input type="text" class="form-control" name="self_soldier" id="self_soldier" value="<?php echo $Form->self_soldier; ?>">
             </div>
-            <div class="col-md-6 mb-3" id="self_soldier_files_cont">
+            <div class="col-md-12 mb-3" id="self_soldier_files_cont">
                 <div class="custom-file" id="self_soldier_files_div">
                     <label class="custom-file-label" for="self_soldier_files">
                    חייב בהעלאת קובץ תעודת חוגר/קצין
@@ -1313,14 +1265,14 @@ if(isset($_POST['submit'])){
             </div>
         </div> <!-- section8 -->
         <div class="row starthidden" id="student_cont"><!-- section9 -->
-    <div class="col-md-6 mb-3" id="self_student_cont">
+    <div class="col-md-12 mb-3" id="self_student_cont">
         <label for="self_student" id="self_student_cont_label" >
 
         </label>
     
         <input type="text" class="form-control" name="self_student" id="self_student" value="<?php echo $Form->self_student; ?>">
     </div>
-    <div class="col-md-6 mb-3" id="self_student_files_cont">
+    <div class="col-md-12 mb-3" id="self_student_files_cont">
         <div class="custom-file" id="self_student_files_div">
             <label class="custom-file-label" for="self_student_files">
                 אם כן חייב בהעלאת אישור לימודים
@@ -1347,7 +1299,7 @@ if(isset($_POST['submit'])){
 
 <div><!--section 10 --> 
 <div class="row" id="is_social_harig">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
            <label>מצב סוציאלי חריג</label>
             <div class="custom-control custom-radio">
              
@@ -1356,13 +1308,13 @@ if(isset($_POST['submit'])){
               <label class="custom-control-label" for="no_social_harig">לא</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="yes_social_harig" value="1" name="social_harig" type="radio" class="custom-control-input ff" <?php echo($Form->social_harig == '1' ?  'checked' : '' ); ?>>
+              <input id="yes_social_harig" value="1" name="social_harig" type="radio" checked class="custom-control-input ff" <?php echo($Form->social_harig == '1' ?  'checked' : '' ); ?>>
               <label class="custom-control-label" for="yes_social_harig">כן</label>
             </div>
           </div>
            
         
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="social_harig_file_cont">
               <label class="custom-file-label" for="social_harig_file">אישור מצב סוציאלי חריג</label>
               <p>למצבים סוציאלים חריגים עליך לצרף אישור רלוונטי- דו"ח סוציאלי או מסמך של רשויות הרווחה</p>
@@ -1394,7 +1346,7 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row" id="is_medical_harig">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
            <label>מצב רפואי חריג סטודנט</label>
             <div class="custom-control custom-radio">
              
@@ -1403,13 +1355,13 @@ if(isset($_POST['submit'])){
               <label class="custom-control-label" for="no_medical_harig">לא</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="yes_medical_harig" value="1" name="medical_harig" type="radio" class="custom-control-input ff" <?php echo($Form->medical_harig == '1' ?  'checked' : '' ); ?>>
+              <input id="yes_medical_harig" value="1" name="medical_harig" type="radio" checked class="custom-control-input ff" <?php echo($Form->medical_harig == '1' ?  'checked' : '' ); ?>>
               <label class="custom-control-label" for="yes_medical_harig">כן</label>
             </div>
           </div>
            
         
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="medical_harig_file_cont">
               <label class="custom-file-label" for="medical_harig_file">אישור מצב רפואי חריג</label>
               <p>למצבים רפואיים חריגים עליך לצרף מסמך מרופא מומחה</p>
@@ -1441,7 +1393,7 @@ if(isset($_POST['submit'])){
           </div>
 
           <div class="row" id="is_family_harig">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
            <label>
       מצב רפואי חריג בן משפחה
            </label>
@@ -1452,12 +1404,12 @@ if(isset($_POST['submit'])){
               <label class="custom-control-label" for="no_family_harig">לא</label>
             </div>
             <div class="custom-control custom-radio">
-              <input id="yes_family_harig" value="1" name="family_harig" type="radio" class="custom-control-input ff" <?php echo($Form->family_harig == '1' ?  'checked' : '' ); ?>>
+              <input id="yes_family_harig" value="1" name="family_harig" type="radio" checked class="custom-control-input ff" <?php echo($Form->family_harig == '1' ?  'checked' : '' ); ?>>
               <label class="custom-control-label" for="yes_family_harig">כן</label>
             </div>
           </div>
           
-          <div class="col-md-6 mb-3">
+          <div class="col-md-12 mb-3">
             <div class="custom-file" id="family_harig_file_cont">
               <label class="custom-file-label" for="family_harig_file">אישור מצב רפואי חריג בן משפחה</label>
               <p>במידה ומי מבני משפחתך הקרובה בעל מצב רפואי חריג יש לצרף מסמכים מרופא מומחה/p>
@@ -1488,31 +1440,36 @@ if(isset($_POST['submit'])){
             </div>
           </div>
       </div><!--/section 10 --> 
-      <input type="submit" name="submit">
-      <input type="submit" name="save" value="save" id="savebtn">
+      <div>       
+        <input type="hidden" name="year" class="form-control" id="year" autocomplete='given-year' placeholder="" required="" value="<?php echo $year; ?>" readonly>
+        <input type="hidden" name="submitted" class="form-control" id="submitted" placeholder="" required="" value="1" readonly>
+      </div>
+      <input type="submit"  name="submit" class="btn-lg btn-success" value="הגשת טופס">
+      <input type="submit" name="save" class="btn-lg btn-info" value="שמירת נתונים" id="savebtn">
     </form>
   </div>
 </div>
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">© 2017-2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
+        <p class="mb-1">המכללה האקדמית אחוה</p>
+
       </footer>
     
-<script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script src="./vendors/parsleyjs/dist/parsley.js"></script>
+<script src="./vendors/parsleyjs/dist/i18n/he.js"></script>
+<script src="./vendors/parsleyjs/dist/i18n/he.extra.js"></script>
+
 
 <script src="./api/js/js.js"></script>
 <script src="./api/js/fileupload.js"></script>
 <script src="./api/js/removefile.js"></script>
 
+
+<script>
+  $('#studentForm').parsley();
+</script>
 
 
 </body>

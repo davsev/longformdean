@@ -1,9 +1,20 @@
 *{
-    /* direction: rtl;
-    text-align: right; */
+    direction: rtl;
 }
 
+body{
+    background-image: url('../images/study-achva.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;  
+}
 
+.mb-3 {
+    margin-bottom: 28px;
+}
+
+.container{
+    background-color: rgba(255,255,255, 0.95);
+}
 @media (min-width: 992px){
     .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9 {
         float: right;
@@ -16,3 +27,8 @@
 .item-file{
     cursor: pointer;
 }
+
+input[type="submit"]{
+    border: 0px;
+}
+

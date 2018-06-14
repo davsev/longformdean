@@ -17,7 +17,7 @@ function preventD(e) {
  * validation
  */
 $('#savebtn').click(function () { 
-    $('input').removeAttr('required');
+    $('input, select').removeAttr('required');
 });
 
 document.onload = showReceivedSchol();
