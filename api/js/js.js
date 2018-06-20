@@ -1,17 +1,6 @@
-// function addfile(place, name){
-
-//     console.log(place);
-//     input = document.createElement("input");
-//     input.type="file";
-//     // input.name=name;
-//     document.getElementById(place).appendChild(input);
-
-// }
-
 function preventD(e) {
     e.preventDefault();
 }
-
 
 /**
  * validation
@@ -19,6 +8,10 @@ function preventD(e) {
 $('#savebtn').click(function () { 
     $('input, select').removeAttr('required');
 });
+
+function init(){
+    
+}
 
 document.onload = showReceivedSchol();
 document.onload = showIsAloneFile();
@@ -30,12 +23,33 @@ document.onload = showIsMiluim();
 document.onload = familyState();
 document.onload = mezonotState();
 
+document.onload = isFileInLi();
+
 document.onload = showIsSiua();
 document.onload = familyandSiua();
 document.onload = fileRequired('#self_children', 'input#self_children_files');
 document.onload = fileRequired('#self_soldier', 'input#self_soldier_files');
 document.onload = fileRequired('#self_student', 'input#self_student_files');
+// document.onload = ifFileUploaded();
+// document.onload = ifFileRemoved();
 
+
+// document.onload = whenFileChanged();
+
+
+// $(document).ready(function(){
+//     $('.file-list').on("DOMSubtreeModified", whenFileChanged);
+// });
+
+
+
+  
+// $(document).ready(function(){
+//     $('input[type="file"]').bind("click", whenFileAdded);
+// });
+
+document.getElementById("asked_schol").addEventListener("click", showReceivedSchol);
+document.getElementById("not_asked_schol").addEventListener("click", showReceivedSchol);
 
 document.onload = tas($('#taasukati_av_state').val());
 
@@ -78,12 +92,12 @@ document.getElementById("family_state").addEventListener("change", familyandSiua
 function showIsAloneFile() {
     if (document.getElementById('alone').checked) {
         document.getElementById('is_alone_file').style.display = 'block';
-        document.getElementById("isalonefile").attributes.required = "required";
+        document.getElementById("isalonefile").required = true;
 
     } else {
         document.getElementById('is_alone_file').style.display = 'none';
         document.getElementById('notalone').checked = true;
-        document.getElementById("isalonefile").attributes.required = "";
+        document.getElementById("isalonefile").required = false;
     }
 }
 
@@ -222,7 +236,7 @@ function tas(val) {
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.salary').find('.file-list li:last-child a').html();
                 if(!lastFile ? $(this).closest('.taasuka').find('div.salary').find('input[type=file]').prop('required', true) : '');
-                console.log(lastFile);
+                
 
                 
                 break;
@@ -235,7 +249,7 @@ function tas(val) {
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.employ').find('.file-list li:last-child a').html();
                 if(!lastFile ? $(this).closest('.taasuka').find('div.employ').find('input[type=file]').prop('required', true) : '');
-                console.log(lastFile);
+              
 
                
                 break;
@@ -250,7 +264,7 @@ function tas(val) {
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.lo-oved').find('.file-list li:last-child a').html();
                 if(!lastFile ? $(this).closest('.taasuka').find('div.lo-oved').find('input[type=file]').prop('required', true) : '');
-                console.log(lastFile);
+               
 
                 
                 break;
@@ -423,13 +437,12 @@ $(field).keyup(function(){
         console.log('true');
 
         var lastFile =  $(this).closest('.row').find('.file-list li:last-child a').html();
-        console.log(lastFile);
         if(lastFile ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
     }else{
 
         $(target).prop('required', false);
       
-        console.log('false');
+        // console.log('false');
 
 
     }
@@ -437,6 +450,112 @@ $(field).keyup(function(){
 
 $(field).trigger('keyup');
 }
+
+
+//this function checks if there are lines in ul.file-list 
+//if so it removes the reqired from the field
+// var fileId = $('input[type="file"]').attr('id');
+
+
+// function ifFileUploaded(){
+  
+//         var isItemInList = $(this).closest('.row').find('.file-list li:last-child a').html();
+//         console.log(isItemInList);
+//         if(isItemInList ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
+        
+  
+   
+//     $('input[type="file"]').trigger( "click" );
+// };
+
+
+
+//add or remove requred property from file field depends on the .file-list content
+//works in chrome only becouse we are using DOMSubtreeModified event handeler
+// function whenFileChanged(){
+
+//         var isItemInList = $(this).closest('.row').find('.file-list li').length;
+//         console.log(isItemInList);
+
+//         if(isItemInList != 0){
+//              $(this).closest('.row').find('input[type=file]').prop('required', false);
+//          }else{
+//             $(this).closest('.row').find('input[type=file]').prop('required', true);
+
+//          };
+
+//         // $(this).closest('.row').find('input[type=file]').prop('required', true)
+// };
+
+
+
+//add or remove requred property from file field depends on the .file-list content
+const observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+        let liLength = mutation.target.getElementsByTagName("li").length;
+        if(mutation.addedNodes.length){
+            console.log('added',mutation.addedNodes[0]);
+            if(liLength != 0){
+                console.log(liLength);
+                console.log( mutation.target.parentElement.getElementsByTagName('input'));
+                
+                mutation.target.parentElement.getElementsByTagName('input')[0].required = false;
+            }
+        }
+        if(mutation.removedNodes.length){
+            console.log('Removed',mutation.removedNodes[0]);
+            if(liLength == 0){
+                mutation.target.parentElement.getElementsByTagName('input')[0].required = true;
+                console.log(liLength);
+            }
+        }
+    });
+});
+
+
+const fileList = document.querySelector('ul.file-list');
+observer.observe(fileList, {
+    childList: true
+})
+
+//this function checks if there are files uploaded in the tzfile fields onpage load
+//If there are files it tremoves the require prop
+
+function isFileInLi(){  
+    let theUl = document.querySelector('ul.file-list')
+    let isLi = theUl.getElementsByTagName("li");
+    if(isLi.length != 0 ? theUl.parentElement.getElementsByTagName('input')[0].required = false : theUl.parentElement.getElementsByTagName('input')[0].required = true )
+    console.log(theUl.parentElement);
+}
+
+// selects all files 
+// function isFileInLi(){  
+//     let theUl = document.querySelectorAll('ul.file-list.active')
+//     theUl.forEach(function(thisUl){
+//         let isLi = thisUl.getElementsByTagName("li");
+//         if(isLi.length != 0 ? thisUl.parentElement.getElementsByTagName('input')[0].required = false : thisUl.parentElement.getElementsByTagName('input')[0].required = true )
+//         console.log(thisUl.parentElement);
+//     });
+    
+  
+// }
+function whenFileAdded(){
+    
+    var isItemInList = $(this).closest('.row').find('.file-list li').length;
+    console.log(isItemInList);
+    if(isItemInList >= 1 ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
+
+    // $(this).closest('.row').find('input[type=file]').prop('required', true)
+
+// $('input[type="file"]').trigger( "click" );
+};
+
+    
+        
+
+        // $('.item-file').trigger( "click" );
+   
+
 
 
 
@@ -457,4 +576,11 @@ $(field).trigger('keyup');
 
 // $('input:radio').click(function(e){
 //     console.log($(this));
+// });
+
+
+// $('.file-list').on('load click',function(e){
+//     if($(this).empty()){
+//         console.log('emptyttt');
+//     }
 // });

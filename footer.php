@@ -51,7 +51,7 @@
     <!-- Custom Theme Scripts -->
     <script src="./gentela/build/js/custom.min.js"></script>
     <script src="./gentela/build/js/js.js"></script>
-    <script src="./api/js/loadfileonhover.js"></script>
+    <script src="./api/js/loadfileonclick.js"></script>
 	
   </body>
 </html>

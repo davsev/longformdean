@@ -20,6 +20,7 @@ $(function(){
                 $(me).parent().remove().animate({
                     opacity: 0.25,
                   });
+                  
             }
         });
     });

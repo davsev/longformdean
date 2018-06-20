@@ -42,3 +42,42 @@ body.login-page{
 #content form .submit, .login_content form input[type=submit]{
     float: right;
 }
+
+/*image file in studentdata.php*/
+.full-width {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+
+#image-container{
+    min-height: 1000px;
+}
+.full-height{
+    height: 100%;
+    display: grid;
+}
+/* image fade out before change*/
+.elementToFadeOut {
+    opacity: 1;
+    animation: fadeOut 1s linear;
+}
+
+.elementToFadeIn {
+    opacity: 0;
+    animation: fadeIn 1s linear;
+}
+
+
+@keyframes fadeOut {
+  0% { opacity: 1 }
+  100% { opacity: 0 }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+  }
+
+  a:active, a:hover, a:focus{
+  color:#e91e63
+  }

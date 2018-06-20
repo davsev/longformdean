@@ -1,7 +1,7 @@
 $(function () {
     $('.custom-file-input').on('change', function(e) {
         var id = $(this).attr('id');
-        e.preventDefault();
+        // e.preventDefault();
         var $thisFormObj = $(this).closest('form');
         var formdata = new FormData ($thisFormObj[0]);
         formdata.append("fieldId", id);

@@ -2,7 +2,7 @@
 
 include './api/incg.php';
 
-if (isset($_SESSION['valid'])) {
+if (isset($_SESSION['email'])) {
     header("Location: dashboard.php");
     die();
 }
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
       $_SESSION['timeout'] = time();
       $_SESSION['email'] = 'irit@achva.ac.il';
 
-      header("Location: dasboard.php");
+      header("Location: dashboard.php");
        die();
    } else {
       $msg = 'Wrong username or password';
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         <div class="animate form login_form">
             
           <section class="login_content">
-            <h1>התחברות למערכת מלוגת דיקאן</h1>
+            <h1>התחברות למערכת מלוגת דיקן</h1>
             
             <form method="POST" action="">
             

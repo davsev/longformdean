@@ -78,6 +78,8 @@ class Form{
     public $medical_harig_file;
     public $family_harig;
     public $family_harig_file;
+    public $explanation;
+    public $explanation_file;
 
 
 
@@ -99,6 +101,7 @@ class Form{
     
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
         $this->id = $row['id'];
         $this->tz = $row['tz'];
         $this->year = $row['year'];
@@ -117,11 +120,9 @@ class Form{
         $this->lo_oved_av_files = $row['lo_oved_av_files'];
         $this->self_av_salary_files = $row['self_av_salary_files'];
         $this->self_av_employ_files = $row['self_av_employ_files'];
-
         $this->lo_oved_em_files = $row['lo_oved_em_files'];
         $this->self_em_salary_files = $row['self_em_salary_files'];
         $this->self_em_employ_files = $row['self_em_employ_files'];
-
         $this->lo_oved_zug_files = $row['lo_oved_zug_files'];
         $this->self_zug_salary_files = $row['self_zug_salary_files'];
         $this->self_zug_employ_files = $row['self_zug_employ_files'];
@@ -131,6 +132,7 @@ class Form{
         $this->social_harig_file = $row['social_harig_file'];
         $this->medical_harig_file = $row['medical_harig_file'];
         $this->family_harig_file = $row['family_harig_file'];
+        $this->explanation_file = $row['explanation_file'];
 
         // $this->lname = $row['lname']; 
         // $this->fname = $row['fname']; 
@@ -187,6 +189,7 @@ class Form{
         $this->family_state = $xcx['family_state'];
         $this->isalone = $xcx['isalone']; 
         $this->study_field = $xcx['study_field']; 
+        $this->study_year = $xcx['study_year']; 
         $this->asked_schol = $xcx['asked_schol']; 
         $this->is_army = $xcx['is_army'];
         $this->length_army = $xcx['length_army']; 
@@ -215,6 +218,7 @@ class Form{
         $this->social_harig = $xcx['social_harig'];
         $this->medical_harig = $xcx['medical_harig'];
         $this->family_harig = $xcx['family_harig']; 
+        $this->explanation = $xcx['explanation']; 
         };
         
     }
@@ -544,6 +548,10 @@ class Form{
             case 'family_harig_file': 
             $fieldvalue = $this->family_harig_file;
             break;
+           
+            case 'explanation_file': 
+            $fieldvalue = $this->explanation_file;
+            break;
 
 
 
@@ -645,8 +653,11 @@ class Form{
         //return($stmt);
     }
 
-
-
+    public function is_submitted(){
+        if($this->submitted == 1){
+            header('Location: was-submitted.php?id='. $this->id);
+        }
+    }
 
     
     /*This set of get feunctions set the*/

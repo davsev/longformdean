@@ -1,10 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['valid'])) {
-    header("Location: login.php");
-    die(); 
-}
-// error_reporting(E_ALL);
+
+error_reporting(E_ALL);
     putenv("TZ=Asia/Jerusalem");
     require './api/config/database.php';
     require './api/class/Form.php';
@@ -17,10 +14,10 @@ if (!isset($_SESSION['valid'])) {
     $database = new Database();
     $db = $database->getConnection();
 
-//disconect user by session destroy, The redirect is in each file header
-if(isset($_POST['destroy'])){
-    session_destroy();
-}
+// //disconect user by session destroy, The redirect is in each file header
+// if(isset($_POST['destroy'])){
+//     session_destroy();
+// }
 
 ?>
 

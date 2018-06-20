@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *'); 
 include '../config/database.php';
 include '../class/Read.php';
 
