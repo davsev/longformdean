@@ -73,6 +73,7 @@ class Dashboard{
         $this->study_field = $xcx['study_field']; 
         $this->study_year = $xcx['study_year']; 
         $this->asked_schol = $xcx['asked_schol']; 
+        $this->received_schol = $xcx['received_schol']; 
         $this->is_army = $xcx['is_army'];
         $this->length_army = $xcx['length_army']; 
         $this->is_lochem = $xcx['is_lochem'];
@@ -219,7 +220,27 @@ class Dashboard{
        return $row['study_field'];
     }
 
-    
+    public function get_study_field(){
+        $query = "SELECT * FROM study_field";
+        $stmt = $this->conn->prepare($query);
+        
+        // execute query
+        $stmt->execute();
+        //print_r($stmt);
+        echo '<select class="custom-select" name="study_field" id="study-field">';
+        foreach($stmt as $k){
+            if($k['study_field_id'] == $this->study_field){
+                echo '<option value="'.$k['study_field_id'].'" selected>'.$k['study_field'].'</option>';
+
+            } 
+            echo '<option value="'.$k['study_field_id'].'">'.$k['study_field'].'</option>';
+
+        }
+        echo '</select>';
+        //return($stmt);
+    }
+
+
     public function get_family_state_by_id($family_state_id){
         $query = "SELECT family_state_name FROM family_state WHERE family_state_id = ${family_state_id}";
         
@@ -257,11 +278,29 @@ class Dashboard{
             case 'self_employ_files':
                 $file_array = $this->self_employ_files;
             break;
+            case 'isalonefile':
+                $file_array = $this->isalonefile;
+            break;
+            case 'islochemfile':
+                $file_array = $this->islochemfile;
+            break;
+            case 'is_army_ptor_file':
+                $file_array = $this->is_army_ptor_file;
+            break;
+            case 'is_miluim_file':
+                $file_array = $this->is_miluim_file;
+            break;
         }
         $tzf = json_decode($file_array);
-        foreach($tzf as $file){
-            echo '<a href="#" class="open-file-near" data-url="/uploads/'.$this->tz.'/'.$file.'" ><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> '. $file.'</a><br />';
+        // var_dump($tzf);
+        if(!empty($tzf)){
+            foreach($tzf as $file){
+                echo '<a href="#" class="open-file-near" data-url="/uploads/'.$this->tz.'/'.$file.'" ><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> '. $file.'</a><br />';
+            }
+        }else{
+            echo 'לא צורף קובץ';
         }
+
 
     }
     

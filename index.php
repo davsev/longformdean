@@ -1,5 +1,5 @@
 <?php
-$tz = '889990099';
+$tz = '9999999';
 echo $tz;
 $year = 2018;
 require './api/inc.php';
@@ -469,12 +469,12 @@ if(isset($_POST['submit'])){
               <div class="col-md-12 mb-3">
                 <label>מין</label>
                 <div class="custom-control custom-radio">
-                  <input id="female" name="gender" value="נקבה" type="radio" class="custom-control-input" <?php echo 'gender='.$Form->gender; ?>
-                  <?php echo($Form->gender == 'נקבה' ?  'checked' : '' ); ?> required="">
+                  <input id="female" name="gender" value="0" type="radio" class="custom-control-input" <?php echo 'gender='.$Form->gender; ?>
+                  <?php echo($Form->gender == '0' ?  'checked' : '' ); ?> required="">
                   <label class="custom-control-label" for="debit">נקבה</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input id="male" name="gender" value="זכר" type="radio" class="custom-control-input" <?php echo($Form->gender == 'זכר' ? 'checked' : '' ); ?> required="">
+                  <input id="male" name="gender" value="1" type="radio" class="custom-control-input" <?php echo($Form->gender == '1' ? 'checked' : '' ); ?> required="">
                   <label class="custom-control-label" for="credit">זכר</label>
                 </div>
               </div>
@@ -504,7 +504,7 @@ if(isset($_POST['submit'])){
               </div>
             </div>
 
-            <div class="row" id="is_alone_file" style="display: none">
+            <div class="row" id="is_alone_file" class="hidden">
               <div class="col-md-12 mb-3">
                 <div class="custom-file" id="iisalonefile">
                   <label class="custom-file-label" for="isalonefile">סטודנט בודד בארץ (לחצו כאן)</label>
@@ -573,7 +573,7 @@ if(isset($_POST['submit'])){
             </div>
             <div class="row">
               <div class="col-md-12 mb-3">
-                <label>האם בקשת בעבר מלגת דיקאן</label>
+                <label>האם בקשת בעבר מלגת דיקן</label>
                 <div class="custom-control custom-radio">
                   <input id="asked_schol" value="1" name="asked_schol" type="radio" class="custom-control-input" required="" <?php echo($Form->asked_schol == '1' ? 'checked' : '' ); ?>>
                   <label class="custom-control-label" for="debit">כן</label>
@@ -585,7 +585,7 @@ if(isset($_POST['submit'])){
               </div>
               <div class="col-md-12 mb-3">
                 <div id="asked-schol-div">
-                  <label>האם קיבלת בעבר מלגת דיקאן</label>
+                  <label>האם קיבלת בעבר מלגת דיקן</label>
                   <div class="custom-control custom-radio">
                     <input id="received_schol" value="1" name="received_schol" type="radio" class="custom-control-input" <?php echo($Form->received_schol == '1' ? 'checked' : '' ); ?>>
                     <label class="custom-control-label" for="debit">כן</label>
@@ -700,7 +700,7 @@ if(isset($_POST['submit'])){
               </div>
               <div class="col-md-12 mb-3">
                 <div class="custom-file" id="is-miluim-file">
-                  <label class="custom-file-label" for="is_miluim_file">במידה והנך משרת שרות מילואים פעיל צרף אישורים (לחצו כאן)</label>
+                  <label class="custom-file-label" for="is-miluim-file">במידה והנך משרת שרות מילואים פעיל צרף אישורים (לחצו כאן)</label>
                   <ul class="file-list">
                     <?php  if($Form->is_miluim_file != '' || $Form->is_miluim_file != NULL){
                 $thefile = json_decode($Form->is_miluim_file);

@@ -53,8 +53,6 @@ document.getElementById("not_asked_schol").addEventListener("click", showReceive
 
 document.onload = tas($('#taasukati_av_state').val());
 
-document.getElementById("asked_schol").addEventListener("click", showReceivedSchol);
-document.getElementById("not_asked_schol").addEventListener("click", showReceivedSchol);
 
 document.getElementById("alone").addEventListener("click", showIsAloneFile);
 document.getElementById("notalone").addEventListener("click", showIsAloneFile);
@@ -91,11 +89,11 @@ document.getElementById("family_state").addEventListener("change", familyandSiua
 
 function showIsAloneFile() {
     if (document.getElementById('alone').checked) {
-        document.getElementById('is_alone_file').style.display = 'block';
+        document.getElementById('is_alone_file').classList.remove('hidden');
         document.getElementById("isalonefile").required = true;
 
     } else {
-        document.getElementById('is_alone_file').style.display = 'none';
+        document.getElementById('is_alone_file').className += ' hidden';
         document.getElementById('notalone').checked = true;
         document.getElementById("isalonefile").required = false;
     }
@@ -104,15 +102,15 @@ function showIsAloneFile() {
 
 
 function showReceivedSchol() {
-    if (document.getElementById('asked_schol').checked) {
-        document.getElementById('asked-schol-div').style.display = 'block';
-        document.getElementById("received_schol").attributes.required = "required";
-        document.getElementById("not_received_schol").attributes.required = "required";
+    if (document.getElementById('asked_schol').checked == true) {
+        document.getElementById('asked-schol-div').classList.remove('hidden');
+        document.getElementsByName("asked_schol")[0].attributes.required = "required";
+       
     } else {
-        document.getElementById('asked-schol-div').style.display = 'none';
-        document.getElementById('not_received_schol').checked = true;
-        document.getElementById("received_schol").attributes.required = "";
-        document.getElementById("not_received_schol").attributes.required = "";
+        document.getElementById('asked-schol-div').className += ' hidden';
+        document.getElementById('not_received_schol').checked == true;
+        document.getElementsByName("asked_schol")[0].attributes.required == "";
+     
     }
 }
 
@@ -120,7 +118,7 @@ function showReceivedSchol() {
 
 function is_army() {
     var isArmy = $('#is_army');
-
+console.log(isArmy);
     switch (isArmy.val()) {
         case 'צבאי':
             $('.army').removeClass('hidden');
@@ -135,13 +133,13 @@ function is_army() {
             $('.army').removeClass('hidden');
             $('#is_lochem').addClass('hidden');
             $('#lo_lochem').prop("checked", true);
-            $('#is-lochem-file').css("display", "none");
+            $('#is-lochem-file').addClass('hidden');
 
             $('#army_ptor').addClass('hidden');
-            $('#is-miluim-file').css("display", "none");
+            $('#is-miluim-file').addClass('hidden');
 
             $('#miluim_pail').addClass('hidden');
-            $('#is_army_ptor_file').css("display", "none");
+            $('#is_army_ptor_file').addClass('hidden');
             break;
 
         case 'ללא':
@@ -170,10 +168,10 @@ function is_army() {
 
 function isLochem() {
     if (document.getElementById('lochem').checked) {
-        document.getElementById('is-lochem-file').style.display = 'block';
+        document.getElementById('is-lochem-file').classList.remove('hidden');
         document.getElementById('is-lochem-file').attributes.required = 'required';
     } else {
-        document.getElementById('is-lochem-file').style.display = 'none';
+        document.getElementById('is-lochem-file').className += ' hidden';
         document.getElementById('lo_lochem').checked = true;
         document.getElementById('is-lochem-file').attributes.required = '';
     }
@@ -182,10 +180,10 @@ function isLochem() {
 
 function isArmyPtor() {
     if (document.getElementById('is_army_ptor').checked) {
-        document.getElementById('is_army_ptor_file').style.display = 'block';
+        document.getElementById('is_army_ptor_file').classList.remove('hidden');
         document.getElementById('is_army_ptor_file').attributes.required = 'required';
     } else {
-        document.getElementById('is_army_ptor_file').style.display = 'none';
+        document.getElementById('is_army_ptor_file').className += ' hidden';
         document.getElementById('is_army_no_ptor').checked = true;
         document.getElementById('is_army_ptor_file').attributes.required = '';
     }
@@ -194,10 +192,10 @@ function isArmyPtor() {
 
 function showIsMiluim() {
     if (document.getElementById('is_miluim').checked) {
-        document.getElementById('is-miluim-file').style.display = 'block';
+        document.getElementById('is-miluim-file').classList.remove('hidden');
         document.getElementById('is-miluim-file').attributes.required = 'required';
     } else {
-        document.getElementById('is-miluim-file').style.display = 'none';
+        document.getElementById('is-miluim-file').className += ' hidden';
         document.getElementById('lo_miluim').checked = true;
         document.getElementById('is-miluim-file').attributes.required = '';
     }

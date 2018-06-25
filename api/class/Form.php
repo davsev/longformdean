@@ -191,6 +191,7 @@ class Form{
         $this->study_field = $xcx['study_field']; 
         $this->study_year = $xcx['study_year']; 
         $this->asked_schol = $xcx['asked_schol']; 
+        $this->received_schol = $xcx['received_schol'];  
         $this->is_army = $xcx['is_army'];
         $this->length_army = $xcx['length_army']; 
         $this->is_lochem = $xcx['is_lochem'];

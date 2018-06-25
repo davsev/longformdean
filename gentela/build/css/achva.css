@@ -56,6 +56,11 @@ body.login-page{
     height: 100%;
     display: grid;
 }
+
+.right_column{
+    margin-right: 230px;
+    margin-left: 0px;
+}
 /* image fade out before change*/
 .elementToFadeOut {
     opacity: 1;
