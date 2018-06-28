@@ -2,6 +2,10 @@ function preventD(e) {
     e.preventDefault();
 }
 
+
+
+
+
 /**
  * validation
  */
@@ -9,17 +13,31 @@ $('#savebtn').click(function () {
     $('input, select').removeAttr('required');
 });
 
-function init(){
-    
-}
+
+
+
+$(document).ready(function() {
+    if ($("input.flat")[0]) {
+        $(document).ready(function () {
+            $('input.flat').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            });
+        });
+    }
+});
 
 document.onload = showReceivedSchol();
 document.onload = showIsAloneFile();
+
+
+document.onload = hideFileOnRadio('social_harig_file', 'is_social_harig', 'social_harig_file_cont', 'yes_social_harig', 'no_social_harig')
+
+
 document.onload = is_army();
 document.onload = isLochem();
 document.onload = isArmyPtor();
 document.onload = showIsMiluim();
-// document.onload = taasukati();
 document.onload = familyState();
 document.onload = mezonotState();
 
@@ -30,23 +48,6 @@ document.onload = familyandSiua();
 document.onload = fileRequired('#self_children', 'input#self_children_files');
 document.onload = fileRequired('#self_soldier', 'input#self_soldier_files');
 document.onload = fileRequired('#self_student', 'input#self_student_files');
-// document.onload = ifFileUploaded();
-// document.onload = ifFileRemoved();
-
-
-// document.onload = whenFileChanged();
-
-
-// $(document).ready(function(){
-//     $('.file-list').on("DOMSubtreeModified", whenFileChanged);
-// });
-
-
-
-  
-// $(document).ready(function(){
-//     $('input[type="file"]').bind("click", whenFileAdded);
-// });
 
 document.getElementById("asked_schol").addEventListener("click", showReceivedSchol);
 document.getElementById("not_asked_schol").addEventListener("click", showReceivedSchol);
@@ -86,19 +87,49 @@ document.getElementById("yes_siua").addEventListener("click", familyandSiua);
 document.getElementById("no_siua").addEventListener("click", familyandSiua);
 document.getElementById("family_state").addEventListener("change", familyandSiua);
 
+document.getElementById("yes_social_harig").addEventListener("click", hideFileOnRadio('social_harig_file', 'is_social_harig', 'social_harig_file_cont', 'yes_social_harig', 'no_social_harig'));
+document.getElementById("no_social_harig").addEventListener("click", hideFileOnRadio('social_harig_file', 'is_social_harig', 'social_harig_file_cont', 'yes_social_harig', 'no_social_harig'));
+
 
 function showIsAloneFile() {
+
+    const input = document.getElementById('iisalonefile');
+    const isLi = input.parentElement.querySelectorAll('li').length;
+    console.log(isLi);
+
     if (document.getElementById('alone').checked) {
         document.getElementById('is_alone_file').classList.remove('hidden');
+       if(isLi == 0){
         document.getElementById("isalonefile").required = true;
+       
+        }
 
     } else {
+
         document.getElementById('is_alone_file').className += ' hidden';
         document.getElementById('notalone').checked = true;
         document.getElementById("isalonefile").required = false;
+       
     }
 }
 
+function hideFileOnRadio(input, cont, fileCont, yes, no) {
+    console.log('DAVXXX');
+    const ulList = document.getElementById(cont);
+    const isLi = ulList.parentElement.querySelectorAll('li').length;
+    console.log(isLi);
+
+    if (document.getElementById(yes).checked) {
+        document.getElementById(fileCont).classList.remove('hidden');
+       if(isLi == 0){
+        document.getElementById(input).required = true;
+        }
+    } else {
+        document.getElementById(fileCont).className += ' hidden';
+        document.getElementById(no).checked = true;
+        document.getElementById(input).required = false;
+    }
+}
 
 
 function showReceivedSchol() {
@@ -118,13 +149,13 @@ function showReceivedSchol() {
 
 function is_army() {
     var isArmy = $('#is_army');
-console.log(isArmy);
+
     switch (isArmy.val()) {
         case 'צבאי':
             $('.army').removeClass('hidden');
             $('#is_lochem').removeClass('hidden');
             $('#army_ptor').addClass('hidden');
-            $('#is-lochem-file').removeClass('hidden');
+            // $('#is-lochem-file').removeClass('hidden');
             $('#miluim_pail').removeClass('hidden');
 
             break;
@@ -139,7 +170,7 @@ console.log(isArmy);
             $('#is-miluim-file').addClass('hidden');
 
             $('#miluim_pail').addClass('hidden');
-            $('#is_army_ptor_file').addClass('hidden');
+            $('#is_army_ptor_file_cont').addClass('hidden');
             break;
 
         case 'ללא':
@@ -150,54 +181,73 @@ console.log(isArmy);
             $('#length_army input').val('0');
             $('#is-lochem-file').addClass('hidden');
             $('#miluim_pail').addClass('hidden');
+            $('#is-miluim-file').addClass('hidden');
 
 
             break;
 
         default:
             $('.army').addClass('hidden');
-            $('#is_lochem').removeClass('hidden');
-            $('#army_ptor').removeClass('hidden');
-            $('#is-lochem-file').removeClass('hidden');
+            $('#is_lochem').addClass('hidden');
+            $('#army_ptor').addClass('hidden');
+            $('#is-lochem-file').addClass('hidden');
             $('#length_army input').val('0');
-            $('#miluim_pail').removeClass('hidden');
+            $('#miluim_pail').addClass('hidden');
+            $('#is-miluim-file').addClass('hidden');
             break;
     }
 }
 
 
 function isLochem() {
+        const inputLochem = document.getElementById('is-lochem-file');
+        const isLiLochem = inputLochem.parentElement.querySelectorAll('li').length;
     if (document.getElementById('lochem').checked) {
         document.getElementById('is-lochem-file').classList.remove('hidden');
-        document.getElementById('is-lochem-file').attributes.required = 'required';
+        if(isLiLochem == 0){
+        document.getElementById('islochemfile').required = true;
+        }
     } else {
         document.getElementById('is-lochem-file').className += ' hidden';
         document.getElementById('lo_lochem').checked = true;
-        document.getElementById('is-lochem-file').attributes.required = '';
+        // if(isLi != 0){
+        document.getElementById('islochemfile').required = false;
+        // }
     }
+
 };
 
 
 function isArmyPtor() {
+        const inputPtor = document.getElementById('is_army_ptor_file_cont');
+        const isLiPtor = inputPtor.parentElement.querySelectorAll('li').length;
     if (document.getElementById('is_army_ptor').checked) {
-        document.getElementById('is_army_ptor_file').classList.remove('hidden');
-        document.getElementById('is_army_ptor_file').attributes.required = 'required';
+        document.getElementById('is_army_ptor_file_cont').classList.remove('hidden');
+        if(isLiPtor == 0){
+        document.getElementById('is_army_ptor_file').required = true;
+        }
     } else {
-        document.getElementById('is_army_ptor_file').className += ' hidden';
+        document.getElementById('is_army_ptor_file_cont').className += ' hidden';
         document.getElementById('is_army_no_ptor').checked = true;
-        document.getElementById('is_army_ptor_file').attributes.required = '';
+        document.getElementById('is_army_ptor_file').required = false;
     }
 };
 
 
 function showIsMiluim() {
+    const inputMiluim = document.getElementById('is-miluim-file');
+    const isLiMiluim = inputMiluim.parentElement.querySelectorAll('li').length;
     if (document.getElementById('is_miluim').checked) {
         document.getElementById('is-miluim-file').classList.remove('hidden');
-        document.getElementById('is-miluim-file').attributes.required = 'required';
+        if(isLiMiluim == 0){
+        document.getElementById('is_miluim_file').required = true;
+        }
+
     } else {
         document.getElementById('is-miluim-file').className += ' hidden';
         document.getElementById('lo_miluim').checked = true;
-        document.getElementById('is-miluim-file').attributes.required = '';
+        document.getElementById('is_miluim_file').required = false;
+       
     }
 };
 
@@ -206,7 +256,7 @@ function showIsMiluim() {
     פונקציות לאזור הכנסה
  */
 function tas(val) {
-    console.log(val);
+    // console.log(val);
     $('.taas').change(function () {
       
         $(this).closest('.taasuka').find('input').prop('required', false);
@@ -216,32 +266,33 @@ function tas(val) {
        
         if ($(this).val()) {
             val = $(this).val();
-            console.log(val);
-
         };
 
+
+        console.log(val,'val var');
+
         switch (val) {
-            //יש לבחור ערך
+           
             case '0':
-                $(this).closest('.taasuka').find('div.starthidden').addClass('hidden');
-               
-                break;
+                $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
+                $(this).prop('required', true);
+            break;
             //שכיר
             case '1':
-                $(this).closest('.taasuka').find('div.starthidden').addClass('hidden');
-                $(this).closest('.taasuka').find('div.salary').removeClass('hidden');
+                $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
+                $(this).closest('.taasuka').find('.salary').removeClass('hidden');
                 $(this).closest('.taasuka').find('div.salary').find('input[type=text]').prop('required', true);
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.salary').find('.file-list li:last-child a').html();
                 if(!lastFile ? $(this).closest('.taasuka').find('div.salary').find('input[type=file]').prop('required', true) : '');
-                
+                // console.log(val, 'xxx');
 
                 
                 break;
              //עצמאי
             case '2':
-                $(this).closest('.taasuka').find('div.starthidden').addClass('hidden');
-                $(this).closest('.taasuka').find('div.employ').removeClass('hidden');
+                $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
+                $(this).closest('.taasuka').find('.employ').removeClass('hidden');
                 $(this).closest('.taasuka').find('div.employ').find('input[type=text]').prop('required', true);
 
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
@@ -254,18 +305,21 @@ function tas(val) {
 
                   //לא עובד
             case '3':
-                $(this).closest('.taasuka').find('div.starthidden').addClass('hidden');
-                $(this).closest('.taasuka').find('div.lo-oved').removeClass('hidden');
+                $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
+                $(this).closest('.taasuka').find('.lo-oved').removeClass('hidden');
 
                 $(this).closest('.taasuka').find('div.lo-oved').find('input[type=text]').prop('required', true);
                 
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.lo-oved').find('.file-list li:last-child a').html();
-                if(!lastFile ? $(this).closest('.taasuka').find('div.lo-oved').find('input[type=file]').prop('required', true) : '');
-               
+                if(!lastFile ? $(this).closest('.taasuka').find('div.lo-oved').find('input[type=file]').prop('required', true) : '');                
+            break;
 
-                
-                break;
+ //יש לבחור ערך
+            // default:
+            // $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
+            // console.log(val, 'xxx');
+            
         }
     });
 
@@ -273,102 +327,86 @@ function tas(val) {
 };
 
 
-
-// function taasukati() {
-
-//     var taasukati = $('#taasukati_state');
-//     switch (taasukati.val()) {
-//         //יש לבחור ערך
-//         case '0':
-
-//             $('#lo_oved_files_cont').addClass('hidden');
-//             $('#self_salary').addClass('hidden');
-//             $('#self_employ_cont').addClass('hidden');
-//             break;
-
-//             //שכיר
-//         case '1':
-
-//             $('#lo_oved_files_cont').addClass('hidden');
-//             $('#self_salary').removeClass('hidden');
-//             $('#self_employ_cont').addClass('hidden');
-//             break;
-
-//             //עצמאי
-//         case '2':
-
-//             $('#lo_oved_files_cont').addClass('hidden');
-//             $('#self_salary').addClass('hidden');
-//             $('#self_employ_cont').removeClass('hidden');
-
-//             break;
-
-//             //לא עובד
-//         default:
-
-//             $('#lo_oved_files_cont').removeClass('hidden');
-//             $('#self_salary').addClass('hidden');
-//             $('#self_employ_cont').addClass('hidden');
-//             break;
-
-//     }
-// };
-
 function familyState() {
     switch ($('#family_state').val()) {
         //רווק
         case '1':
             
+            $('#the-family-state').text('רווק');
             $('#is_siua_cont').removeClass('hidden');
             $('#mezonot_state_row_cont').addClass('hidden');
-            $('#mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[valeu=0]').attr('selected', 'selected');
+            $('.mezonot_height_cont').addClass('hidden');
+            $('#mezonot_state option[value=0]').attr('selected', 'selected');
             $(".taasuka-zug").addClass("hidden");
+            // $(".taasuka-parents").removeClass("hidden");
+            
+            $('.children_cont').removeClass('hidden');
 
-            $('#children_cont').removeClass('hidden');
+            $("#children").text('אחים מתחת לגיל 18');
+            $("#soldier").text('אח בשירות צבאי סדיר');
+            $("#student").text('אח הלומד במוסד להשכלה גבוהה בארץ');
             $("#self_children_cont_label").text('מספר אחים מתחת לגיל 18');
             $("#self_soldier_cont_label").text('האם יש לך אח בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך אח הלומד במוסד להשכלה גבוהה בארץ?');
-            console.log('ravak');
+            $("#is_siua_cont").removeClass("hidden");
+            // console.log('ravak');
         break;
 
         //נשוי  
         case '2':
+            $('#the-family-state').text('נשוי');
             $('#mezonot_state_row_cont').addClass('hidden');
-            $('#mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[valeu=0]').attr('selected', 'selected');
+            $('.mezonot_height_cont').addClass('hidden');
+            $('#mezonot_state option[value=0]').attr('selected', 'selected');
             $(".taasuka-zug").removeClass("hidden");
+            $(".taasuka-parents").addClass("hidden");
+            $("#is_siua_cont").addClass("hidden");
+           
+            $("#student").text('ילד הלומד במוסד להשכלה גבוהה בארץ');
+            $("#children").text('ילדים מתחת לגיל 18');
+            $("#soldier").text('ילד בשירות צבאי סדיר');
             $("#self_children_cont_label").text('מספר ילדים מתחת לגיל 18');
             $("#self_soldier_cont_label").text('האם יש לך ילדים בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך ילד הלומד במוסד להשכלה גבוהה בארץ?');
-            console.log('nasui');
+           
+            // console.log('nasui');
         break;
 
         //גרוש
         case '3':
+        $('#the-family-state').text('גרוש');
+        $("#student").text('ילד הלומד במוסד להשכלה גבוהה בארץ');
+
+        $("#soldier").text('ילד בשירות צבאי סדיר');
+        $("#children").text('ילדים מתחת לגיל 18')
             $('#mezonot_state_row_cont').removeClass('hidden');
-            $('#mezonot_height_cont').removeClass('hidden');
+            $('.mezonot_height_cont').removeClass('hidden');
             $(".taasuka-zug").addClass("hidden");
             $("#self_children_cont_label").text('מספר ילדים מתחת לגיל 18');
             $("#self_soldier_cont_label").text('האם יש לך ילדים בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך ילד הלומד במוסד להשכלה גבוהה בארץ?');
-
-            console.log('garush');
+            $("#is_siua_cont").addClass("hidden");
+            // console.log('garush');
         break;
 
 
         //כל מה שלא גרוש
         default:
+
             $('#mezonot_state_row_cont').addClass('hidden');
-            $('#mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[valeu=0]').attr('selected', 'selected');
+            $('.mezonot_height_cont').addClass('hidden');
+            $('#mezonot_state option[value=0]').attr('selected', 'selected');
             $('#is_siua_cont').addClass('hidden');
             $(".taasuka-zug").addClass("hidden");
+
+            $("#student").text('ילד הלומד במוסד להשכלה גבוהה בארץ');
+            $("#children").text('ילדים מתחת לגיל 18');
+            $("#soldier").text('ילד בשירות צבאי סדיר');
             $("#self_children_cont_label").text('מספר ילדים מתחת לגיל 18');
             $("#self_soldier_cont_label").text('האם יש לך ילדים בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך ילד הלומד במוסד להשכלה גבוהה בארץ?');
-
-            console.log('else');
+            $("#is_siua_cont").addClass("hidden");
+            // console.log('else');
         break;
 
     };
@@ -381,21 +419,37 @@ function mezonotState() {
     switch ($('#mezonot_state').val()) {
         //יש לבחור ערך
         case '1':
+
+            const input = document.getElementById('mezonot_files_div');
+            const isLi = input.parentElement.querySelectorAll('li').length;
+
             $('#mezonot_files_div').removeClass('hidden');
-            $('#mezonot_height_cont').addClass('hidden');
+            $('.mezonot_height_cont').addClass('hidden');
+        
+            if(isLi == 0){
+                $('#mezonot_files').prop('required', true);
+            }
             
             break;
 
         case '2':
         case '3':
+            const input2 = document.getElementById('mezonot_height_files_div');
+            const isLi2 = input.parentElement.querySelectorAll('li').length;
             $('#mezonot_files_div').addClass('hidden');
-            $('#mezonot_height_cont').removeClass('hidden');
+            $('.mezonot_height_cont').removeClass('hidden');
+            $('#mezonot_files').prop('required', false);
+
+            if(isLi2 == 0){
+                $('#mezonot_height_files').prop('required', true);
+            }
             break;
 
             //לא עובד
         default:
             $('#mezonot_files_div').addClass('hidden');
-            $('#mezonot_height_cont').addClass('hidden');
+            $('.mezonot_height_cont').addClass('hidden');
+            $('#mezonot_files').prop('required', false);
             break;
 
     }
@@ -405,13 +459,23 @@ function mezonotState() {
 
 
 function showIsSiua() {
+    const inputSiua = document.getElementById('is_siua_file_cont');
+    const isLiSiua = inputSiua.parentElement.querySelectorAll('li').length;
     if ($('#yes_siua').is(':checked')) {
-        console.log('yes');
+        // console.log('yes');
         $('#is_siua_file_cont').removeClass('hidden');
+        if(isLiSiua == 0){
+            document.getElementById("is_siua_file").required = true;
+
+        }
+
        
     } else {
-        console.log('no');
+        // console.log('no');
         $('#is_siua_file_cont').addClass('hidden');
+        document.getElementById("is_siua_file").required = false;
+      
+
     }
 };
 
@@ -432,7 +496,7 @@ function fileRequired(field, target){
 $(field).keyup(function(){
     if($(this).val().length > 0){
         $(target).prop('required', true);
-        console.log('true');
+        // console.log('true');
 
         var lastFile =  $(this).closest('.row').find('.file-list li:last-child a').html();
         if(lastFile ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
@@ -450,135 +514,61 @@ $(field).trigger('keyup');
 }
 
 
-//this function checks if there are lines in ul.file-list 
-//if so it removes the reqired from the field
-// var fileId = $('input[type="file"]').attr('id');
 
+/**
+ * this function check all inputs witsh class `reqOnLoad` and adds required
+ * to them depending if they have liws in the list or not.
+ */
+function isFileInLi(){  
+    const allInputs = document.querySelectorAll('input.reqOnLoad');
+    // console.log(theUls);
+    allInputs.forEach((Input) => {
+        if(Input){
 
-// function ifFileUploaded(){
-  
-//         var isItemInList = $(this).closest('.row').find('.file-list li:last-child a').html();
-//         console.log(isItemInList);
-//         if(isItemInList ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
-        
-  
-   
-//     $('input[type="file"]').trigger( "click" );
-// };
-
-
-
-//add or remove requred property from file field depends on the .file-list content
-//works in chrome only becouse we are using DOMSubtreeModified event handeler
-// function whenFileChanged(){
-
-//         var isItemInList = $(this).closest('.row').find('.file-list li').length;
-//         console.log(isItemInList);
-
-//         if(isItemInList != 0){
-//              $(this).closest('.row').find('input[type=file]').prop('required', false);
-//          }else{
-//             $(this).closest('.row').find('input[type=file]').prop('required', true);
-
-//          };
-
-//         // $(this).closest('.row').find('input[type=file]').prop('required', true)
-// };
-
+            // console.log(Input);
+            const isLi = Input.parentElement.getElementsByTagName("li");
+            // console.log(isLi.length);
+            // console.log(Input.required);
+            
+            if(isLi.length == 0 ? Input.required = true : Input.required = false );
+        }
+    }); 
+}
 
 
 //add or remove requred property from file field depends on the .file-list content
+// function MutationObservers()
+//For now there are onley tfo files tham use this condition:
+//tzfile and isalonefile
 const observer = new MutationObserver(function(mutations){
     mutations.forEach(function(mutation){
         let liLength = mutation.target.getElementsByTagName("li").length;
+          console.log('liLength ',liLength);
         if(mutation.addedNodes.length){
-            console.log('added',mutation.addedNodes[0]);
+            // console.log('added',mutation);
             if(liLength != 0){
-                console.log(liLength);
-                console.log( mutation.target.parentElement.getElementsByTagName('input'));
-                
-                mutation.target.parentElement.getElementsByTagName('input')[0].required = false;
+                // console.log('added ',liLength);
+                mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = false;
             }
         }
         if(mutation.removedNodes.length){
-            console.log('Removed',mutation.removedNodes[0]);
             if(liLength == 0){
-                mutation.target.parentElement.getElementsByTagName('input')[0].required = true;
-                console.log(liLength);
+                // console.log('removed ',liLength);
+                mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = true;
             }
         }
     });
 });
 
 
-const fileList = document.querySelector('ul.file-list');
+
+// document.getElementById("myBtn").addEventListener("click", function(){
+//     document.getElementById("demo").innerHTML = "Hello World";
+// });
+
+
+const fileList = document.querySelector('form');
 observer.observe(fileList, {
-    childList: true
+    childList: true,
+    subtree: true
 })
-
-//this function checks if there are files uploaded in the tzfile fields onpage load
-//If there are files it tremoves the require prop
-
-function isFileInLi(){  
-    let theUl = document.querySelector('ul.file-list')
-    let isLi = theUl.getElementsByTagName("li");
-    if(isLi.length != 0 ? theUl.parentElement.getElementsByTagName('input')[0].required = false : theUl.parentElement.getElementsByTagName('input')[0].required = true )
-    console.log(theUl.parentElement);
-}
-
-// selects all files 
-// function isFileInLi(){  
-//     let theUl = document.querySelectorAll('ul.file-list.active')
-//     theUl.forEach(function(thisUl){
-//         let isLi = thisUl.getElementsByTagName("li");
-//         if(isLi.length != 0 ? thisUl.parentElement.getElementsByTagName('input')[0].required = false : thisUl.parentElement.getElementsByTagName('input')[0].required = true )
-//         console.log(thisUl.parentElement);
-//     });
-    
-  
-// }
-function whenFileAdded(){
-    
-    var isItemInList = $(this).closest('.row').find('.file-list li').length;
-    console.log(isItemInList);
-    if(isItemInList >= 1 ? $(this).closest('.row').find('input[type=file]').prop('required', false) : '');
-
-    // $(this).closest('.row').find('input[type=file]').prop('required', true)
-
-// $('input[type="file"]').trigger( "click" );
-};
-
-    
-        
-
-        // $('.item-file').trigger( "click" );
-   
-
-
-
-
-    // var siua = $('#yes_siua').is(':checked');
-    // var famState = $('#family_state').val();
-    // console.log($(this).val());
-
-
-    // if(siua == true && $('#family_state').val() == '1'){
-    //     console.log('11');
-    //     $('.taasuka-parents').removeClass('hidden');
-    // }
-
-
-
-       
-
-
-// $('input:radio').click(function(e){
-//     console.log($(this));
-// });
-
-
-// $('.file-list').on('load click',function(e){
-//     if($(this).empty()){
-//         console.log('emptyttt');
-//     }
-// });

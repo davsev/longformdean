@@ -179,8 +179,8 @@ $(document).ready(function() {
 // /Panel toolbox
 
 // Tooltip
-$(document).ready(function() {
-    $('[data-toggle="tooltip"]').tooltip({
+jQuery(document).ready(function() {
+	jQuery('[data-toggle="tooltip"]').tooltip({
         container: 'body'
     });
 });

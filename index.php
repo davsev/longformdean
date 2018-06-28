@@ -336,49 +336,7 @@ if(isset($_POST['submit'])){
       </div>
 
 
-      <!-- <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
 
-
-        </div> -->
       <div class="col-md-12 order-md-1">
 
         <form action="" id="studentForm" method="POST" class="needs-validation" enctype="multipart/form-data" data-parsley-validate=""
@@ -387,9 +345,10 @@ if(isset($_POST['submit'])){
           <div>
             <!-- section1 -->
             <h3>פרטים אישיים</h3>
+            <hr />
             <div class="row">
               <div class="col-md-12 mb-3">
-                <?php echo $Form->fname; ?>
+     
                 <label for="fname">שם פרטי</label>
                 <input type="text" name="fname" class="form-control" id="fname" autocomplete='given-name' placeholder="" required="" value="<?php echo $Form->fname; ?>">
 
@@ -432,7 +391,7 @@ if(isset($_POST['submit'])){
                   </ul>
 
 
-                  <input type="file" class="custom-file-input" id="tzfile" name="tzfile" required="" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="tzfile" name="tzfile" required="" />
 
                   <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
@@ -528,7 +487,7 @@ if(isset($_POST['submit'])){
                   </ul>
 
 
-                  <input type="file" class="custom-file-input" id="isalonefile" name="isalonefile" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="isalonefile" name="isalonefile" />
 
                   <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
@@ -560,7 +519,7 @@ if(isset($_POST['submit'])){
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="study_year">שנת לימודים</label>
                 </div>
-                <?php echo $Form->study_year;?>
+ 
 
                 <select class="custom-select" name="study_year" id="study_year" required="">
                   <option value="">נא לבחור ערך</option>
@@ -631,7 +590,7 @@ if(isset($_POST['submit'])){
                 </div>
               </div>
               <div class="col-md-12 mb-3">
-                <div class="custom-file" id="is-lochem-file">
+                <div class="custom-file hidden" id="is-lochem-file">
                   <label class="custom-file-label" for="islochemfile">קובץ לוחם (לחצו כאן)</label>
 
                   <ul class="file-list">
@@ -648,12 +607,12 @@ if(isset($_POST['submit'])){
                 }
               }; ?>
                   </ul>
-                  <input type="file" class="custom-file-input" id="islochemfile" name="islochemfile" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="islochemfile" name="islochemfile" />
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12 mb-3" id="army_ptor">
+              <div class="col-md-12 mb-3 hidden" id="army_ptor">
                 <label>פטור משירות מסיבה רפואית בלבד</label>
                 <div class="custom-control custom-radio">
                   <input id="is_army_ptor" name="is_army_ptor" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->is_army_ptor == '1' ? 'checked' : '' ); ?>>
@@ -665,7 +624,7 @@ if(isset($_POST['submit'])){
                 </div>
               </div>
               <div class="col-md-12 mb-3">
-                <div class="custom-file" id="is_army_ptor_file">
+                <div class="custom-file" id="is_army_ptor_file_cont">
                   <label class="custom-file-label" for="is_army_ptor_file">נא לצרף מסמכי פטור</label>
                   <p>במידה וקיבלת פטור משירות מסיבה רפואית, צרף מסמכים</p>
                   <ul class="file-list">
@@ -682,7 +641,7 @@ if(isset($_POST['submit'])){
                 }
               }; ?>
                   </ul>
-                  <input type="file" class="custom-file-input" id="is_army_ptor_file" name="is_army_ptor_file" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="is_army_ptor_file" name="is_army_ptor_file" />
                 </div>
               </div>
             </div>
@@ -715,13 +674,13 @@ if(isset($_POST['submit'])){
                 }
               }; ?>
                   </ul>
-                  <input type="file" class="custom-file-input" id="is_miluim_file" name="is_miluim_file" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="is_miluim_file" name="is_miluim_file" />
                 </div>
               </div>
             </div>
           </div>
           <!-- section3 -->
-          <h3>לימודים אקדמיים בשנה"ל הנוכחית</h3>
+          <h3>מימון נוסף</h3>
           <!-- section4 -->
           <div class="row">
             <div class="col-md-12 mb-3" id="mimun_nosaf">
@@ -773,7 +732,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="lo_oved_files" name="lo_oved_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_files" name="lo_oved_files" />
                   </div>
                 </div>
               </div>
@@ -802,7 +761,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_salary_files" name="self_salary_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_salary_files" name="self_salary_files" />
                   </div>
                 </div>
               </div>
@@ -831,7 +790,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_employ_files" name="self_employ_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_employ_files" name="self_employ_files" />
                   </div>
                 </div>
               </div>
@@ -867,13 +826,13 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                   </ul>
-                  <input type="file" class="custom-file-input" id="mezonot_files" name="mezonot_files" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="mezonot_files" name="mezonot_files" />
                 </div>
               </div>
             </div>
 
 
-            <div class="row hidden" id="mezonot_height_cont">
+            <div class="row hidden mezonot_height_cont" id="">
               <div class="col-md-12 mb-3" id="mezonot_height_div">
                 <label for="mezonot_height">גובה מזונות (חודשי? שנתי?)</label>
 
@@ -897,7 +856,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                   </ul>
-                  <input type="file" class="custom-file-input" id="mezonot_height_files" name="mezonot_height_files" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="mezonot_height_files" name="mezonot_height_files" />
                 </div>
               </div>
             </div>
@@ -944,7 +903,7 @@ if(isset($_POST['submit'])){
                   </ul>
 
 
-                  <input type="file" class="custom-file-input" id="is_siua_file" name="is_siua_file" />
+                  <input type="file" class="custom-file-input alwaysRequired" id="is_siua_file" name="is_siua_file" />
 
                   <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
@@ -982,7 +941,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="lo_oved_av_files" name="lo_oved_av_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_av_files" name="lo_oved_av_files" />
                   </div>
                 </div>
               </div>
@@ -1011,7 +970,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_av_salary_files" name="self_av_salary_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_av_salary_files" name="self_av_salary_files" />
                   </div>
                 </div>
               </div>
@@ -1040,7 +999,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_av_employ_files" name="self_av_employ_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_av_employ_files" name="self_av_employ_files" />
                   </div>
                 </div>
               </div>
@@ -1077,7 +1036,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="lo_oved_em_files" name="lo_oved_em_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_em_files" name="lo_oved_em_files" />
                   </div>
                 </div>
               </div>
@@ -1106,7 +1065,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_em_salary_files" name="self_em_salary_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_em_salary_files" name="self_em_salary_files" />
                   </div>
                 </div>
               </div>
@@ -1135,7 +1094,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_em_employ_files" name="self_em_employ_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_em_employ_files" name="self_em_employ_files" />
                   </div>
                 </div>
               </div>
@@ -1172,7 +1131,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="lo_oved_zug_files" name="lo_oved_zug_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_zug_files" name="lo_oved_zug_files" />
                   </div>
                 </div>
               </div>
@@ -1201,7 +1160,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_zug_salary_files" name="self_zug_salary_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_zug_salary_files" name="self_zug_salary_files" />
                   </div>
                 </div>
               </div>
@@ -1230,7 +1189,7 @@ if(isset($_POST['submit'])){
                   }
                 }; ?>
                     </ul>
-                    <input type="file" class="custom-file-input" id="self_zug_employ_files" name="self_zug_employ_files" />
+                    <input type="file" class="custom-file-input alwaysRequired" id="self_zug_employ_files" name="self_zug_employ_files" />
                   </div>
                 </div>
               </div>
@@ -1238,7 +1197,7 @@ if(isset($_POST['submit'])){
             </div>
           </div>
           <!-- section6 -->
-          <div class="row starthidden" id="children_cont">
+          <div class="row starthidden children_cont" id="">
             <!-- section7 -->
             <div class="col-md-12 mb-3" id="self_children_cont">
               <label for="self_children" id="self_children_cont_label">
@@ -1341,6 +1300,7 @@ if(isset($_POST['submit'])){
 
           <div>
             <!--section 10 -->
+            <h3>מסמכים נוספים</h3>
             <div class="row" id="is_social_harig">
               <div class="col-md-12 mb-3">
                 <label>מצב סוציאלי חריג</label>
@@ -1363,7 +1323,6 @@ if(isset($_POST['submit'])){
                   <p>למצבים סוציאלים חריגים עליך לצרף אישור רלוונטי- דו"ח סוציאלי או מסמך של רשויות הרווחה</p>
                   <ul class="file-list">
                     <?php  if($Form->social_harig_file != '' || $Form->social_harig_file != NULL){
-                    //var_dump(unserialize($Form->tzfile));
                     $thefile = json_decode($Form->social_harig_file);
                     $i = 0;
                     foreach($thefile as $filename){

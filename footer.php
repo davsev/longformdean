@@ -10,7 +10,10 @@
     </div>
 
     <!-- jQuery -->
-    <script src="./gentela/vendors/jquery/dist/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.js"
+  integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+  crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <script src="./gentela/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
@@ -49,7 +52,7 @@
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="./gentela/build/js/custom.min.js"></script>
+    <script src="./gentela/build/js/custom.js"></script>
     <script src="./gentela/build/js/js.js"></script>
     <script src="./api/js/js.js"></script>
 

@@ -86,3 +86,16 @@ body.login-page{
   a:active, a:hover, a:focus{
   color:#e91e63
   }
+
+
+  .x_title h2{
+      float: right;
+  }
+
+  .x_title h1{
+    float: right;
+}
+
+.x_title h3{
+    float: right;
+}

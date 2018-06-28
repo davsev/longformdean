@@ -290,10 +290,76 @@ class Dashboard{
             case 'is_miluim_file':
                 $file_array = $this->is_miluim_file;
             break;
+            case 'mezonot_files':
+                $file_array = $this->mezonot_files;
+            break;
+            case 'mezonot_height_files':
+                $file_array = $this->mezonot_height_files;
+            break;
+            case 'lo_oved_files':
+                $file_array = $this->lo_oved_files;
+            break;
+            case 'self_salary_files':
+                $file_array = $this->self_salary_files;
+            break;
+            case 'self_employ_files':
+                $file_array = $this->self_employ_files;
+            break;
+            case 'is_siua_file':
+                $file_array = $this->is_siua_file;
+            break;
+            case 'lo_oved_av_files':
+                $file_array = $this->lo_oved_av_files;
+            break;
+            case 'self_av_salary_files':
+                $file_array = $this->self_av_salary_files;
+            break;
+            case 'self_av_employ_files':
+                $file_array = $this->self_av_employ_files;
+            break;
+            case 'lo_oved_em_files':
+                $file_array = $this->lo_oved_em_files;
+            break;
+            case 'self_em_salary_files':
+                $file_array = $this->self_em_salary_files;
+            break;
+            case 'self_em_employ_files':
+                $file_array = $this->self_em_employ_files;
+            break;
+            case 'lo_oved_zug_files':
+                $file_array = $this->lo_oved_zug_files;
+            break;
+            case 'self_zug_salary_files':
+                $file_array = $this->self_zug_salary_files;
+            break;
+            case 'self_zug_employ_files':
+                $file_array = $this->self_zug_employ_files;
+            break;
+            case 'self_children_files':
+                $file_array = $this->self_children_files;
+            break;
+            case 'self_soldier_files':
+                $file_array = $this->self_soldier_files;
+            break;
+            case 'self_student_files':
+                $file_array = $this->self_student_files;
+            break;
+            case 'social_harig_file':
+                $file_array = $this->social_harig_file;
+            break;
+            case 'medical_harig_file':
+                $file_array = $this->medical_harig_file;
+            break;
+            case 'family_harig_file':
+                $file_array = $this->family_harig_file;
+            break;
+            case 'explanation_file':
+                $file_array = $this->explanation_file;
+            break;
         }
         $tzf = json_decode($file_array);
         // var_dump($tzf);
-        if(!empty($tzf)){
+        if(!empty($tzf) ){
             foreach($tzf as $file){
                 echo '<a href="#" class="open-file-near" data-url="/uploads/'.$this->tz.'/'.$file.'" ><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> '. $file.'</a><br />';
             }
