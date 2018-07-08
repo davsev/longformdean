@@ -28,13 +28,13 @@ $(document).ready(function() {
 });
 
 document.onload = showReceivedSchol();
-document.onload = showIsAloneFile();
 
 
-document.onload =  hideFileOnRadio('social_harig_file_cont', 'social_harig', 'social_harig_file');
-document.onload =  hideFileOnRadio('medical_harig_file_cont', 'medical_harig', 'medical_harig_file');
-document.onload =  hideFileOnRadio('family_harig_file_cont', 'family_harig', 'family_harig_file');
 
+
+// document.onload =  hideFileOnRadio('social_harig_file_cont', 'social_harig', 'social_harig_file');
+// document.onload =  hideFileOnRadio('medical_harig_file_cont', 'medical_harig', 'medical_harig_file');
+// document.onload =  hideFileOnRadio('family_harig_file_cont', 'family_harig', 'family_harig_file');
 
 
 document.onload = is_army();
@@ -58,8 +58,6 @@ document.getElementById("not_asked_schol").addEventListener("click", showReceive
 document.onload = tas($('#taasukati_av_state').val());
 
 
-document.getElementById("alone").addEventListener("click", showIsAloneFile);
-document.getElementById("notalone").addEventListener("click", showIsAloneFile);
 
 document.getElementById("lochem").addEventListener("click", isLochem);
 document.getElementById("lo_lochem").addEventListener("click", isLochem);
@@ -123,27 +121,7 @@ document.getElementsByName('family_harig')[1].addEventListener('change', functio
 // $('input:radio[name=social_harig]').change(harig_file_change;
 
 
-function showIsAloneFile() {
 
-    const input = document.getElementById('iisalonefile');
-    const isLi = input.parentElement.querySelectorAll('li').length;
-   
-
-    if (document.getElementById('alone').checked) {
-        document.getElementById('is_alone_file').classList.remove('hidden');
-       if(isLi == 0){
-        document.getElementById("isalonefile").required = true;
-       
-        }
-
-    } else {
-
-        document.getElementById('is_alone_file').className += ' hidden';
-        document.getElementById('notalone').checked = true;
-        document.getElementById("isalonefile").required = false;
-       
-    }
-}
 
 
 
@@ -151,24 +129,24 @@ function showIsAloneFile() {
  * hides radio field that is depend on radio btn result
  * works only for harig_file
  */
-function hideFileOnRadio(fileCont, radioName, fileId){
-    const input = document.getElementById(fileCont);
-    const isLi = input.parentElement.querySelectorAll('li').length;
+// function hideFileOnRadio(fileCont, radioName, fileId){
+//     const input = document.getElementById(fileCont);
+//     const isLi = input.parentElement.querySelectorAll('li').length;
 
    
-    if ($('input:radio[name="' + radioName +'"]:checked').val() == 1){
-        document.getElementById(fileCont).classList.remove('hidden');
-        if(isLi == 0){
-            document.getElementById(fileId).required = true;
-        }
-    } else {
-        document.getElementById(fileCont).className += ' hidden';
-        document.getElementById(fileId).required = false;
+//     if ($('input:radio[name="' + radioName +'"]:checked').val() == 1){
+//         document.getElementById(fileCont).classList.remove('hidden');
+//         if(isLi == 0){
+//             document.getElementById(fileId).required = true;
+//         }
+//     } else {
+//         document.getElementById(fileCont).className += ' hidden';
+//         document.getElementById(fileId).required = false;
  
-    }
+//     }
    
    
-}
+// }
 
 
 
@@ -243,53 +221,52 @@ function is_army() {
 
 
 function isLochem() {
-        const inputLochem = document.getElementById('is-lochem-file');
-        const isLiLochem = inputLochem.parentElement.querySelectorAll('li').length;
+        // const inputLochem = document.getElementById('is-lochem-file');
+        // const isLiLochem = inputLochem.parentElement.querySelectorAll('li').length;
     if (document.getElementById('lochem').checked) {
         document.getElementById('is-lochem-file').classList.remove('hidden');
-        if(isLiLochem == 0){
-        document.getElementById('islochemfile').required = true;
-        }
+        // if(isLiLochem == 0){
+        // document.getElementById('islochemfile').required = true;
+        // }
     } else {
         document.getElementById('is-lochem-file').className += ' hidden';
         document.getElementById('lo_lochem').checked = true;
-        // if(isLi != 0){
-        document.getElementById('islochemfile').required = false;
-        // }
+        // document.getElementById('islochemfile').required = false;
+ 
     }
 
 };
 
 
 function isArmyPtor() {
-        const inputPtor = document.getElementById('is_army_ptor_file_cont');
-        const isLiPtor = inputPtor.parentElement.querySelectorAll('li').length;
+        // const inputPtor = document.getElementById('is_army_ptor_file_cont');
+        // const isLiPtor = inputPtor.parentElement.querySelectorAll('li').length;
     if (document.getElementById('is_army_ptor').checked) {
         document.getElementById('is_army_ptor_file_cont').classList.remove('hidden');
-        if(isLiPtor == 0){
-        document.getElementById('is_army_ptor_file').required = true;
-        }
+        // if(isLiPtor == 0){
+        // document.getElementById('is_army_ptor_file').required = true;
+        // }
     } else {
         document.getElementById('is_army_ptor_file_cont').className += ' hidden';
         document.getElementById('is_army_no_ptor').checked = true;
-        document.getElementById('is_army_ptor_file').required = false;
+        // document.getElementById('is_army_ptor_file').required = false;
     }
 };
 
 
 function showIsMiluim() {
-    const inputMiluim = document.getElementById('is-miluim-file');
-    const isLiMiluim = inputMiluim.parentElement.querySelectorAll('li').length;
+    // const inputMiluim = document.getElementById('is-miluim-file');
+    // const isLiMiluim = inputMiluim.parentElement.querySelectorAll('li').length;
     if (document.getElementById('is_miluim').checked) {
         document.getElementById('is-miluim-file').classList.remove('hidden');
-        if(isLiMiluim == 0){
-        document.getElementById('is_miluim_file').required = true;
-        }
+        // if(isLiMiluim == 0){
+        // document.getElementById('is_miluim_file').required = true;
+        // }
 
     } else {
         document.getElementById('is-miluim-file').className += ' hidden';
         document.getElementById('lo_miluim').checked = true;
-        document.getElementById('is_miluim_file').required = false;
+        // document.getElementById('is_miluim_file').required = false;
        
     }
 };
@@ -524,7 +501,7 @@ function showIsSiua() {
         // console.log('yes');
         $('#is_siua_file_cont').removeClass('hidden');
         if(isLiSiua == 0){
-            document.getElementById("is_siua_file").required = true;
+            // document.getElementById("is_siua_file").required = true;
 
         }
 
@@ -532,7 +509,7 @@ function showIsSiua() {
     } else {
         // console.log('no');
         $('#is_siua_file_cont').addClass('hidden');
-        document.getElementById("is_siua_file").required = false;
+        // document.getElementById("is_siua_file").required = false;
       
 
     }
@@ -599,39 +576,39 @@ function isFileInLi(){
 }
 
 
-//add or remove requred property from file field depends on the .file-list content
-// function MutationObservers()
-//For now there are onley tfo files tham use this condition:
-//tzfile and isalonefile
-const observer = new MutationObserver(function(mutations){
-    mutations.forEach(function(mutation){
-        let liLength = mutation.target.getElementsByTagName("li").length;
-          console.log('liLength ',liLength);
-        if(mutation.addedNodes.length){
-            // console.log('added',mutation);
-            if(liLength != 0){
-                // console.log('added ',liLength);
-                mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = false;
-            }
-        }
-        if(mutation.removedNodes.length){
-            if(liLength == 0){
-                // console.log('removed ',liLength);
-                mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = true;
-            }
-        }
-    });
-});
-
-
-
-// document.getElementById("myBtn").addEventListener("click", function(){
-//     document.getElementById("demo").innerHTML = "Hello World";
+// //add or remove requred property from file field depends on the .file-list content
+// // function MutationObservers()
+// //For now there are onley tfo files tham use this condition:
+// //tzfile and isalonefile
+// const observer = new MutationObserver(function(mutations){
+//     mutations.forEach(function(mutation){
+//         let liLength = mutation.target.getElementsByTagName("li").length;
+//           console.log('liLength ',liLength);
+//         if(mutation.addedNodes.length){
+//             // console.log('added',mutation);
+//             if(liLength != 0){
+//                 // console.log('added ',liLength);
+//                 mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = false;
+//             }
+//         }
+//         if(mutation.removedNodes.length){
+//             if(liLength == 0){
+//                 // console.log('removed ',liLength);
+//                 mutation.target.parentElement.getElementsByClassName('alwaysRequired')[0].required = true;
+//             }
+//         }
+//     });
 // });
 
 
-const fileList = document.querySelector('form');
-observer.observe(fileList, {
-    childList: true,
-    subtree: true
-})
+
+// // document.getElementById("myBtn").addEventListener("click", function(){
+// //     document.getElementById("demo").innerHTML = "Hello World";
+// // });
+
+
+// const fileList = document.querySelector('form');
+// observer.observe(fileList, {
+//     childList: true,
+//     subtree: true
+// })

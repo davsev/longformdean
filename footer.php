@@ -54,7 +54,7 @@
     <!-- Custom Theme Scripts -->
     <script src="./gentela/build/js/custom.js"></script>
     <script src="./gentela/build/js/js.js"></script>
-    <script src="./api/js/js.js"></script>
+    <script src="./api/js/dash.js"></script>
 
     <script src="./api/js/loadfileonclick.js"></script>
 	

@@ -1,5 +1,5 @@
 <?php
-$tz = '9999999';
+$tz = $_GET['tz'];
 echo $tz;
 $year = 2018;
 require './api/inc.php';
@@ -254,8 +254,8 @@ if(isset($_POST['submit'])){
         <title>בקשה למלגת דיקן</title>
 
         <!-- <link rel="stylesheet" href="./vendors/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-        <link rel="stylesheet" href="./vendors/parsleyjs/dist/parsley.css"> -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"> -->
+        <link rel="stylesheet" href="./vendors/parsleyjs/dist/parsley.css">
 
         <?php include 'head.php'; ?>
 
@@ -392,7 +392,6 @@ if(isset($_POST['submit'])){
                                         <li>
                                             <a>
                                                 <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image" />
                                                 </span>
                                                 <span>
                                                     <span>John Smith</span>
@@ -406,7 +405,6 @@ if(isset($_POST['submit'])){
                                         <li>
                                             <a>
                                                 <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image" />
                                                 </span>
                                                 <span>
                                                     <span>John Smith</span>
@@ -420,7 +418,6 @@ if(isset($_POST['submit'])){
                                         <li>
                                             <a>
                                                 <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image" />
                                                 </span>
                                                 <span>
                                                     <span>John Smith</span>
@@ -434,7 +431,6 @@ if(isset($_POST['submit'])){
                                         <li>
                                             <a>
                                                 <span class="image">
-                                                    <img src="images/img.jpg" alt="Profile Image" />
                                                 </span>
                                                 <span>
                                                     <span>John Smith</span>
@@ -489,7 +485,180 @@ if(isset($_POST['submit'])){
 
                         </div>
 
-                        <div class="col-sm-12 col-xs-12">
+                        <div class="col-sm-4 col-xs-12">
+                        <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>מסמכים נדרשים</h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <table class="table table-bordered" id="doctable">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>ת.ז</td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>אישור הכרה כחייל בודד</td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>פטור משירות צבאי מסיבה רפואית </td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>אישור שרות מילואים פעיל </td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>
+                                                תעודת לוחם / תומך לחימה                                                
+                                                </td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>
+                                                    סטודנט אשר אינו נתמך על ידי הוריו, עליו לצרף אישור מגורמי רווחה או עו"ד בלבד
+                                                <td></td>                                       
+                                                <td>סטודנט</td>
+                                            </tr>
+                                                <td>7</td>
+                                                <td>
+                                                שלושה תלושי שכר אחרונים
+                                                </td>
+                                                 <td rowspan="3"> אחד משלושתם</td>                                        
+                                                <td>
+                                                    <ul>
+                                                        <li>סטודנט</li>
+                                                        <li>אב</li>
+                                                        <li>אם</li>
+                                                        <li> בן / בת זוג</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            </tr>
+                                                <td>8</td>
+                                                <td>
+                                                דוח שומה לשנת מס נוכחית
+                                                </td>
+                                                                                    
+                                                <td>
+                                                    <ul>
+                                                        <li>סטודנט</li>
+                                                        <li>אב</li>
+                                                        <li>אם</li>
+                                                        <li> בן / בת זוג</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            </tr>
+                                                <td>9</td>
+                                                <td>
+                                                אישור מעמד לא עובד – ביטוח לאומי
+                                                </td>
+                                                                                        
+                                                <td>
+                                                    <ul>
+                                                        <li>סטודנט</li>
+                                                        <li>אב</li>
+                                                        <li>אם</li>
+                                                        <li> בן / בת זוג</li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td> <ul>
+                                                        <li>אישור גובה מזונות</li>
+                                                        <li>אסמכתא על אי קבלת מזונות</li>
+                                                        
+                                                    </ul> 
+                                                </td>
+                                                <td></td>
+                                                <td>סטודנט</td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>ספח ת.ז 
+                                                </td>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>סטודנט </li>
+                                                        <li>אם</li>
+                                                        
+                                                    </ul> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>תעודת חוגר / קצין
+                                                </td>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>ילדים  </li>
+                                                        <li>אחים</li>
+                                                        
+                                                    </ul> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>13</td>
+                                                <td>אישור לימודים במוסד להשכלה גבוהה
+                                                </td>
+                                                <td></td>
+                                                <td><ul>
+                                                        <li>ילדים  </li>
+                                                        <li>אחים</li>
+                                                        
+                                                    </ul> 
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>14</td>
+                                                <td>למצבים סוציאליים חריגים עליך לצרף אישור רלוונטי - דו"ח סוציאלי או מסמך של רשויות הרווחה
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    
+                                                סטודנט
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>15</td>
+                                                <td>
+                                                במידה ואתה או בני משפחתך הינם בעלי מצב רפואי חריג, יש להביא מסמכים מרופא מומחה
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    
+                                                סטודנט
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>16</td>
+                                                <td>
+                                                נימוק בקשה לסיוע - ניתן לצרף מכתב נלווה                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    
+                                                
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    </div>
+                        </div>
+                        <div class="col-sm-8 col-xs-12">
                             <form action="" id="studentForm" method="POST" class="needs-validation" enctype="multipart/form-data" data-parsley-validate=""
                                 ovalidate="" action="<?php $_SERVER['PHP_SELF'];?>">
 
@@ -546,7 +715,6 @@ if(isset($_POST['submit'])){
 
                                                     <input type="file" class="custom-file-input alwaysRequired reqOnLoad" id="tzfile" name="tzfile" required="" />
 
-                                                    <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
                                                 </div>
                                             </div>
@@ -886,7 +1054,7 @@ if(isset($_POST['submit'])){
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="taasukati_state_cont">
                                                     <label for="taasukati_state">מצב תעסוקתי</label>
                                                     <select name="taasukati_state" class="taas form-control" id="taasukati_state" required>
-                                                        <option value="0">יש לבחור ערך</option>
+                                                        <option value="">יש לבחור ערך</option>
                                                         <option value="1" <?php echo($Form->taasukati_state == '1' ? 'selected' : '')?>>שכיר</option>
                                                         <option value="2" <?php echo($Form->taasukati_state == '2' ? 'selected' : '')?>>עצמאי</option>
                                                         <option value="3" <?php echo($Form->taasukati_state == '3' ? 'selected' : '')?>>לא עובד</option>
@@ -1104,7 +1272,7 @@ if(isset($_POST['submit'])){
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="taasukati_av_state_cont">
                                                     <label for="taasukati_av_state">מצב תעסוקתי אב</label>
                                                     <select name="taasukati_av_state" class="taas form-control" id="taasukati_av_state">
-                                                        <option value="0">יש לבחור ערך</option>
+                                                        <option value="">יש לבחור ערך</option>
                                                         <option value="1" <?php echo($Form->taasukati_av_state == '1' ? 'selected' : '')?>>שכיר</option>
                                                         <option value="2" <?php echo($Form->taasukati_av_state == '2' ? 'selected' : '')?>>עצמאי</option>
                                                         <option value="3" <?php echo($Form->taasukati_av_state == '3' ? 'selected' : '')?>>לא עובד</option>
@@ -1199,7 +1367,7 @@ if(isset($_POST['submit'])){
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="taasukati_em_state_cont">
                                                     <label for="taasukati_em_state">מצב תעסוקתי אם</label>
                                                     <select name="taasukati_em_state" class="taas form-control" id="taasukati_em_state">
-                                                        <option value="0">יש לבחור ערך</option>
+                                                        <option value="">יש לבחור ערך</option>
                                                         <option value="1" <?php echo($Form->taasukati_em_state == '1' ? 'selected' : '')?>>שכירה</option>
                                                         <option value="2" <?php echo($Form->taasukati_em_state == '2' ? 'selected' : '')?>>עצמאית</option>
                                                         <option value="3" <?php echo($Form->taasukati_em_state == '3' ? 'selected' : '')?>>לא עובדת</option>
@@ -1294,7 +1462,7 @@ if(isset($_POST['submit'])){
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="taasukati_zug_state_cont">
                                                     <label for="taasukati_zug_state">מצב תעסוקתי בן/בת זוג</label>
                                                     <select name="taasukati_zug_state" class="taas form-control" id="taasukati_zug_state">
-                                                        <option value="0">יש לבחור ערך</option>
+                                                        <option value="">יש לבחור ערך</option>
                                                         <option value="1" <?php echo($Form->taasukati_zug_state == '1' ? 'selected' : '')?>>שכירה</option>
                                                         <option value="2" <?php echo($Form->taasukati_zug_state == '2' ? 'selected' : '')?>>עצמאית</option>
                                                         <option value="3" <?php echo($Form->taasukati_zug_state == '3' ? 'selected' : '')?>>לא עובדת</option>
@@ -1565,9 +1733,8 @@ if(isset($_POST['submit'])){
                                                         </ul>
 
 
-                                                        <input type="file" class="custom-file-input" id="social_harig_file" name="social_harig_file" />
+                                                        <input type="file" class="custom-file-input alwaysRequired" id="social_harig_file" name="social_harig_file" />
 
-                                                        <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
                                                     </div>
                                                 </div>
@@ -1581,7 +1748,7 @@ if(isset($_POST['submit'])){
                                                         <input id="no_medical_harig" value="0" name="medical_harig" type="radio" class="custom-control-input ff" <?php echo($Form->medical_harig == '0' ? 'checked' : '' ); ?>>
                                                         <label class="custom-control-label" for="no_medical_harig">לא</label>
                                                    
-                                                        <input id="yes_medical_harig" value="1" name="medical_harig" type="radio" checked class="custom-control-input ff" <?php echo($Form->medical_harig == '1' ? 'checked' : '' ); ?>>
+                                                        <input id="yes_medical_harig" value="1" name="medical_harig" type="radio" class="custom-control-input ff" <?php echo($Form->medical_harig == '1' ? 'checked' : '' ); ?>>
                                                         <label class="custom-control-label" for="yes_medical_harig">כן</label>
                                                     </p>
                                                 </div>
@@ -1593,7 +1760,6 @@ if(isset($_POST['submit'])){
                                                         <p>למצבים רפואיים חריגים עליך לצרף מסמך מרופא מומחה</p>
                                                         <ul class="file-list">
                                                             <?php  if($Form->medical_harig_file != '' || $Form->medical_harig_file != NULL){
-                                                            //var_dump(unserialize($Form->tzfile));
                                                             $thefile = json_decode($Form->medical_harig_file);
                                                             $i = 0;
                                                             foreach($thefile as $filename){
@@ -1610,9 +1776,8 @@ if(isset($_POST['submit'])){
                                                         </ul>
 
 
-                                                        <input type="file" class="custom-file-input" id="medical_harig_file" name="medical_harig_file" />
+                                                        <input type="file" class="custom-file-input alwaysRequired" id="medical_harig_file" name="medical_harig_file" />
 
-                                                        <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
                                                     </div>
                                                 </div>
@@ -1640,7 +1805,6 @@ if(isset($_POST['submit'])){
                                                             מומחה</p>
                                                         <ul class="file-list">
                                                             <?php  if($Form->family_harig_file != '' || $Form->family_harig_file != NULL){
-                                                              //var_dump(unserialize($Form->tzfile));
                                                               $thefile = json_decode($Form->family_harig_file);
                                                               $i = 0;
                                                               foreach($thefile as $filename){
@@ -1657,9 +1821,8 @@ if(isset($_POST['submit'])){
                                                         </ul>
 
 
-                                                        <input type="file" class="custom-file-input" id="family_harig_file" name="family_harig_file" />
+                                                        <input type="file" class="custom-file-input alwaysRequired" id="family_harig_file" name="family_harig_file" />
 
-                                                        <!-- <button type="button" onClick="addfile('tz-file','tzfile')">העלאת קובץ נוסף</button> -->
 
                                                     </div>
                                                 </div>
@@ -1693,7 +1856,6 @@ if(isset($_POST['submit'])){
                                                     <label class="custom-file-label" for="explanation_file">ניתן לצרף מכתב נלווה</label>
                                                     <ul class="file-list">
                                                         <?php  if($Form->explanation_file != '' || $Form->explanation_file != NULL){
-                                                            //var_dump(unserialize($Form->tzfile));
                                                             $thefile = json_decode($Form->explanation_file);
                                                             $i = 0;
                                                             foreach($thefile as $filename){
@@ -1769,9 +1931,9 @@ if(isset($_POST['submit'])){
 
             <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-            <!-- <script src="./vendors/parsleyjs/dist/parsley.js"></script> -->
-            <!-- <script src="./vendors/parsleyjs/dist/i18n/he.js"></script>
-            <script src="./vendors/parsleyjs/dist/i18n/he.extra.js"></script> -->
+            <script src="./vendors/parsleyjs/dist/parsley.js"></script>
+            <script src="./vendors/parsleyjs/dist/i18n/he.js"></script>
+            <script src="./vendors/parsleyjs/dist/i18n/he.extra.js"></script>
 
             <!-- iCheck -->
             <script src="./gentela/vendors/iCheck/icheck.min.js"></script>
@@ -1783,9 +1945,9 @@ if(isset($_POST['submit'])){
             <script src="./api/js/removefile.js"></script>
 
 
-            <!-- <script>
+            <script>
                 $('#studentForm').parsley();
-            </script> -->
+            </script>
 
 
 

@@ -99,3 +99,9 @@ body.login-page{
 .x_title h3{
     float: right;
 }
+
+#doctable ul{
+    -webkit-padding-start: 15px !important ;
+
+
+}
