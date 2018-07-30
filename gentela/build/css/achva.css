@@ -1,7 +1,56 @@
-*{
+* {
     direction: rtl;
 }
-.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-55, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-55,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9 {
     float: right;
 }
 
@@ -11,11 +60,11 @@
     margin-left: 0px;
 }
 
-.nav_menu{
-  display: none;
+.nav_menu {
+    display: none;
 }
 
-th{
+th {
     text-align: right;
 }
 
@@ -29,39 +78,45 @@ img.dash-logo {
     -webkit-padding-start: 0;
 }
 
-body.login-page{
+body.login-page {
     background-color: lightgrey;
     /* background-image: url('../../../assets/images/out-achva.jpg'); */
     background-size: cover;
 }
 
-.login_content h1:after, .login_content h1:before{
+.login_content h1:after,
+.login_content h1:before {
     width: 0%;
 }
 
-#content form .submit, .login_content form input[type=submit]{
+#content form .submit,
+.login_content form input[type=submit] {
     float: right;
 }
 
 /*image file in studentdata.php*/
+
 .full-width {
     width: 100%;
     border: 1px solid lightgray;
 }
 
-#image-container{
+#image-container {
     min-height: 1000px;
 }
-.full-height{
+
+.full-height {
     height: 100%;
     display: grid;
 }
 
-.right_column{
+.right_column {
     margin-right: 230px;
     margin-left: 0px;
 }
+
 /* image fade out before change*/
+
 .elementToFadeOut {
     opacity: 1;
     animation: fadeOut 1s linear;
@@ -72,36 +127,82 @@ body.login-page{
     animation: fadeIn 1s linear;
 }
 
-
 @keyframes fadeOut {
-  0% { opacity: 1 }
-  100% { opacity: 0 }
+    0% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
 }
 
 @keyframes fadeIn {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
-  }
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
 
-  a:active, a:hover, a:focus{
-  color:#e91e63
-  }
+a:active,
+a:hover,
+a:focus {
+    color: #e91e63
+}
 
-
-  .x_title h2{
-      float: right;
-  }
-
-  .x_title h1{
+.x_title h2 {
     float: right;
 }
 
-.x_title h3{
+.x_title h1 {
     float: right;
+}
+
+.x_title h3 {
+    float: right;
+}
+
+#doctable ul {
+    -webkit-padding-start: 15px !important;
+}
+
+#doctable {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a2b66;
+}
+
+#side-datatable {
+    overflow: scroll;
+    height: 100vh;
+}
+
+.cityname {
+    direction: rtl;
+}
+
+ul#city-result {
+    position: absolute;
+    z-index: 9;
+    background-color: #fff;
+    border: solid 1px #00b0ba;
+    width: 200px;
+    max-height: 500px;
+    overflow: hidden;
+    -webkit-padding-start: 0px;
+}
+
+ul#city-result li {
+    color: #1a2b66;
+    margin: 2px 5px;
+    list-style: none;
 }
 
 #doctable ul{
-    -webkit-padding-start: 15px !important ;
+    margin-bottom: 0;
+}
 
-
+.red{
+    color: red;
 }

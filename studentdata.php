@@ -156,7 +156,7 @@
     <body class="nav-md">
         <div class="container body">
             <div class="main_container">
-                <div class="col-md-3 left_col">
+                <div class="col-md-3 left_col menu_fixed">
                     <?php include './inc/sidenav.php'; ?>
                 </div>
 
@@ -345,7 +345,7 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="col-md-4 col-sm-12 col-xs-12" id="side-datatable">
                                         <form name="studentdata" method="POST" action="<?php $_SERVER['PHP_SELF'];?>">
                                             <h3>פרטים אישיים</h3>
                                             <table class="table table-striped table-bordered bulk_action">
@@ -372,7 +372,7 @@
                                                     <tr>
                                                         <td> מספר תעודת זהות</td>
                                                         <td>
-                                                            <input type="text" name="lname" value="<?php echo $Dash->tz; ?>" />
+                                                            <input type="text" name="tz" value="<?php echo $Dash->tz; ?>" />
                                                         </td>
                                                     </tr>
                                                     <tr>

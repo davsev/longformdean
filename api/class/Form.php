@@ -41,6 +41,7 @@ class Form{
     public $is_miluim;
     public $is_miluim_file;
     public $mimun_nosaf ;
+    public $is_siua ;
     public $family_state;
     public $taasukati_state;
     public $self_salary_avg;

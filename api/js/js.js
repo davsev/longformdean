@@ -34,6 +34,8 @@ document.onload = showIsAloneFile();
 document.onload =  hideFileOnRadio('social_harig_file_cont', 'social_harig', 'social_harig_file');
 document.onload =  hideFileOnRadio('medical_harig_file_cont', 'medical_harig', 'medical_harig_file');
 document.onload =  hideFileOnRadio('family_harig_file_cont', 'family_harig', 'family_harig_file');
+document.onload =  hideFileOnRadio('self_soldier_files_cont', 'self_soldier', 'self_soldier_files');
+document.onload =  hideFileOnRadio('self_student_files_cont', 'self_student', 'self_student_files');
 
 
 
@@ -90,6 +92,22 @@ document.getElementById("yes_siua").addEventListener("click", familyandSiua);
 document.getElementById("no_siua").addEventListener("click", familyandSiua);
 document.getElementById("family_state").addEventListener("change", familyandSiua);
 
+// בן/אח במוסד להשכלה גבוהה
+document.getElementsByName('self_student')[0].addEventListener('change', function(){
+    hideFileOnRadio('self_student_files_cont', 'self_student', 'self_student_files');
+}, false);
+document.getElementsByName('self_student')[1].addEventListener('change', function(){
+    hideFileOnRadio('self_student_files_cont', 'self_student', 'self_student_files');
+}, false);
+
+// בן/אח חייל
+document.getElementsByName('self_soldier')[0].addEventListener('change', function(){
+    hideFileOnRadio('self_soldier_files_cont', 'self_soldier', 'self_soldier_files');
+}, false);
+document.getElementsByName('self_soldier')[1].addEventListener('change', function(){
+    hideFileOnRadio('self_soldier_files_cont', 'self_soldier', 'self_soldier_files');
+}, false);
+
 //harig file
 document.getElementsByName('social_harig')[0].addEventListener('change', function(){
     hideFileOnRadio('social_harig_file_cont', 'social_harig', 'social_harig_file');
@@ -139,7 +157,8 @@ function showIsAloneFile() {
     } else {
 
         document.getElementById('is_alone_file').className += ' hidden';
-        document.getElementById('notalone').checked = true;
+        
+        // document.getElementById('notalone').checked = true;
         document.getElementById("isalonefile").required = false;
        
     }
@@ -193,6 +212,7 @@ function is_army() {
 
     switch (isArmy.val()) {
         case 'צבאי':
+            $('#the-army-state').text('צבאי');
             $('.army').removeClass('hidden');
             $('#is_lochem').removeClass('hidden');
             $('#army_ptor').addClass('hidden');
@@ -202,6 +222,7 @@ function is_army() {
             break;
 
         case 'לאומי':
+        $('#the-army-state').text('לאומי');
             $('.army').removeClass('hidden');
             $('#is_lochem').addClass('hidden');
             $('#lo_lochem').prop("checked", true);
@@ -215,6 +236,7 @@ function is_army() {
             break;
 
         case 'ללא':
+        $('#the-army-state').text('ללא שירות צבאי');
             $('.army').addClass('hidden');
             $('#is_lochem').addClass('hidden');
             $('#lo_lochem').prop("checked", true)
@@ -252,10 +274,8 @@ function isLochem() {
         }
     } else {
         document.getElementById('is-lochem-file').className += ' hidden';
-        document.getElementById('lo_lochem').checked = true;
-        // if(isLi != 0){
+        // document.getElementById('lo_lochem').checked = true;
         document.getElementById('islochemfile').required = false;
-        // }
     }
 
 };
@@ -271,7 +291,7 @@ function isArmyPtor() {
         }
     } else {
         document.getElementById('is_army_ptor_file_cont').className += ' hidden';
-        document.getElementById('is_army_no_ptor').checked = true;
+        // document.getElementById('is_army_no_ptor').checked = true;
         document.getElementById('is_army_ptor_file').required = false;
     }
 };
@@ -288,11 +308,13 @@ function showIsMiluim() {
 
     } else {
         document.getElementById('is-miluim-file').className += ' hidden';
-        document.getElementById('lo_miluim').checked = true;
+        // document.getElementById('lo_miluim').checked = true;
         document.getElementById('is_miluim_file').required = false;
        
     }
 };
+
+
 
 
 /*
@@ -330,6 +352,8 @@ function tas(val) {
             break;
             //שכיר
             case '1':
+            $('#the-taa-state').text('שכיר');
+
                 $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
                 $(this).closest('.taasuka').find('.salary').removeClass('hidden');
                 $(this).closest('.taasuka').find('div.salary').find('input[type=text]').prop('required', true);
@@ -342,6 +366,7 @@ function tas(val) {
                 break;
              //עצמאי
             case '2':
+            $('#the-taa-state').text('עצמאי');
                 $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
                 $(this).closest('.taasuka').find('.employ').removeClass('hidden');
                 $(this).closest('.taasuka').find('div.employ').find('input[type=text]').prop('required', true);
@@ -356,6 +381,7 @@ function tas(val) {
 
                   //לא עובד
             case '3':
+            $('#the-taa-state').text('לא עובד');
                 $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
                 $(this).closest('.taasuka').find('.lo-oved').removeClass('hidden');
 
@@ -491,19 +517,32 @@ function mezonotState() {
             break;
 
         case '2':
-        case '3':
-            const input2 = document.getElementById('mezonot_height_files_div');
-            const isLi2 = input.parentElement.querySelectorAll('li').length;
+            const input3 = document.getElementById('mezonot_height_files_div');
+            const isLi3 = input3.parentElement.querySelectorAll('li').length;
             $('#mezonot_files_div').addClass('hidden');
             $('.mezonot_height_cont').removeClass('hidden');
             $('#mezonot_files').prop('required', false);
+            $('#mezonot-file-text').text('אישור קבלת מזונות');
+  
 
+
+            if(isLi3 == 0){
+                $('#mezonot_height_files').prop('required', true);
+            }
+            break;
+        case '3':
+            const input2 = document.getElementById('mezonot_height_files_div');
+            const isLi2 = input2.parentElement.querySelectorAll('li').length;
+            $('#mezonot_files_div').addClass('hidden');
+            $('.mezonot_height_cont').removeClass('hidden');
+            $('#mezonot_files').prop('required', false);
+            $('#mezonot-file-text').text('אישור תשלום מזונות');
             if(isLi2 == 0){
                 $('#mezonot_height_files').prop('required', true);
             }
             break;
 
-            //לא עובד
+            //יש לבחור ערך
         default:
             $('#mezonot_files_div').addClass('hidden');
             $('.mezonot_height_cont').addClass('hidden');

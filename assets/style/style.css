@@ -3,7 +3,7 @@
 }
 
 body{
-    background-image: url('../images/study-achva.jpg');
+    /* background-image: url('../images/study-achva.jpg'); */
     background-repeat: no-repeat;
     background-size: cover;  
 }
@@ -67,4 +67,27 @@ p, label, file-list>a{
     background-image: url('../images/logo.png');
     background-repeat: no-repeat;
     background-position: 5px 50px; 
+}
+
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+    border-right: 5px solid #00b0ba;
+}
+
+input#savebtn {
+    background-color: #00b0ba;
+    position: fixed;
+    left: 41px;
+    bottom: 70px;
+    width: 150px;
+}
+
+input#submitbtn{
+    background-color: #462e8d;
+    position: fixed;
+    left: 41px;
+    bottom: 20px;
+    width: 150px;
 }

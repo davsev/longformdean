@@ -29,3 +29,5 @@
     <link href="./gentela/build/css/custom.min.css" rel="stylesheet">
     <link href="./gentela/build/css/achva.css" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style/style.css">
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

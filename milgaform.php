@@ -165,6 +165,10 @@ if(isset($_POST['save'])){
    }else{
       $Form->create();
   };
+
+
+
+
 };
 
 if(isset($_POST['submit'])){
@@ -251,7 +255,7 @@ if(isset($_POST['submit'])){
 
     <head lang="he">
 
-        <title>בקשה למלגת דיקן</title>
+        <title>טופס בקשה למלגת דיקן  – מלגה סוציו אקונומית</title>
 
         <!-- <link rel="stylesheet" href="./vendors/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"> -->
@@ -309,6 +313,14 @@ if(isset($_POST['submit'])){
             <ul class="student-state">
                 <li>
                     <label class="white glyphicon glyphicon-user" aria-hidden="true"> <span class="arial white">מצב משפחתי: </span><span class="arial" id="the-family-state"></span></label>
+        
+                </li>
+                <li>
+                    <label class="white glyphicon glyphicon-user" aria-hidden="true"> <span class="arial white">שירות צבאי: </span><span class="arial" id="the-army-state"></span></label>
+        
+                </li>
+                <li>
+                    <label class="white glyphicon glyphicon-user" aria-hidden="true"> <span class="arial white">מצב תעסוקתי: </span><span class="arial" id="the-taa-state"></span></label>
         
                 </li>
                     <ul class="nav child_menu">
@@ -467,7 +479,7 @@ if(isset($_POST['submit'])){
 
                                 <div class="row x_title">
                                     <div class="col-md-12">
-                                        <h2>בקשה למלגות דיקן- טופס מקוון</h2>
+                                        <h2>טופס בקשה למלגת דיקן  – מלגה סוציו אקונומית</h2>
                                     </div>
                                 </div>
                                 <blockquote class="message">
@@ -496,55 +508,41 @@ if(isset($_POST['submit'])){
                                             <tr>
                                                 <td>1</td>
                                                 <td>ת.ז</td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>אישור הכרה כחייל בודד</td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>פטור משירות צבאי מסיבה רפואית </td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>אישור שרות מילואים פעיל </td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>5</td>
                                                 <td>
                                                 תעודת לוחם / תומך לחימה                                                
                                                 </td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>
                                                     סטודנט אשר אינו נתמך על ידי הוריו, עליו לצרף אישור מגורמי רווחה או עו"ד בלבד
-                                                <td></td>                                       
-                                                <td>סטודנט</td>
+
                                             </tr>
                                                 <td>7</td>
                                                 <td>
                                                 שלושה תלושי שכר אחרונים
                                                 </td>
-                                                 <td rowspan="3"> אחד משלושתם</td>                                        
-                                                <td>
-                                                    <ul>
-                                                        <li>סטודנט</li>
-                                                        <li>אב</li>
-                                                        <li>אם</li>
-                                                        <li> בן / בת זוג</li>
-                                                    </ul>
-                                                </td>
+
                                             </tr>
                                             </tr>
                                                 <td>8</td>
@@ -552,107 +550,61 @@ if(isset($_POST['submit'])){
                                                 דוח שומה לשנת מס נוכחית
                                                 </td>
                                                                                     
-                                                <td>
-                                                    <ul>
-                                                        <li>סטודנט</li>
-                                                        <li>אב</li>
-                                                        <li>אם</li>
-                                                        <li> בן / בת זוג</li>
-                                                    </ul>
-                                                </td>
+                                               
                                             </tr>
                                             </tr>
                                                 <td>9</td>
                                                 <td>
                                                 אישור מעמד לא עובד – ביטוח לאומי
                                                 </td>
-                                                                                        
-                                                <td>
-                                                    <ul>
-                                                        <li>סטודנט</li>
-                                                        <li>אב</li>
-                                                        <li>אם</li>
-                                                        <li> בן / בת זוג</li>
-                                                    </ul>
-                                                </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td>10</td>
-                                                <td> <ul>
+                                                <td> 
+                                                    <ul>
                                                         <li>אישור גובה מזונות</li>
                                                         <li>אסמכתא על אי קבלת מזונות</li>
-                                                        
                                                     </ul> 
                                                 </td>
-                                                <td></td>
-                                                <td>סטודנט</td>
+
                                             </tr>
                                             <tr>
                                                 <td>11</td>
                                                 <td>ספח ת.ז 
                                                 </td>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>סטודנט </li>
-                                                        <li>אם</li>
-                                                        
-                                                    </ul> 
-                                                </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td>12</td>
                                                 <td>תעודת חוגר / קצין
                                                 </td>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>ילדים  </li>
-                                                        <li>אחים</li>
-                                                        
-                                                    </ul> 
-                                                </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td>13</td>
                                                 <td>אישור לימודים במוסד להשכלה גבוהה
                                                 </td>
-                                                <td></td>
-                                                <td><ul>
-                                                        <li>ילדים  </li>
-                                                        <li>אחים</li>
-                                                        
-                                                    </ul> 
-                                                </td>
+                                             
                                             </tr>
                                             <tr>
                                                 <td>14</td>
                                                 <td>למצבים סוציאליים חריגים עליך לצרף אישור רלוונטי - דו"ח סוציאלי או מסמך של רשויות הרווחה
                                                 </td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                סטודנט
-                                                </td>
+                                               
                                             </tr>
                                             <tr>
                                                 <td>15</td>
                                                 <td>
                                                 במידה ואתה או בני משפחתך הינם בעלי מצב רפואי חריג, יש להביא מסמכים מרופא מומחה
                                                 </td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                סטודנט
-                                                </td>
+                                              
                                             </tr>
                                             <tr>
                                                 <td>16</td>
                                                 <td>
                                                 נימוק בקשה לסיוע - ניתן לצרף מכתב נלווה                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    
-                                                
-                                                </td>
+                                               
                                             </tr>
                                         </table>
                                     </div>
@@ -671,28 +623,29 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
 
-                                                <label for="fname">שם פרטי</label>
-                                                <input type="text" name="fname" class="form-control" id="fname" autocomplete='given-name' placeholder="" required="" value="<?php echo $Form->fname; ?>">
+                                                <label for="fname">שם פרטי <span class="red">*</span></label>
+                                                <input type="text" name="fname" class="form-control" id="fname" autocomplete='first-name' placeholder="" required="" value="<?php echo $Form->fname; ?>" >
 
 
                                             </div>
                                             <div class="col-md-4 col-md-pull-2  col-sm-12 mb-3">
-                                                <label for="lname">שם משפחה</label>
-                                                <input type="text" name="lname" class="form-control" id="lname" placeholder="" required="" value="<?php echo $Form->lname; ?>">
+                                                <label for="lname">שם משפחה  <span class="red">*</span></label>
+                                                <input type="text" name="lname" class="form-control" id="lname" placeholder="" required="" value="<?php echo $Form->lname; ?>" autocomplete='family-name'>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
-                                                <label for="tz">תעודת זהות</label>
-                                                <input type="text" name="tz" class="form-control" id="tz" autocomplete='given-name' placeholder="" required="" value="<?php echo $tz; ?>"
+                                                <label for="tz">תעודת זהות  <span class="red">*</span></label>
+                                                <input type="text" name="tz" class="form-control" id="tz" autocomplete='tz' placeholder="" required="" value="<?php echo $tz; ?>"
                                                     readonly>
 
                                             </div>
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
 
                                                 <div class="custom-file" id="tz-file">
-                                                    <label class="custom-file-label" for="tzfile">צילום ת.ז (לחצו כאן)</label>
+                                                    <label class="custom-file-label" for="tzfile">צילום ת.ז  <span class="red">*</span></label>
+                                                    <p>חייב בהעלאת קובץ ת.ז</p>
 
                                                     <ul class="file-list">
                                                         <?php  if($Form->tzfile != '' || $Form->tzfile != NULL){
@@ -722,13 +675,13 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
 
-                                                <label for="birth_country">ארץ לידה</label>
-                                                <input type="text" name="birth_country" class="form-control" id="birth_country" placeholder="" required="" value="<?php echo $Form->birth_country; ?>">
+                                                <label for="birth_country">ארץ לידה  <span class="red">*</span></label>
+                                                <input type="text" name="birth_country" class="form-control" id="birth_country" placeholder="" required="" value="<?php echo $Form->birth_country; ?>" autocomplete="birth_country">
 
                                             </div>
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
-                                                <label for="city">מקום מגורים</label>
-                                                <input type="text" name="city" class="form-control" id="city" placeholder="" required="" value="<?php echo $Form->city; ?>">
+                                                <label for="city">מקום מגורים  <span class="red">*</span></label>
+                                                <input type="text" name="city" class="form-control" id="city" placeholder="" required="" value="<?php echo $Form->city; ?>" autocomplete="city">
                                             </div>
                                         </div>
 
@@ -736,13 +689,13 @@ if(isset($_POST['submit'])){
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
 
 
-                                                <label for="cellular">טלפון נייד</label>
-                                                <input type="text" name="cellular" class="form-control" id="cellular" placeholder="" required="" value="<?php echo $Form->cellular; ?>">
+                                                <label for="cellular">טלפון נייד  <span class="red">*</span></label>
+                                                <input type="text" name="cellular" class="form-control" id="cellular" placeholder="" required="" value="<?php echo $Form->cellular; ?>" autocomplete="cellular">
                                             </div>
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
 
                                                 <label for="email">דואר אלקטרוני</label>
-                                                <input type="email" name="email" class="form-control" id="email" placeholder="" required="" value="<?php echo $Form->email; ?>">
+                                                <input type="email" name="email" class="form-control" id="email" placeholder=""  value="<?php echo $Form->email; ?>" autocomplete="email">
                                             </div>
                                         </div>
                                         <div class="row">
@@ -752,11 +705,11 @@ if(isset($_POST['submit'])){
                                                 <p>
                                                     <input id="female" name="gender" value="0" type="radio" class="xxx" <?php echo 'gender='.$Form->gender; ?>
                                                     <?php echo($Form->gender == '0' ?  'checked' : '' ); ?> required="">
-                                                    <label class="custom-control-label" for="debit">נקבה</label>
+                                                    <label class="custom-control-label" for="female">נקבה</label>
 
 
                                                     <input id="male" name="gender" value="1" type="radio" class="xxx" <?php echo($Form->gender == '1' ? 'checked' : '' ); ?> required="">
-                                                    <label class="custom-control-label" for="credit">זכר</label>
+                                                    <label class="custom-control-label" for="male">זכר</label>
                                                 </p>
 
 
@@ -778,6 +731,7 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
                                                 <label>בודד בארץ</label>
+                                                <p>אם כן, חייב בהעלאת קובץ, אחד או יותר.</p>
                                                 <p>
                                                     <input id="alone" value="בודד" name="isalone" type="radio" class="xxx" required="" <?php echo($Form->isalone == 'בודד' ? 'checked' : '' ); ?>>
                                                     <label class="custom-control-label" for="debit">בודד בארץ</label>
@@ -792,7 +746,7 @@ if(isset($_POST['submit'])){
                                         <div class="row" id="is_alone_file" class="hidden">
                                             <div class="col-md-4 col-md-pull-2 col-sm-12 mb-3">
                                                 <div class="custom-file" id="iisalonefile">
-                                                    <label class="custom-file-label" for="iisalonefile">סטודנט בודד בארץ (לחצו כאן)</label>
+                                                    <label class="custom-file-label" for="iisalonefile">סטודנט בודד בארץ </label>
                                                     <p>סטודנט בודד בארץ, או מי שהוכר כחייל בודד, יש להביא אישורים המעידים על
                                                         כך
                                                     </p>
@@ -917,6 +871,7 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden" id="is_lochem">
                                                 <label>לוחם/ת או תומך/ת לחימה</label>
+                                                <p>אם כן, חייב בהעלאת קובץ, אחד או יותר.</p>
                                                 <p>
                                                     <input id="lochem" name="is_lochem" value="1" type="radio" class="xxx" required="" <?php echo($Form->is_lochem == '1' ? 'checked' : '' ); ?>>
                                                     <label class="custom-control-label" for="debit">כן</label>
@@ -927,7 +882,7 @@ if(isset($_POST['submit'])){
                                             </div>
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3">
                                                 <div class="custom-file hidden" id="is-lochem-file">
-                                                    <label class="custom-file-label" for="islochemfile">קובץ לוחם (לחצו כאן)</label>
+                                                    <label class="custom-file-label" for="islochemfile">קובץ לוחם/תומך לחימה</label>
 
                                                     <ul class="file-list">
                                                         <?php  if($Form->islochemfile != '' || $Form->islochemfile != NULL){
@@ -950,6 +905,7 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="miluim_pail">
                                                 <label>שירות מילואים פעיל</label>
+                                                <p>אם כן, חייב בהעלאת קובץ, אחד או יותר.</p>
                                                 <p>
                                                     <input id="is_miluim" name="is_miluim" value="1" type="radio" class="xxx" required="" <?php echo($Form->is_miluim == '1' ? 'checked' : '' ); ?>>
                                                     <label class="custom-control-label" for="debit">כן</label>
@@ -960,7 +916,7 @@ if(isset($_POST['submit'])){
                                             </div>
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3">
                                                 <div class="custom-file" id="is-miluim-file">
-                                                    <label class="custom-file-label" for="is-miluim-file">במידה והנך משרת שרות מילואים פעיל צרף אישורים (לחצו כאן)</label>
+                                                    <label class="custom-file-label" for="is-miluim-file">במידה והנך משרת שרות מילואים פעיל צרף אישורים </label>
                                                     <ul class="file-list">
                                                         <?php  if($Form->is_miluim_file != '' || $Form->is_miluim_file != NULL){
                     $thefile = json_decode($Form->is_miluim_file);
@@ -982,7 +938,9 @@ if(isset($_POST['submit'])){
                                         <div class="row">
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden" id="army_ptor">
                                                 <label>פטור משירות מסיבה רפואית בלבד</label>
-<p>                                                   <input id="is_army_ptor" name="is_army_ptor" value="1" type="radio" class="xxx" required="" <?php echo($Form->is_army_ptor == '1' ? 'checked' : '' ); ?>>
+                                                <p>אם כן, חייב בהעלאת קובץ, אחד או יותר.</p>
+                                                <p>                                                  
+                                                   <input id="is_army_ptor" name="is_army_ptor" value="1" type="radio" class="xxx" required="" <?php echo($Form->is_army_ptor == '1' ? 'checked' : '' ); ?>>
                                                     <label class="custom-control-label" for="debit">כן</label>
                                               
                                                     <input id="is_army_no_ptor" name="is_army_ptor" value="0" type="radio" class="xxx" required="" <?php echo($Form->is_army_ptor == '0' ? 'checked' : '' ); ?>>
@@ -1028,11 +986,11 @@ if(isset($_POST['submit'])){
                                                 <label>בשנת הלימודים הנוכחית אקבל השתתפות במימון לימודי על ידי גוף כלשהו</label>
                                                 <p>
                                                     <input id="mimun_nosaf" name="mimun_nosaf" value="1" type="radio" class="custom-control-input" required="" <?php echo($Form->mimun_nosaf == '1' ? 'checked' : '' ); ?>>
-                                                    <label class="custom-control-label" for="debit">כן</label>
+                                                    <label class="custom-control-label" for="mimun_nosaf">כן</label>
 
-                                                    <input id="lo_mimun_nosaf" name="mimun_nosaf" value="0" type="radio" class="custom-control-input" checked required="" <?php
+                                                    <input id="lo_mimun_nosaf" name="mimun_nosaf" value="0" type="radio" class="custom-control-input" required="" <?php
                                                         echo($Form->mimun_nosaf == '0' ? 'checked' : '' ); ?>>
-                                                    <label class="custom-control-label" for="credit">לא</label>
+                                                    <label class="custom-control-label" for="lo_mimun_nosaf">לא</label>
                                                 </p>
                                             </div>
 
@@ -1045,8 +1003,12 @@ if(isset($_POST['submit'])){
                                     <div class="x_title">
                                         <h2>הכנסה</h2>
                                         <div class="clearfix"></div>
+
                                     </div>
+                                    <p>יש לציין כי המכללה האקדמית אחוה מעודדת סטודנט לעבודה והשתכרות אישית ואינה מונעת קבלת מלגה מסטודנט עובד.</p>
+
                                     <div class="x_content">
+                                    
                                         <div class="taasuka">
                                             <div class="row">
                                                 <!-- taasukati -->
@@ -1062,7 +1024,7 @@ if(isset($_POST['submit'])){
                                                 </div>
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden starthidden lo-oved" id="lo_oved_files_cont">
                                                     <div class="custom-file" id="lo_oved_files">
-                                                        <label class="custom-file-label" for="lo_oved_files">במידה ולא עובד</label>
+                                                        <label class="custom-file-label" for="lo_oved_files">במידה ולא עובד – אישור מעמד לא עובד מביטוח לאומי חובה.</label>
                                                         <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
                                                         <ul class="file-list">
                                                             <?php  if($Form->lo_oved_files != '' || $Form->lo_oved_files != NULL){
@@ -1186,7 +1148,7 @@ if(isset($_POST['submit'])){
                                             </div>
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="mezonot_height_files_cont">
                                                 <div class="custom-file" id="mezonot_height_files_div">
-                                                    <label class="custom-file-label" for="mezonot_height_files">אישור גובה מזונות</label>
+                                                    <label class="custom-file-label" id="mezonot-file-text" for="mezonot_height_files"></label>
 
                                                     <ul class="file-list">
                                                         <?php  if($Form->mezonot_height_files != '' || $Form->mezonot_height_files != NULL){
@@ -1224,7 +1186,7 @@ if(isset($_POST['submit'])){
                                                 <label>מקבל סיוע</label>
                                                 <p>סטודנט אשר אינו נתמך על ידי הוריו, עליו לצרף אישור מגורמי רווחה או עו"ד בלבד</p>
                                                 <p>
-                                                    <input id="no_siua" value="0" name="is_siua" type="radio" class="custom-control-input ff" required="" <?php echo($Form->is_siua == '0' ? 'checked' : '' ); ?>>
+                                                    <input id="no_siua" value="0" name="is_siua" type="radio" class="custom-control-input ff" required="" <?php echo ($Form->is_siua == '0' ? 'checked' : '' ); ?>>
                                                     <label class="custom-control-label" for="no_siua">לא</label>
 
                                                     <input id="yes_siua" value="1" name="is_siua" type="radio" class="custom-control-input ff" required="" <?php echo($Form->is_siua == '1' ? 'checked' : '' ); ?>>
@@ -1280,7 +1242,7 @@ if(isset($_POST['submit'])){
                                                 </div>
                                                 <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden starthidden lo-oved" id="lo_oved_av_files_cont">
                                                     <div class="custom-file" id="lo_oved_av_files_div">
-                                                        <label class="custom-file-label" for="lo_oved_av_files">במידה ולא עובד</label>
+                                                        <label class="custom-file-label" for="lo_oved_av_files">במידה ולא עובד – אישור מעמד לא עובד מביטוח לאומי חובה</label>
                                                         <p>נא לצרף אישור מעמד לא עובד מביטוח לאומי</p>
                                                         <ul class="file-list">
                                                             <?php  if($Form->lo_oved_av_files != '' || $Form->lo_oved_av_files != NULL){
@@ -1566,13 +1528,14 @@ if(isset($_POST['submit'])){
                                                 <label for="self_children" id="self_children_cont_label">
 
                                                 </label>
-
+                                                <p>במידה ואין להשאיר ריק</p>
                                                 <input type="text" class="form-control" name="self_children" id="self_children" value="<?php echo $Form->self_children; ?>">
                                             </div>
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="self_children_files_cont">
                                                 <div class="custom-file" id="self_children_files_div">
-                                                    <label class="custom-file-label" for="self_children_files">חייב בהעלאת קובץ ספח תעודות זהות</label>
-
+                                                    <label class="custom-file-label" for="self_children_files">אם קיים ערך בשדה חייב בהעלאת קובץ ספח תעודות זהות</label>
+                                                   
+                                                    <p>מספיקה אסמכתא לילד / אח אחד בלבד</p>
                                                     <ul class="file-list">
                                                         <?php  if($Form->self_children_files != '' || $Form->self_children_files != NULL){
                                                           $thefile = json_decode($Form->self_children_files);
@@ -1588,6 +1551,7 @@ if(isset($_POST['submit'])){
                                                         }; ?>
                                                     </ul>
                                                     <input type="file" class="custom-file-input" id="self_children_files" name="self_children_files" />
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -1605,13 +1569,27 @@ if(isset($_POST['submit'])){
                                     <div class="x_content">
                                         <div class="row starthidden" id="soldier_cont">
                                             <!-- section8 -->
-                                            <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="self_soldier_cont">
-                                                <label for="self_soldier" id="self_soldier_cont_label">
 
-                                                </label>
-                                                <p>במידה ואין להשאיר ריק</p>
-                                                <input type="text" class="form-control" name="self_soldier" id="self_soldier" value="<?php echo $Form->self_soldier; ?>">
+
+                                            <!-- soldier -->
+
+
+                                            <div class="row" id="self_soldier_cont">
+                                                <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3">
+                                                <label for="self_soldier" id="self_soldier_cont_label"></label>
+                                                   <?php echo $Form->self_soldier; ?>
+                                                    <p>
+
+                                                        <input id="no_self_soldier" value="0" name="self_soldier" type="radio" class="custom-control-input ff" <?php echo($Form->self_soldier == '0' ? 'checked' : '' ); ?>>
+                                                        <label class="custom-control-label" for="no_self_soldier">לא</label>
+
+                                                        <input id="yes_self_soldier" value="1" name="self_soldier" type="radio" class="custom-control-input ff" <?php echo($Form->self_soldier == '1' ? 'checked' : '' ); ?>>
+                                                        <label class="custom-control-label" for="yes_self_soldier">כן</label>
+                                                    </p>
+                                                </div>
                                             </div>
+
+
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="self_soldier_files_cont">
                                                 <div class="custom-file" id="self_soldier_files_div">
                                                     <label class="custom-file-label" for="self_soldier_files">
@@ -1649,14 +1627,24 @@ if(isset($_POST['submit'])){
                                     </div>
                                     <div class="x_content">
                                         <div class="row starthidden" id="student_cont">
-                                            <!-- section9 -->
-                                            <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="self_student_cont">
-                                                <label for="self_student" id="self_student_cont_label">
+                                           <!-- student -->
+                                           <div class="row" id="self_student_cont">
+                                                <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3">
+                                                <label for="self_student" id="self_student_cont_label"></label>
+                                                   <?php echo $Form->self_student; ?>
+                                                    <p>
 
-                                                </label>
+                                                        <input id="no_self_student" value="0" name="self_student" type="radio" class="custom-control-input ff" <?php echo($Form->self_student == '0' ? 'checked' : '' ); ?>>
+                                                        <label class="custom-control-label" for="no_self_student">לא</label>
 
-                                                <input type="text" class="form-control" name="self_student" id="self_student" value="<?php echo $Form->self_student; ?>">
+                                                        <input id="yes_self_student" value="1" name="self_student" type="radio" class="custom-control-input ff" <?php echo($Form->self_student == '1' ? 'checked' : '' ); ?>>
+                                                        <label class="custom-control-label" for="yes_self_student">כן</label>
+                                                    </p>
+                                                </div>
                                             </div>
+
+                                            <!-- section9 -->
+
                                             <div class="col-md-8 col-md-pull-2 col-sm-12 mb-3" id="self_student_files_cont">
                                                 <div class="custom-file" id="self_student_files_div">
                                                     <label class="custom-file-label" for="self_student_files">
@@ -1930,6 +1918,8 @@ if(isset($_POST['submit'])){
 
 
             <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
             <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
             <script src="./vendors/parsleyjs/dist/parsley.js"></script>
             <script src="./vendors/parsleyjs/dist/i18n/he.js"></script>
@@ -1941,6 +1931,7 @@ if(isset($_POST['submit'])){
 
 
             <script src="./api/js/js.js"></script>
+            <script src="./api/js/search.js"></script>
             <script src="./api/js/fileupload.js"></script>
             <script src="./api/js/removefile.js"></script>
 
@@ -1948,7 +1939,6 @@ if(isset($_POST['submit'])){
             <script>
                 $('#studentForm').parsley();
             </script>
-
 
 
     </body>
