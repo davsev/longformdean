@@ -1,4 +1,5 @@
   <title>מלגות דיקן</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.ico">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">

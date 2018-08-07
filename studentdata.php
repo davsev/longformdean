@@ -1,15 +1,17 @@
 <?php
     include './api/incg.php';
-    $Dash = new Dashboard($db);
+
 
     $id = $_GET['id'];
+    $Dash = new Dashboard($db, $id);
+    // $Dash->get_student_data($id);
 
-    $Dash->get_student_data($id);
+  
 
     //confirm data is o.k and submit to next confirmation level
     if(isset($_POST['submit'])){
       
-
+        $submitted = 2;
         $datas =  array(
           'fname' => $_POST['fname'],
           'lname' => $_POST['lname'],
@@ -39,7 +41,7 @@
           'taasukati_av_state' => $_POST['taasukati_av_state'],
           'self_av_salary_avg' => $_POST['self_av_salary_avg'],
           'self_av_employ_avg' => $_POST['self_av_employ_avg'],
-          'taasukati_em_state' => $_POST['taasukati_em_state'],
+          'taasukati_em_state' => (isset($_POST['taasukati_em_state']) ? $_POST['taasukati_em_state'] : ''),
           'self_em_salary_avg' => $_POST['self_em_salary_avg'],
           'self_em_employ_avg' => $_POST['self_em_employ_avg'],
           'taasukati_zug_state' => $_POST['taasukati_zug_state'],
@@ -51,10 +53,110 @@
           'social_harig' => $_POST['social_harig'],
           'family_harig' => $_POST['family_harig'],
           'medical_harig' => $_POST['medical_harig'],
-          'explanation' => $_POST['explanation']
+          'explanation' => (isset($_POST['explanation']) ? $_POST['explanation'] : ''),
+          'reject_exp' => (isset($_POST['reject_exp']) ? $_POST['reject_exp'] : ''),
+          
+          'tzfile_cb' => (isset($_POST['tzfile_cb']) ? $_POST['tzfile_cb'] : ''),
+          'isalonefile_cb' => (isset($_POST['isalonefile_cb']) ? $_POST['isalonefile_cb'] : ''),
+          'islochemfile_cb' => (isset($_POST['islochemfile_cb']) ? $_POST['islochemfile_cb'] : ''),
+          'is_army_ptor_file_cb' => (isset($_POST['is_army_ptor_file_cb']) ? $_POST['is_army_ptor_file_cb'] : ''),
+          'is_miluim_file_cb' => (isset($_POST['is_miluim_file_cb']) ? $_POST['is_miluim_file_cb'] : ''),
+          'lo_oved_files_cb' => (isset($_POST['lo_oved_files_cb']) ? $_POST['lo_oved_files_cb'] : ''),
+          'self_salary_files_cb' => (isset($_POST['self_salary_files_cb']) ? $_POST['self_salary_files_cb'] : ''),
+          'self_employ_files_cb' => (isset($_POST['self_employ_files_cb']) ? $_POST['self_employ_files_cb'] : ''),
+          'mezonot_files_cb' => (isset($_POST['mezonot_files_cb']) ? $_POST['mezonot_files_cb'] : ''),
+          'mezonot_height_files_cb' => (isset($_POST['mezonot_height_files_cb']) ? $_POST['mezonot_height_files_cb'] : ''),
+          'is_siua_file_cb' => (isset($_POST['is_siua_file_cb']) ? $_POST['is_siua_file_cb'] : ''),
+          'lo_oved_av_files_cb' => (isset($_POST['lo_oved_av_files_cb']) ? $_POST['lo_oved_av_files_cb'] : ''),
+          'self_av_salary_files_cb' => (isset($_POST['self_av_salary_files_cb']) ? $_POST['self_av_salary_files_cb'] : ''),
+          'self_av_employ_files_cb' => (isset($_POST['self_av_employ_files_cb']) ? $_POST['self_av_employ_files_cb'] : ''),
+          'lo_oved_em_files_cb' => (isset($_POST['lo_oved_em_files_cb']) ? $_POST['lo_oved_em_files_cb'] : ''),
+          'self_em_salary_files_cb' => (isset($_POST['self_em_salary_files_cb']) ? $_POST['self_em_salary_files_cb'] : ''),
+          'self_em_employ_files_cb' => (isset($_POST['self_em_employ_files_cb']) ? $_POST['self_em_employ_files_cb'] : ''),
+          'lo_oved_zug_files_cb' => (isset($_POST['lo_oved_zug_files_cb']) ? $_POST['lo_oved_zug_files_cb'] : ''),
+          'self_zug_salary_files_cb' => (isset($_POST['self_zug_salary_files_cb']) ? $_POST['self_zug_salary_files_cb'] : ''),
+          'self_zug_employ_files_cb' => (isset($_POST['self_zug_employ_files_cb']) ? $_POST['self_zug_employ_files_cb'] : ''),
+          'self_children_files_cb' => (isset($_POST['self_children_files_cb']) ? $_POST['self_children_files_cb'] : ''),
+          'self_soldier_files_cb' => (isset($_POST['self_soldier_files_cb']) ? $_POST['self_soldier_files_cb'] : ''),
+          'self_student_files_cb' => (isset($_POST['self_student_files_cb']) ? $_POST['self_student_files_cb'] : ''),
+          'social_harig_file_cb' => (isset($_POST['social_harig_file_cb']) ? $_POST['social_harig_file_cb'] : ''),
+          'medical_harig_file_cb' => (isset($_POST['medical_harig_file_cb']) ? $_POST['medical_harig_file_cb'] : ''),
+          'family_harig_file_cb' => (isset($_POST['family_harig_file_cb']) ? $_POST['family_harig_file_cb'] : '')
           
         );
     
+        
+
+
+
+  $Dash->fname = $datas['fname'];
+  $Dash->lname = $datas['lname'];
+  $Dash->gender = $datas['gender'];
+  $Dash->birth_country = $datas['birth_country'];
+  $Dash->city = $datas['city'];
+  $Dash->cellular = $datas['cellular'];
+  $Dash->email = $datas['email']; 
+  $Dash->family_state = $datas['family_state']; 
+  $Dash->isalone = $datas['isalone'];
+  $Dash->study_field = $datas['study_field'];
+  $Dash->study_year = $datas['study_year'];
+  $Dash->asked_schol = $datas['asked_schol'];
+  $Dash->received_schol = $datas['received_schol'];
+  $Dash->is_army = $datas['is_army'];
+  $Dash->length_army = $datas['length_army'];
+  $Dash->is_lochem = $datas['is_lochem'];
+  $Dash->is_army_ptor = $datas['is_army_ptor'];
+  $Dash->is_miluim = $datas['is_miluim'];
+  $Dash->mimun_nosaf = $datas['mimun_nosaf'];
+  $Dash->taasukati_state = $datas['taasukati_state'];
+  $Dash->self_salary_avg = $datas['self_salary_avg'];
+  $Dash->self_employ_avg = $datas['self_employ_avg'];
+  $Dash->mezonot_state = $datas['mezonot_state'];
+  $Dash->mezonot_height = $datas['mezonot_height'];
+  $Dash->is_siua = $datas['is_siua'];
+  $Dash->taasukati_av_state = $datas['taasukati_av_state'];
+  $Dash->self_av_salary_avg = $datas['self_av_salary_avg'];
+  $Dash->self_av_employ_avg = $datas['self_av_employ_avg'];
+  $Dash->taasukati_em_state = $datas['taasukati_em_state'];
+  $Dash->self_em_salary_avg = $datas['self_em_salary_avg'];
+  $Dash->self_em_employ_avg = $datas['self_em_employ_avg'];
+  $Dash->taasukati_zug_state = $datas['taasukati_zug_state'];
+  $Dash->self_zug_salary_avg = $datas['self_zug_salary_avg'];
+  $Dash->self_zug_employ_avg = $datas['self_zug_employ_avg'];
+  $Dash->self_children = $datas['self_children'];
+  $Dash->self_soldier = $datas['self_soldier'];
+  $Dash->self_student = $datas['self_student'];
+  $Dash->social_harig = $datas['social_harig'];
+  $Dash->family_harig = $datas['family_harig'];
+  $Dash->medical_harig = $datas['medical_harig'];
+  $Dash->explanation = $datas['explanation'];
+  $Dash->tzfile_cb = $datas['tzfile_cb'];
+  $Dash->isalonefile_cb = $datas['isalonefile_cb'];
+  $Dash->islochemfile_cb = $datas['islochemfile_cb'];
+  $Dash->is_army_ptor_file_cb = $datas['is_army_ptor_file_cb'];
+  $Dash->is_miluim_file_cb = $datas['is_miluim_file_cb'];
+  $Dash->lo_oved_files_cb = $datas['lo_oved_files_cb'];
+  $Dash->self_salary_files_cb = $datas['self_salary_files_cb'];
+  $Dash->self_employ_files_cb = $datas['self_employ_files_cb'];
+  $Dash->mezonot_files_cb = $datas['mezonot_files_cb'];
+  $Dash->mezonot_height_files_cb = $datas['mezonot_height_files_cb'];
+  $Dash->is_siua_file_cb = $datas['is_siua_file_cb'];
+  $Dash->lo_oved_av_files_cb = $datas['lo_oved_av_files_cb'];
+  $Dash->self_av_salary_files_cb = $datas['self_av_salary_files_cb'];
+  $Dash->self_av_employ_files_cb = $datas['self_av_employ_files_cb'];
+  $Dash->lo_oved_em_files_cb = $datas['lo_oved_em_files_cb'];
+  $Dash->self_em_salary_files_cb = $datas['self_em_salary_files_cb'];
+  $Dash->self_em_employ_files_cb = $datas['self_em_employ_files_cb'];
+  $Dash->lo_oved_zug_files_cb = $datas['lo_oved_zug_files_cb'];
+  $Dash->self_zug_salary_files_cb = $datas['self_zug_salary_files_cb'];
+  $Dash->self_zug_employ_files_cb = $datas['self_zug_employ_files_cb'];
+  $Dash->self_children_files_cb = $datas['self_children_files_cb'];
+  $Dash->self_soldier_files_cb = $datas['self_soldier_files_cb'];
+  $Dash->self_student_files_cb = $datas['self_student_files_cb'];
+  $Dash->social_harig_file_cb = $datas['social_harig_file_cb'];
+  $Dash->medical_harig_file_cb = $datas['medical_harig_file_cb'];
+  $Dash->family_harig_file_cb = $datas['family_harig_file_cb'];
+  $Dash->reject_exp = $datas['reject_exp'];
     
         $meida = json_encode($datas);
         //properties retrived by consructor
@@ -67,15 +169,17 @@
     
         $Dash->datas = serialize($datas);
 
-        $Dash->update_user_data($id);
+        $Dash->update_user_data($id, $submitted);
+        
     };
   
     // var_dump($Dash->datas);
     //data is missing documents and send back to user edit
 
     if(isset($_POST['return'])){
-        $submitted = $_POST['submitted'];
-
+        
+        $submitted = 0;
+        $id = $_GET['id'];
         $datas =  array(
           'fname' => $_POST['fname'],
           'lname' => $_POST['lname'],
@@ -105,19 +209,48 @@
           'taasukati_av_state' => $_POST['taasukati_av_state'],
           'self_av_salary_avg' => $_POST['self_av_salary_avg'],
           'self_av_employ_avg' => $_POST['self_av_employ_avg'],
-          'taasukati_em_state' => $_POST['taasukati_em_state'],
-          'self_em_salary_avg' => $_POST['self_em_salary_avg'],
-          'self_em_employ_avg' => $_POST['self_em_employ_avg'],
-          'taasukati_zug_state' => $_POST['taasukati_zug_state'],
-          'self_zug_salary_avg' => $_POST['self_zug_salary_avg'],
-          'self_zug_employ_avg' => $_POST['self_zug_employ_avg'],
-          'self_children' => $_POST['self_children'],
-          'self_soldier' => $_POST['self_soldier'],
-          'self_student' => $_POST['self_student'],
-          'social_harig' => $_POST['social_harig'],
+          'taasukati_em_state' => (isset($_POST['taasukati_em_state']) ? $_POST['taasukati_em_state'] : ''),
+          'self_em_salary_avg' => (isset($_POST['self_em_salary_avg']) ? $_POST['self_em_salary_avg'] : ''),
+          'self_em_employ_avg' => (isset($_POST['self_em_employ_avg']) ? $_POST['self_em_employ_avg'] : ''),
+          'taasukati_zug_state' => (isset($_POST['taasukati_zug_state']) ? $_POST['taasukati_zug_state'] : ''),
+          'self_zug_salary_avg' => (isset($_POST['self_zug_salary_avg']) ? $_POST['self_zug_salary_avg'] : ''),
+          'self_zug_employ_avg' => (isset($_POST['self_zug_employ_avg']) ? $_POST['self_zug_employ_avg'] : ''),
+          'self_children' => (isset($_POST['self_children']) ? $_POST['self_children'] : ''),
+          'self_soldier' => (isset($_POST['self_soldier']) ? $_POST['self_soldier'] : ''),
+          'self_student' => (isset($_POST['self_student']) ? $_POST['self_student'] : ''),
+          'social_harig' => (isset($_POST['social_harig']) ? $_POST['social_harig'] : ''),
           'family_harig' => $_POST['family_harig'],
           'medical_harig' => $_POST['medical_harig'],
-          'explanation' => $_POST['explanation']
+          'explanation' => (isset($_POST['explanation']) ? $_POST['explanation'] : ''),
+     
+
+          'tzfile_cb' => (isset($_POST['tzfile_cb']) ? $_POST['tzfile_cb'] : ''),
+          'isalonefile_cb' => (isset($_POST['isalonefile_cb']) ? $_POST['isalonefile_cb'] : ''),
+          'islochemfile_cb' => (isset($_POST['islochemfile_cb']) ? $_POST['islochemfile_cb'] : ''),
+          'is_army_ptor_file_cb' => (isset($_POST['is_army_ptor_file_cb']) ? $_POST['is_army_ptor_file_cb'] : ''),
+          'is_miluim_file_cb' => (isset($_POST['is_miluim_file_cb']) ? $_POST['is_miluim_file_cb'] : ''),
+          'lo_oved_files_cb' => (isset($_POST['lo_oved_files_cb']) ? $_POST['lo_oved_files_cb'] : ''),
+          'self_salary_files_cb' => (isset($_POST['self_salary_files_cb']) ? $_POST['self_salary_files_cb'] : ''),
+          'self_employ_files_cb' => (isset($_POST['self_employ_files_cb']) ? $_POST['self_employ_files_cb'] : ''),
+          'mezonot_files_cb' => (isset($_POST['mezonot_files_cb']) ? $_POST['mezonot_files_cb'] : ''),
+          'mezonot_height_files_cb' => (isset($_POST['mezonot_height_files_cb']) ? $_POST['mezonot_height_files_cb'] : ''),
+          'is_siua_file_cb' => (isset($_POST['is_siua_file_cb']) ? $_POST['is_siua_file_cb'] : ''),
+          'lo_oved_av_files_cb' => (isset($_POST['lo_oved_av_files_cb']) ? $_POST['lo_oved_av_files_cb'] : ''),
+          'self_av_salary_files_cb' => (isset($_POST['self_av_salary_files_cb']) ? $_POST['self_av_salary_files_cb'] : ''),
+          'self_av_employ_files_cb' => (isset($_POST['self_av_employ_files_cb']) ? $_POST['self_av_employ_files_cb'] : ''),
+          'lo_oved_em_files_cb' => (isset($_POST['lo_oved_em_files_cb']) ? $_POST['lo_oved_em_files_cb'] : ''),
+          'self_em_salary_files_cb' => (isset($_POST['self_em_salary_files_cb']) ? $_POST['self_em_salary_files_cb'] : ''),
+          'self_em_employ_files_cb' => (isset($_POST['self_em_employ_files_cb']) ? $_POST['self_em_employ_files_cb'] : ''),
+          'lo_oved_zug_files_cb' => (isset($_POST['lo_oved_zug_files_cb']) ? $_POST['lo_oved_zug_files_cb'] : ''),
+          'self_zug_salary_files_cb' => (isset($_POST['self_zug_salary_files_cb']) ? $_POST['self_zug_salary_files_cb'] : ''),
+          'self_zug_employ_files_cb' => (isset($_POST['self_zug_employ_files_cb']) ? $_POST['self_zug_employ_files_cb'] : ''),
+          'self_children_files_cb' => (isset($_POST['self_children_files_cb']) ? $_POST['self_children_files_cb'] : ''),
+          'self_soldier_files_cb' => (isset($_POST['self_soldier_files_cb']) ? $_POST['self_soldier_files_cb'] : ''),
+          'self_student_files_cb' => (isset($_POST['self_student_files_cb']) ? $_POST['self_student_files_cb'] : ''),
+          'social_harig_file_cb' => (isset($_POST['social_harig_file_cb']) ? $_POST['social_harig_file_cb'] : ''),
+          'medical_harig_file_cb' => (isset($_POST['medical_harig_file_cb']) ? $_POST['medical_harig_file_cb'] : ''),
+          'family_harig_file_cb' => (isset($_POST['family_harig_file_cb']) ? $_POST['family_harig_file_cb'] : ''),
+          'reject_exp' => (isset($_POST['reject_exp']) ? $_POST['reject_exp'] : '')
           
         );
     
@@ -132,7 +265,83 @@
         // $Dash->datas = $meida;
     
         $Dash->datas = serialize($datas);
-        $Dash->update_user_data($id);
+        $Dash->update_user_data($id, $submitted);
+
+
+
+
+
+
+  $Dash->fname = $datas['fname'];
+  $Dash->lname = $datas['lname'];
+  $Dash->gender = $datas['gender'];
+  $Dash->birth_country = $datas['birth_country'];
+  $Dash->city = $datas['city'];
+  $Dash->cellular = $datas['cellular'];
+  $Dash->email = $datas['email']; 
+  $Dash->family_state = $datas['family_state']; 
+  $Dash->isalone = $datas['isalone'];
+  $Dash->study_field = $datas['study_field'];
+  $Dash->study_year = $datas['study_year'];
+  $Dash->asked_schol = $datas['asked_schol'];
+  $Dash->received_schol = $datas['received_schol'];
+  $Dash->is_army = $datas['is_army'];
+  $Dash->length_army = $datas['length_army'];
+  $Dash->is_lochem = $datas['is_lochem'];
+  $Dash->is_army_ptor = $datas['is_army_ptor'];
+  $Dash->is_miluim = $datas['is_miluim'];
+  $Dash->mimun_nosaf = $datas['mimun_nosaf'];
+  $Dash->taasukati_state = $datas['taasukati_state'];
+  $Dash->self_salary_avg = $datas['self_salary_avg'];
+  $Dash->self_employ_avg = $datas['self_employ_avg'];
+  $Dash->mezonot_state = $datas['mezonot_state'];
+  $Dash->mezonot_height = $datas['mezonot_height'];
+  $Dash->is_siua = $datas['is_siua'];
+  $Dash->taasukati_av_state = $datas['taasukati_av_state'];
+  $Dash->self_av_salary_avg = $datas['self_av_salary_avg'];
+  $Dash->self_av_employ_avg = $datas['self_av_employ_avg'];
+  $Dash->taasukati_em_state = $datas['taasukati_em_state'];
+  $Dash->self_em_salary_avg = $datas['self_em_salary_avg'];
+  $Dash->self_em_employ_avg = $datas['self_em_employ_avg'];
+  $Dash->taasukati_zug_state = $datas['taasukati_zug_state'];
+  $Dash->self_zug_salary_avg = $datas['self_zug_salary_avg'];
+  $Dash->self_zug_employ_avg = $datas['self_zug_employ_avg'];
+  $Dash->self_children = $datas['self_children'];
+  $Dash->self_soldier = $datas['self_soldier'];
+  $Dash->self_student = $datas['self_student'];
+  $Dash->social_harig = $datas['social_harig'];
+  $Dash->family_harig = $datas['family_harig'];
+  $Dash->medical_harig = $datas['medical_harig'];
+  $Dash->explanation = $datas['explanation'];
+  $Dash->tzfile_cb = $datas['tzfile_cb'];
+  $Dash->isalonefile_cb = $datas['isalonefile_cb'];
+  $Dash->islochemfile_cb = $datas['islochemfile_cb'];
+  $Dash->is_army_ptor_file_cb = $datas['is_army_ptor_file_cb'];
+  $Dash->is_miluim_file_cb = $datas['is_miluim_file_cb'];
+  $Dash->lo_oved_files_cb = $datas['lo_oved_files_cb'];
+  $Dash->self_salary_files_cb = $datas['self_salary_files_cb'];
+  $Dash->self_employ_files_cb = $datas['self_employ_files_cb'];
+  $Dash->mezonot_files_cb = $datas['mezonot_files_cb'];
+  $Dash->mezonot_height_files_cb = $datas['mezonot_height_files_cb'];
+  $Dash->is_siua_file_cb = $datas['is_siua_file_cb'];
+  $Dash->lo_oved_av_files_cb = $datas['lo_oved_av_files_cb'];
+  $Dash->self_av_salary_files_cb = $datas['self_av_salary_files_cb'];
+  $Dash->self_av_employ_files_cb = $datas['self_av_employ_files_cb'];
+  $Dash->lo_oved_em_files_cb = $datas['lo_oved_em_files_cb'];
+  $Dash->self_em_salary_files_cb = $datas['self_em_salary_files_cb'];
+  $Dash->self_em_employ_files_cb = $datas['self_em_employ_files_cb'];
+  $Dash->lo_oved_zug_files_cb = $datas['lo_oved_zug_files_cb'];
+  $Dash->self_zug_salary_files_cb = $datas['self_zug_salary_files_cb'];
+  $Dash->self_zug_employ_files_cb = $datas['self_zug_employ_files_cb'];
+  $Dash->self_children_files_cb = $datas['self_children_files_cb'];
+  $Dash->self_soldier_files_cb = $datas['self_soldier_files_cb'];
+  $Dash->self_student_files_cb = $datas['self_student_files_cb'];
+  $Dash->social_harig_file_cb = $datas['social_harig_file_cb'];
+  $Dash->medical_harig_file_cb = $datas['medical_harig_file_cb'];
+  $Dash->family_harig_file_cb = $datas['family_harig_file_cb'];
+  $Dash->reject_exp = $datas['reject_exp'];
+
+  
     };
 
 ?>
@@ -276,61 +485,8 @@
 
                 <!-- page content -->
                 <div class="right_col" role="main">
-                    <!-- top tiles -->
-                    <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-user"></i> מספר הסטודנטים שהגישו בקשה למלגה</span>
-                            <div class="count">
-                                <?php  $Dash->count_submitted_rows(); ?>
-                            </div>
-                            <span class="count_bottom">
-                                <i class="green">4% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-users"></i> מספר הסטודנטים שהחלו בתהליך</span>
-                            <div class="count">
-                                <?php  $Dash->count_all_rows(); ?>
-                            </div>
-                            <span class="count_bottom">
-                                <i class="green">
-                                    <i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-user"></i> Total Males</span>
-                            <div class="count green">2,500</div>
-                            <span class="count_bottom">
-                                <i class="green">
-                                    <i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-user"></i> Total Females</span>
-                            <div class="count">4,567</div>
-                            <span class="count_bottom">
-                                <i class="red">
-                                    <i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-user"></i> Total Collections</span>
-                            <div class="count">2,315</div>
-                            <span class="count_bottom">
-                                <i class="green">
-                                    <i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top">
-                                <i class="fa fa-user"></i> Total Connections</span>
-                            <div class="count">7,325</div>
-                            <span class="count_bottom">
-                                <i class="green">
-                                    <i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                        </div>
-                    </div>
-                    <!-- /top tiles -->
+                
+                    <?php include('./inc/dash-top-titles.php')?>
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -360,13 +516,13 @@
 
                                                         <td>שם פרטי</td>
                                                         <td>
-                                                            <input type="text" name="fname" value="<?php echo $Dash->fname; ?>" />
+                                                            <input type="text" name="fname" autocomplete='fname' value="<?php echo $Dash->fname; ?>" />
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>שם משפחה</td>
                                                         <td>
-                                                            <input type="text" name="lname" value="<?php echo $Dash->lname; ?>" />
+                                                            <input type="text" name="lname" autocomplete='lname' value="<?php echo $Dash->lname; ?>" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -377,7 +533,22 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <input type="checkbox" class="flat"> קובץ ת.ז</td>
+                                                          
+                                                           <input type="checkbox" value="1" name="tzfile_cb"   
+                                                                <?php 
+                                                                echo($Dash->tzfile_cb ==  1 ? 'checked' : '');
+                                                                    // if(!isset($_POST['tzfile_cb']))
+                                                                    // {
+                                                                    //     echo($Dash->tzfile_cb ==  1 ? 'checked' : '');
+                                                                    // }else{
+                                                                    //     echo($_POST['tzfile_cb'] ==  1 ? 'checked' : '');
+                                                                    // }
+                                                                ?> 
+
+
+                                                            > קובץ ת.ז
+                                                        </td>
+                                                           <!-- <input type="checkbox" value="1" name="tzfile_cb"   <?php// echo($Dash->tzfile_cb ==  1 ? 'checked' : '') ?> > קובץ ת.ז</td> -->
                                                         <td>
                                                             <?php 
                                                                 $Dash->load_clicked_image('tzfile');
@@ -451,7 +622,7 @@
 
                                                     <tr id="is_alone_file" class="hidden">
                                                         <td>
-                                                            <input type="checkbox" class="flat"> קובץ המעיד כי בסטודנט בודד בארץ</td>
+                                                           <input type="checkbox" value="1" name="isalonefile_cb" class=""  <?php echo($Dash->isalonefile_cb == 1  ? 'checked' : '') ?>> קובץ המעיד כי בסטודנט בודד בארץ</td>
                                                         <td id="isalonefile">
                                                             <?php 
                                                             
@@ -514,7 +685,7 @@
 
                                                     <tr id="is-lochem-file">
                                                         <td>
-                                                            <input type="checkbox" name="is_lochem_file_approved" class="flat"> קובץ לוחם</td>
+                                                           <input type="checkbox" value="1" name="islochemfile_cb" class="" <?php echo($Dash->islochemfile_cb == 1  ? 'checked' : '') ?>> קובץ לוחם</td>
                                                         <td>
                                                             <?php 
                                                                 $Dash->load_clicked_image('islochemfile');
@@ -536,7 +707,7 @@
                                                     </tr>
                                                     <tr id="is_army_ptor_file_cont">
                                                         <td>
-                                                            <input type="checkbox" name="is_army_ptor_file_approved" class="flat"> מסמכי פטור משירות צבאי</td>
+                                                           <input type="checkbox" value="1" name="is_army_ptor_file_cb" class="" <?php echo($Dash->is_army_ptor_file_cb == 1  ? 'checked' : '') ?>> מסמכי פטור משירות צבאי</td>
                                                         <td>
                                                             <?php 
                                                                 $Dash->load_clicked_image('is_army_ptor_file');
@@ -558,7 +729,7 @@
                                                     </tr>
                                                     <tr id="is-miluim-file">
                                                         <td>
-                                                            <input type="checkbox" name="is_miluim_file_approved" class="flat"> אישור המעיד על שירות מילואים פעיל</td>
+                                                           <input type="checkbox" value="1" name="is_miluim_file_cb" class="" <?php echo($Dash->is_miluim_file_cb == 1  ? 'checked' : '') ?>> אישור המעיד על שירות מילואים פעיל</td>
                                                         <td id="is_miluim_file">
                                                             <?php 
                                                                 $Dash->load_clicked_image('is_miluim_file');
@@ -610,6 +781,7 @@
                                                     <tr>
                                                         <td>תחום לימודים</td>
                                                         <td>
+                                                        
                                                             <?php $Dash->get_study_field(); ?>
                                                         </td>
                                                     </tr>
@@ -684,8 +856,12 @@
                                                 
                                                     <tr class="starthidden lo-oved" id="lo_oved_files">
 
-                                                        <td>אישור מעמד לא עובד מביטוח לאומי</td>
                                                         <td>
+                                                       <input type="checkbox" value="1" name="lo_oved_files_cb" class="" <?php echo($Dash->lo_oved_files_cb == 1  ? 'checked' : '') ?>> 
+                                                        אישור מעמד לא עובד מביטוח לאומי
+                                                        </td>
+                                                        <td>
+                                                       
                                                         <?php  $Dash->load_clicked_image('lo_oved_files'); ?>
 
                                                         </td>
@@ -700,7 +876,9 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_salary">
 
-                                                        <td>קבצי שלושה תלושי שכר אחרונים</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_salary_files_cb" class="" <?php echo($Dash->self_salary_files_cb == 1   ? 'checked' : ''); ?>> 
+                                                        קבצי שלושה תלושי שכר אחרונים</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('self_salary_files'); ?>
                                                         </td>
@@ -716,7 +894,9 @@
                                                     </tr>
                                                     <tr class="starthidden employ" id="self_employ_avg_cont">
 
-                                                            <td>דו"ח שומה</td>
+                                                            <td>
+                                                           <input type="checkbox" value="1" name="self_employ_files_cb" class="" <?php echo($Dash->self_employ_files_cb == 1  ? 'checked' : '') ?> > 
+                                                            דו"ח שומה</td>
                                                             <td>
                                                             <?php  $Dash->load_clicked_image('self_employ_files'); ?>
 
@@ -738,7 +918,9 @@
                                                     </tr>
                                                     <tr id="mezonot_files_div">
 
-                                                        <td>אסמכתא על אי קבלת מזונות</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="mezonot_files_cb" class="" <?php echo($Dash->mezonot_files_cb == 1  ? 'checked' : '') ?>> 
+                                                        אסמכתא על אי קבלת מזונות</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('mezonot_files'); ?>
                                                         </td>
@@ -752,7 +934,9 @@
                                                     </tr>
                                                     <tr class="mezonot_height_cont">
 
-                                                        <td>אישור גובה מזונות</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="mezonot_height_files_cb" class="" <?php echo($Dash->mezonot_height_files_cb == 1  ? 'checked' : '') ?> >
+                                                        אישור גובה מזונות</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('mezonot_height_files'); ?> 
                                                         </td>
@@ -785,7 +969,10 @@
                                                     </tr>
                                                     <tr id="is_siua_file_cont">
 
-                                                        <td>אישור מגורמי הרווחה</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="is_siua_file_cb" class="" <?php echo($Dash->is_siua_file_cb == 1  ? 'checked' : '') ?>>
+
+                                                        אישור מגורמי הרווחה</td>
                                                         <td>
                                                             <?php $Dash->load_clicked_image('is_siua_file'); ?> 
                                                         </td>
@@ -811,7 +998,10 @@
 
                                                     <tr class="starthidden lo-oved" id="lo_oved_av_files">
 
-                                                        <td>אישור מעמד לא עובד מביטוח לאומי</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="lo_oved_av_files_cb" class="" <?php echo($Dash->lo_oved_av_files_cb == 1  ? 'checked' : '') ?> >
+
+                                                        אישור מעמד לא עובד מביטוח לאומי</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('lo_oved_av_files'); ?>
 
@@ -819,7 +1009,8 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_av_salary_files">
 
-                                                        <td>ממוצע שלושה חודשי שכר אחרונים אב(ברוטו)</td>
+                                                        <td>
+                                                        ממוצע שלושה חודשי שכר אחרונים אב(ברוטו)</td>
                                                         <td>
                                                         <input type="text" name="self_av_salary_avg" value="<?php echo $Dash->self_av_salary_avg; ?>">
 
@@ -827,7 +1018,9 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_av_salary_files">
 
-                                                        <td>קבצי שלושה תלושי שכר אחרונים</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_av_salary_files_cb" class="" <?php echo($Dash->self_av_salary_files_cb == 1  ? 'checked' : '') ?> >
+                                                        קבצי שלושה תלושי שכר אחרונים</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_av_salary_files'); ?>
                                                         </td>
@@ -843,7 +1036,9 @@
                                                     </tr>
                                                     <tr class="starthidden employ" id="self_av_employ_files">
 
-                                                        <td>דו"ח שומה</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_av_employ_files_cb" class="" <?php echo($Dash->self_av_employ_files_cb == 1  ? 'checked' : '') ?> >
+                                                        דו"ח שומה</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_av_employ_files'); ?>
 
@@ -868,7 +1063,9 @@
 
                                                     <tr class="starthidden lo-oved" id="lo_oved_em_files">
 
-                                                        <td>אישור מעמד לא עובד מביטוח לאומי</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="lo_oved_em_files_cb" class="" <?php echo($Dash->lo_oved_em_files_cb == 1  ? 'checked' : '') ?>>
+                                                        אישור מעמד לא עובד מביטוח לאומי</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('lo_oved_em_files'); ?>
 
@@ -876,7 +1073,8 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_em_salary">
 
-                                                        <td>ממוצע שלושה חודשי שכר אחרונים אם (ברוטו)</td>
+                                                        <td>
+                                                        ממוצע שלושה חודשי שכר אחרונים אם (ברוטו)</td>
                                                         <td>
                                                         <input type="text" name="self_em_salary_avg" value="<?php echo $Dash->self_em_salary_avg; ?>">
 
@@ -884,7 +1082,11 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_em_salary_files">
 
-                                                        <td>קבצי שלושה תלושי שכר אחרונים</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_em_salary_files_cb" class="" <?php echo($Dash->self_em_salary_files_cb == 1  ? 'checked' : '') ?>>
+                                                        קבצי שלושה תלושי שכר אחרונים
+
+                                                        </td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_em_salary_files'); ?>
                                                         </td>
@@ -900,7 +1102,9 @@
                                                     </tr>
                                                     <tr class="starthidden employ" id="self_em_employ_files">
 
-                                                        <td>דו"ח שומה</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_em_employ_files_cb" class="" <?php echo($Dash->self_em_employ_files_cb == 1  ? 'checked' : '') ?> >
+                                                        דו"ח שומה</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_em_employ_files'); ?>
 
@@ -925,8 +1129,11 @@
                                                     </tr>
 
                                                     <tr class="starthidden lo-oved" id="lo_oved_zug_files">
+                                                  
 
-                                                        <td>אישור מעמד לא עובד מביטוח לאומי</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="lo_oved_zug_files_cb" class="" <?php echo($Dash->lo_oved_zug_files_cb == 1  ? 'checked' : '') ?> >    
+                                                        אישור מעמד לא עובד מביטוח לאומי</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('lo_oved_zug_files'); ?>
 
@@ -942,7 +1149,9 @@
                                                     </tr>
                                                     <tr class="starthidden salary" id="self_zug_salary_files">
 
-                                                        <td>קבצי שלושה תלושי שכר אחרונים בן/בת זוג</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_zug_salary_files_cb" class="" <?php echo($Dash->self_zug_salary_files_cb == 1  ? 'checked' : '') ?> >
+                                                        קבצי שלושה תלושי שכר אחרונים בן/בת זוג</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_zug_salary_files'); ?>
                                                         </td>
@@ -957,8 +1166,10 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="starthidden employ" id="self_zug_employ_files">
-
-                                                        <td>דו"ח שומה</td>
+                                                 
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_zug_employ_files_cb" class="" <?php echo($Dash->self_zug_employ_files_cb == 1  ? 'checked' : '') ?> >    
+                                                        דו"ח שומה</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_zug_employ_files'); ?>
 
@@ -973,13 +1184,17 @@
 
                                                         <td class="col-xs-6" id="self_children_cont_label"></td>
                                                         <td class="col-xs-6">
+                                                        
                                                         <input type="text" name="self_children" value="<?php echo $Dash->self_children; ?>">
 
                                                         </td>
                                                     </tr>
                                                     <tr class="starthidden children_cont" id="">
 
-                                                        <td>חייב בהעלאת קובץ ספח תעודות זהות</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_children_files_cb" class=""  <?php echo($Dash->self_children_files_cb == 1  ? 'checked' : '') ?> >
+
+                                                        חייב בהעלאת קובץ ספח תעודות זהות של האם</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_children_files'); ?>
                                                         </td>
@@ -989,13 +1204,25 @@
 
                                                         <td id="self_soldier_cont_label"></td>
                                                         <td>
-                                                         <input type="text" name="self_soldier" value="<?php echo $Dash->self_soldier; ?>">
+
+                                                        <div class="custom-control custom-radio">
+                                                            <input id="no_self_soldier" value="0" name="self_soldier" type="radio" class="custom-control-input ff" <?php echo($Dash->self_soldier == '0' ? 'checked' : '' ); ?>>
+                                                            <label class="custom-control-label" for="no_self_soldier">לא</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                            <input id="yes_self_soldier" value="1" name="self_soldier" type="radio" class="custom-control-input ff" <?php echo($Dash->self_soldier == '1' ? 'checked' : '' ); ?>>
+                                                            <label class="custom-control-label" for="yes_self_soldier">כן</label>
+                                                            </div>
+                                                        </div>
 
                                                         </td>
                                                     </tr>
                                                     <tr class="starthidden soldier_cont" id="">
 
-                                                        <td>חייב בהעלאת קובץ תעודת חוגר/קצין</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_soldier_files_cb" class="" <?php echo($Dash->self_soldier_files_cb == 1  ? 'checked' : '') ?> >
+                                                        חייב בהעלאת קובץ תעודת חוגר/קצין
+                                                        </td>
                                                         <td>
                                                          <?php  $Dash->load_clicked_image('self_soldier_files'); ?>
                                                         </td>
@@ -1005,13 +1232,24 @@
 
                                                         <td id="self_student_cont_label"></td>
                                                         <td>
-                                                            <input type="text" name="self_student" value="<?php echo $Dash->self_student; ?>">
 
+                                                        <div class="custom-control custom-radio">
+                                                            <input id="no_self_student" value="0" name="self_student" type="radio" class="custom-control-input ff" <?php echo($Dash->self_student == '0' ? 'checked' : '' ); ?>>
+                                                            <label class="custom-control-label" for="no_self_soldier">לא</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio">
+                                                            <input id="yes_self_student" value="1" name="self_student" type="radio" class="custom-control-input ff" <?php echo($Dash->self_student == '1' ? 'checked' : '' ); ?>>
+                                                            <label class="custom-control-label" for="yes_self_student">כן</label>
+                                                            </div>
+                                                        </div>
                                                         </td>
                                                     </tr>
                                                     <tr class="starthidden student_cont" id="">
 
-                                                        <td>אם כן חייב בהעלאת אישור לימודים</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="self_student_files_cb" class=""  <?php echo($Dash->self_student_files_cb == 1  ? 'checked' : '') ?>  >
+
+                                                        אם כן חייב בהעלאת אישור לימודים</td>
                                                         <td>
                                                             <?php  $Dash->load_clicked_image('self_student_files'); ?>
                                                         </td>
@@ -1049,7 +1287,10 @@
                                                     </tr>
                                                     <tr class="" id="social_harig_file_cont">
 
-                                                        <td>אישור מצב סוציאלי חריג</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="social_harig_file_cb" class=""  <?php echo($Dash->social_harig_file_cb == 1  ? 'checked' : '') ?> >
+
+                                                        אישור מצב סוציאלי חריג</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('social_harig_file'); ?>
 
@@ -1071,7 +1312,10 @@
                                                         </tr>
                                                         <tr class="" id="medical_harig_file_cont">
 
-                                                        <td>אישור מצב רפואי חריג סטודנט</td>
+                                                        <td>
+                                                       <input type="checkbox" value="1" name="medical_harig_file_cb" class=""  <?php echo($Dash->medical_harig_file_cb == 1  ? 'checked' : '') ?> >
+
+                                                        אישור מצב רפואי חריג סטודנט</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('medical_harig_file'); ?>
 
@@ -1097,7 +1341,10 @@
                                                         </tr>
                                                         <tr class="" id="family_harig_file_cont">
 
-                                                        <td> אישור מצב סוציאלי חריג בן משפחה</td>
+                                                        <td> 
+                                                       <input type="checkbox" data-id="999" value="1" name="family_harig_file_cb" class="" <?php echo($Dash->family_harig_file_cb == 1  ? 'checked' : '') ?> >
+
+                                                        אישור מצב סוציאלי חריג בן משפחה</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('family_harig_file'); ?>
 
@@ -1119,13 +1366,14 @@
 
                                                         <td>נימוק הבקשה</td>
                                                         <td>
-                                                            <p><?php echo $Dash->explanation; ?></p>
+                                                            <?php echo($Dash->explanation ? $Dash->explanation : 'לא הוזן נימוק'); ?>
 
                                                         </td>
                                                     </tr>
                                                     <tr class="" id="social_harig_file_cont">
 
-                                                        <td>אישור מצב סוציאלי חריג</td>
+                                                        <td>
+                                                        אישור מצב סוציאלי חריג</td>
                                                         <td>
                                                         <?php  $Dash->load_clicked_image('explanation_file'); ?>
 
@@ -1133,8 +1381,35 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <input type="submit" name="submit" value="אשר בקשה">
-                                            <input type="submit" name="return" value="החזר לשולח">
+
+
+                                             <table class="table table-striped table-bordered bulk_action">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="col-xs-6">שם</th>
+                                                        <th class="col-xs-6">ערך</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="">
+                                                
+                                                    <tr class="" id="">
+                                                        <td>קבצים לא תקינים:</td>
+                                                        <td>
+                                                            <ol id="files-denay">
+
+                                                            </ol>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="" id="">
+                                                        <td>הערות נוספות</td>
+                                                        <td>
+                                                            <textarea name="reject_exp" id="" cols="30" rows="10"><?php echo($Dash->reject_exp ? $Dash->reject_exp : '' ); ?></textarea>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <input class="btn btn-success sd-submit" type="submit" name="submit" value="אשר בקשה">
+                                            <input class="btn btn-danger sd-submit" type="submit" name="return" value="החזר לשולח">
                                             
 <!-- <div class="custom-file">
     <label class="custom-file-label">קובץ לוחם (לחצו כאן)</label>
@@ -1174,3 +1449,6 @@
 
 
                     <?php require 'footer.php'; ?>
+
+
+               

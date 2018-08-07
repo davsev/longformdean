@@ -9,10 +9,7 @@ $(function () {
         var listName = $(this).closest('.custom-file').find('.file-list');
         var fieldName = $(this).closest('.custom-file').find('.custom-file-input').attr('id');
         formdata.append("fieldName", fieldName);
-       
-       
-        $('.form_loader').show();
-       
+    
         $.ajax({
             type: 'POST',
             url: './api/ajax/uploadfile.php',
@@ -20,14 +17,9 @@ $(function () {
             processData: false,
             contentType: false,
             dataType: 'json',
-            success: function (data){
-                        
-                        $(listName).append(`<li><a href="./uploads/${data.tz}/${data.name}" target="_blank"> ${data.name} </a>
-                        <span class="item-file" id="${data.year}-${data.tz}-${data.id}-${data.place}">הסר קובץ</span></li>`);
-                 
-                       
-                },         
-              
+            success: function (data){        
+                $(listName).append('<li><a href="./uploads/'+data.tz+'/'+data.name+'" target="_blank"> '+data.name+' </a><span class="item-file" id="'+data.year+'-'+data.tz+'-'+data.id+'-'+data.place+'">הסר קובץ</span></li>');                  
+            },         
         });
     });
 });

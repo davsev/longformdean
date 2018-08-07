@@ -12,12 +12,14 @@ $(function(){
         $.ajax({
             type: 'POST',
             url: './api/ajax/removefile.php',
-            data: ({year: res[0], tz: res[1], id: res[2], itemPos: res[3], fieldName}),  
+            data: ({year: res[0], tz: res[1], id: res[2], itemPos: res[3], fieldName: fieldName}),  
             dataType: 'json',
             success: function (data){
-                //console.log(data);
-                //console.log(el);
+                // console.log(data);
+             
+                $('#'+fieldName).val('');
                 $(me).parent().remove().animate({
+
                     opacity: 0.25,
                   });
                   

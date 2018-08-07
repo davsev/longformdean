@@ -4,9 +4,9 @@ session_start();
     putenv("TZ=Asia/Jerusalem");
     include './api/config/database.php';
     include './api/class/Form.php';
-    include './api/class/User.php';
-    include './api/class/read.php';
     include './api/class/Dashboard.php';
+    include './api/inc/PHPMailer/PHPMailerAutoload.php';
+ 
    
 
 

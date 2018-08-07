@@ -167,7 +167,7 @@ a:focus {
     -webkit-padding-start: 15px !important;
 }
 
-#doctable {
+#doctable, .bluetext {
     font-size: 13px;
     font-weight: 700;
     color: #1a2b66;
@@ -205,4 +205,10 @@ ul#city-result li {
 
 .red{
     color: red;
+}
+
+
+.sd-submit{
+    position: sticky;
+    bottom: 10px;
 }

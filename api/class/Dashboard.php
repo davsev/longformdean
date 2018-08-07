@@ -1,26 +1,33 @@
 <?php 
-
-
 class Dashboard{
 
      // database connection and table name
-     public $site_url = '127.0.0.1/deanm/';
      private $conn;
      private $table_name = "form";
+     public $id;
+     public $tz;
      public $fname;
+     public $lname;
+     public $submitted;
+     public $tzfile_cb;
+     public $student_id;
+
+
  
-     public function __construct($db){
+     public function __construct($db, $id){
          $this->conn = $db;
          
+         $this::get_student_data($id);
      }
  
-     public function get_student_data($student_id){
-     $query = "SELECT * FROM form WHERE id = ${student_id}";
+    public function get_student_data($id){
+        
+        $query = "SELECT * FROM form WHERE `id`=?";
     
         $stmt = $this->conn->prepare($query);     
+        $stmt->bindParam(1, $id);
         $stmt->execute();
         
-
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
@@ -28,6 +35,7 @@ class Dashboard{
         $this->tz = $row['tz'];
         $this->year = $row['year'];
         $this->submitted= $row['submitted'];
+        $this->date_submitted = $row['date_submitted']; 
         $this->isalonefile = $row['isalonefile'];
         $this->tzfile = $row['tzfile'];
         $this->islochemfile = $row['islochemfile'];
@@ -102,30 +110,61 @@ class Dashboard{
         $this->medical_harig = $xcx['medical_harig'];
         $this->family_harig = $xcx['family_harig']; 
         $this->explanation = $xcx['explanation']; 
-        };
-        
+        (isset($xcx['reject_exp']) ? $this->reject_exp = $xcx['reject_exp'] : $this->reject_exp = ''); 
 
+       //checkboxes
+       
+        (isset($xcx['tzfile_cb']) ? $this->tzfile_cb = $xcx['tzfile_cb'] : $this->tzfile_cb = ''); 
+        (isset($xcx['isalonefile_cb']) ? $this->isalonefile_cb = $xcx['isalonefile_cb'] : $this->isalonefile_cb = ''); 
+        (isset($xcx['islochemfile_cb']) ? $this->islochemfile_cb = $xcx['islochemfile_cb'] : $this->islochemfile_cb = ''); 
+        (isset($xcx['is_army_ptor_file_cb']) ? $this->is_army_ptor_file_cb = $xcx['is_army_ptor_file_cb'] : $this->is_army_ptor_file_cb = ''); 
+        (isset($xcx['is_miluim_file_cb']) ? $this->is_miluim_file_cb = $xcx['is_miluim_file_cb'] : $this->is_miluim_file_cb = ''); 
+        (isset($xcx['lo_oved_files_cb']) ? $this->lo_oved_files_cb = $xcx['lo_oved_files_cb'] : $this->lo_oved_files_cb = ''); 
+        (isset($xcx['self_salary_files_cb']) ? $this->self_salary_files_cb = $xcx['self_salary_files_cb'] : $this->self_salary_files_cb = ''); 
+        (isset($xcx['self_employ_files_cb']) ? $this->self_employ_files_cb = $xcx['self_employ_files_cb'] : $this->self_employ_files_cb = ''); 
+        (isset($xcx['mezonot_files_cb']) ? $this->mezonot_files_cb = $xcx['mezonot_files_cb'] : $this->mezonot_files_cb = ''); 
+        (isset($xcx['mezonot_height_files_cb']) ? $this->mezonot_height_files_cb = $xcx['mezonot_height_files_cb'] : $this->mezonot_height_files_cb = ''); 
+        (isset($xcx['is_siua_file_cb']) ? $this->is_siua_file_cb = $xcx['is_siua_file_cb'] : $this->is_siua_file_cb = ''); 
+        (isset($xcx['lo_oved_av_files_cb']) ? $this->lo_oved_av_files_cb = $xcx['lo_oved_av_files_cb'] : $this->lo_oved_av_files_cb = ''); 
+        (isset($xcx['self_av_salary_files_cb']) ? $this->self_av_salary_files_cb = $xcx['self_av_salary_files_cb'] : $this->self_av_salary_files_cb = ''); 
+        (isset($xcx['self_av_employ_files_cb']) ? $this->self_av_employ_files_cb = $xcx['self_av_employ_files_cb'] : $this->self_av_employ_files_cb = ''); 
+        (isset($xcx['lo_oved_em_files_cb']) ? $this->lo_oved_em_files_cb = $xcx['lo_oved_em_files_cb'] : $this->lo_oved_em_files_cb = ''); 
+        (isset($xcx['self_em_salary_files_cb']) ? $this->self_em_salary_files_cb = $xcx['self_em_salary_files_cb'] : $this->self_em_salary_files_cb = ''); 
+        (isset($xcx['self_em_employ_files_cb']) ? $this->self_em_employ_files_cb = $xcx['self_em_employ_files_cb'] : $this->self_em_employ_files_cb = ''); 
+        (isset($xcx['lo_oved_zug_files_cb']) ? $this->lo_oved_zug_files_cb = $xcx['lo_oved_zug_files_cb'] : $this->lo_oved_zug_files_cb = ''); 
+        (isset($xcx['self_zug_salary_files_cb']) ? $this->self_zug_salary_files_cb = $xcx['self_zug_salary_files_cb'] : $this->self_zug_salary_files_cb = ''); 
+        (isset($xcx['self_zug_employ_files_cb']) ? $this->self_zug_employ_files_cb = $xcx['self_zug_employ_files_cb'] : $this->self_zug_employ_files_cb = ''); 
+        (isset($xcx['self_children_files_cb']) ? $this->self_children_files_cb = $xcx['self_children_files_cb'] : $this->self_children_files_cb = ''); 
+        (isset($xcx['self_soldier_files_cb']) ? $this->self_soldier_files_cb = $xcx['self_soldier_files_cb'] : $this->self_soldier_files_cb = ''); 
+        (isset($xcx['self_student_files_cb']) ? $this->self_student_files_cb = $xcx['self_student_files_cb'] : $this->self_student_files_cb = ''); 
+        (isset($xcx['social_harig_file_cb']) ? $this->social_harig_file_cb = $xcx['social_harig_file_cb'] : $this->social_harig_file_cb = ''); 
+        (isset($xcx['medical_harig_file_cb']) ? $this->medical_harig_file_cb = $xcx['medical_harig_file_cb'] : $this->medical_harig_file_cb = ''); 
+        (isset($xcx['family_harig_file_cb']) ? $this->family_harig_file_cb = $xcx['family_harig_file_cb'] : $this->family_harig_file_cb = ''); 
+       
+
+        };
      }
 
 
 //update student data when admin clicks save or confirm
-     public function update_user_data($id){
-                //     $submitted == 0;
-        // }
-     $query = "UPDATE form SET datas=?, submitted=? WHERE id = ${id}";
-        $stmt = $this->conn->prepare($query);
-        
+     public function update_user_data($id, $submitted){
 
-        $stmt->execute([$this->datas, $this->submitted]);
+        $query = "UPDATE form SET datas=?, submitted=? WHERE id = ${id}";
+        $stmt = $this->conn->prepare($query);        
+        $stmt->execute([$this->datas, $submitted]);
+        if($stmt->rowCount() > 0){
+            if($submitted == 1){
+                $this->send_mail_on_approve();
+            }else{
+                echo 'returned mail';
+            }
+        }
         
 
      } 
 
      public function count_all_rows(){
         
- 
-         // echo '<br />tz is '.$tz;
-         // echo '<br />year is '. $year;
          $query = "SELECT * FROM " . $this->table_name;
     
          $stmt = $this->conn->prepare($query);     
@@ -133,7 +172,7 @@ class Dashboard{
          $count = $stmt->rowCount();
          echo $count;
 
-
+        
      }
 
      public function count_submitted_rows(){
@@ -142,6 +181,22 @@ class Dashboard{
         // echo '<br />tz is '.$tz;
         // echo '<br />year is '. $year;
         $query = "SELECT * FROM " . $this->table_name . " WHERE submitted = 1";
+   
+        $stmt = $this->conn->prepare($query);     
+        $stmt->execute();
+        $count = $stmt->rowCount();
+        echo $count;
+
+
+    }
+
+
+    public function count_approved_rows(){
+        
+ 
+        // echo '<br />tz is '.$tz;
+        // echo '<br />year is '. $year;
+        $query = "SELECT * FROM " . $this->table_name . " WHERE submitted = 2";
    
         $stmt = $this->conn->prepare($query);     
         $stmt->execute();
@@ -166,33 +221,72 @@ class Dashboard{
         
         echo'<thead>
                 <tr>
-                    <th>שם פרטי</th>  
+                    <th>ת.ז</th>
                     <th>שם משפחה</th> 
-                    <th>ת.ז</th>  
-                    <th>תאריך הגשה</th>  
-                    <th>מסלול לימודים</th>  
-                    <th>מצב משפחתי</th>  
-                    <th>שנת לימודים</th>  
+                    <th>שם פרטי</th>  
+                    <th>תאריך הגשה</th>    
+                    <th>סטטוס טיפול בבקשה</th>
                     <th></th>  
                 </tr>
             </thead>
             <tbody>';
-        // $all = $row['datas'];
      
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             $data =  unserialize($row['datas']);
          
             echo' 
             <tr>
-                <td>'. $data['fname'].'</td>  
-                <td>'. $data['lname'].'</td>  
                 <td data-year="'.$row['year'].'" data-type="file" data-filetype="tzfile" data-id="'. $row['tz'].'">'. $row['tz'].'</td>  
-                <td>'. date("d.m.Y", $row['created']).'</td>  
-                <td>'. $this->get_study_field_by_id($data['study_field']).'</td>  
-                <td>'. $this->get_family_state_by_id($data['family_state']).'</td>  
-                <td>'. $data['study_year'].'</td>  
+                <td>'. $data['lname'].'</td>  
+                <td>'. $data['fname'].'</td>  
+                <td>'. date("d.m.Y", $row['date_submitted']).'</td>  
+                <td>'.($row['submitted'] == 1 ? 'חדש' : 'בטיפול').'</td>  
                 <td>
-                  <a href="studentdata.php?id='.$row['id'].'">צפייה בכל הנתונים</a>
+                <a class="btn btn-primary" href="studentdata.php?id='.$row['id'].'">צפייה בכל הנתונים</a>
+
+                </td>  
+                  
+
+            </tr>';
+           
+       };
+       echo '</tbody>';
+    }
+
+
+    public function last_approved_table(){
+
+        $query = "SELECT * FROM " . $this->table_name . " WHERE submitted = 2";
+        
+        $stmt = $this->conn->prepare($query);
+    
+        $stmt->execute();
+        
+        echo'<thead>
+                <tr>
+                    <th>ת.ז</th>
+                    <th>שם משפחה</th> 
+                    <th>שם פרטי</th>  
+                    <th>תאריך הגשה</th>    
+                    <th>סטטוס טיפול בבקשה</th>
+                    <th></th>  
+                </tr>
+            </thead>
+            <tbody>';
+     
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $data =  unserialize($row['datas']);
+         
+            echo' 
+            <tr>
+                <td data-year="'.$row['year'].'" data-type="file" data-filetype="tzfile" data-id="'. $row['tz'].'">'. $row['tz'].'</td>  
+                <td>'. $data['lname'].'</td>  
+                <td>'. $data['fname'].'</td>  
+                <td>'. date("d.m.Y", $row['date_submitted']).'</td>  
+                <td>'.($row['submitted'] == 2 ? 'אושר' : 'בטיפול').'</td>  
+                <td>
+                
+                  <a class="btn btn-primary" href="studentdata.php?id='.$row['id'].'">צפייה בכל הנתונים</a>
 
                 </td>  
                   
@@ -367,6 +461,186 @@ class Dashboard{
             echo 'לא צורף קובץ';
         }
 
+
+    }
+
+
+    public function send_mail_on_approve(){
+        $title = 'בקשתך למלגה הועברה להמשך תהליך';
+        $msg = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+<head>
+<!-- If you delete this meta tag, Half Life 3 will never be released. -->
+<meta name="viewport" content="width=device-width">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ZURBemails</title>
+	
+<style>
+@media only screen and (max-width: 600px) {
+  a[class="btn"] {
+    display: block!important;
+    margin-bottom: 10px!important;
+    background-image: none!important;
+    margin-right: 0!important;
+  }
+
+  div[class="column"] {
+    width: auto!important;
+    float: none!important;
+  }
+
+  table.social div[class="column"] {
+    width: auto!important;
+  }
+}
+</style>
+</head>
+ 
+<body bgcolor="#FFFFFF" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; height: 100%; width: 100%;">
+
+<!-- HEADER -->
+<table class="head-wrap" bgcolor="#999999" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+	<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+		<td class="header container" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+				
+				<div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+				<table bgcolor="#999999" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+					<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+						<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"><img src="http://www.achva.ac.il/sites/all/themes/ninesixty/logo.png" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; max-width: 100%;"></td>
+						<td align="right" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"><h6 class="collapse" style="direction: rtl; font-family: \'HelveticaNeue-Light\', \'Helvetica Neue Light\', \'Helvetica Neue\', Helvetica, Arial, \'Lucida Grande\', sans-serif; line-height: 1.1; margin-bottom: 15px; font-weight: 900; font-size: 14px; text-transform: uppercase; color: #444; padding: 0; margin: 0;">המכללה האקדמית אחוה</h6></td>
+					</tr>
+				</table>
+				</div>
+				
+		</td>
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+	</tr>
+</table><!-- /HEADER -->
+
+
+<!-- BODY -->
+<table class="body-wrap" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+	<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+		<td class="container" bgcolor="#FFFFFF" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+
+			<div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+			<table style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+				<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+					<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+						<h3 style="margin: 0; padding: 0; direction: rtl; font-family: \'HelveticaNeue-Light\', \'Helvetica Neue Light\', \'Helvetica Neue\', Helvetica, Arial, \'Lucida Grande\', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 500; font-size: 27px;"> '. $this->lname .' '. $this->fname .' היי  </h3>
+						<p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;">הקבצים שהגשת נמצאו תקינים והועברו לשלב הבא</p>
+						<p style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">נשמח לעדכן אותך ברגע שתהיה לנו תשובה סופית לגבי המלגה.</p>
+						<!-- Callout Panel -->
+						<p class="callout" style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; font-weight: normal; font-size: 14px; line-height: 1.6; padding: 15px; background-color: #ECF8FF; margin-bottom: 15px;">
+							Phasellus dictum sapien a neque luctus cursus. Pellentesque sem dolor, fringilla et pharetra vitae. <a href="#" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; font-weight: bold; color: #2BA6CB;">Click it! &raquo;</a>
+						</p><!-- /Callout Panel -->					
+												
+						<!-- social & contact -->
+						<table class="social" width="100%" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; background-color: #ebebeb; width: 100%;" bgcolor="#ebebeb">
+							<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+								<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+									
+									<!-- column 1 -->
+									<table align="left" class="column" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 280px; min-width: 279px; float: left;" width="280">
+										<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+											<td style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px;">				
+												
+												<h5 class="" style="margin: 0; padding: 0; direction: rtl; font-family: \'HelveticaNeue-Light\', \'Helvetica Neue Light\', \'Helvetica Neue\', Helvetica, Arial, \'Lucida Grande\', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 900; font-size: 17px;">עקבו אחרינו</h5>
+												<p class="" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;"><a href="#" class="soc-btn fb" style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 3px 7px; font-size: 12px; margin-bottom: 10px; text-decoration: none; color: #FFF; font-weight: bold; display: block; text-align: center; background-color: #3B5998;">Facebook</a> 
+						
+												
+											</p></td>
+										</tr>
+									</table><!-- /column 1 -->	
+									
+									<!-- column 2 -->
+									<table align="left" class="column" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 280px; min-width: 279px; float: left;" width="280">
+										<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+											<td style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px;">				
+																			
+												<h5 class="" style="margin: 0; padding: 0; direction: rtl; font-family: \'HelveticaNeue-Light\', \'Helvetica Neue Light\', \'Helvetica Neue\', Helvetica, Arial, \'Lucida Grande\', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 900; font-size: 17px;">צרו איתנו קשר</h5>												
+												<p style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">טלפון <strong style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">408.341.0600</strong><br style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                דוא"ל: <strong style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"><a href="emailto:irit@achva.ac.il" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; color: #2BA6CB;">irit@achva.ac.il</a></strong></p>
+                
+											</td>
+										</tr>
+									</table><!-- /column 2 -->
+									
+									<span class="clear" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; clear: both;"></span>	
+									
+								</td>
+							</tr>
+						</table><!-- /social & contact -->
+						
+					</td>
+				</tr>
+			</table>
+			</div><!-- /content -->
+									
+		</td>
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+	</tr>
+</table><!-- /BODY -->
+
+<!-- FOOTER -->
+<table class="footer-wrap" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%; clear: both;" width="100%">
+	<tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+		<td class="container" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+			
+				<!-- content -->
+				<div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+				
+				</div><!-- /content -->
+				
+		</td>
+		<td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+	</tr>
+</table><!-- /FOOTER -->
+
+</body>
+</html>';
+
+
+if($this->email) {
+    $mail = new PHPMailer(true);
+    try {
+        $mail->SMTPDebug = 2;
+        //$mail->isSMTP();
+        $mail->Host = '31.168.6.82';
+        $mail->Port = 587;
+        $mail->SMTPAuth = true;
+        $mail->CharSet = 'UTF-8';
+
+//       $mail -> AddAddress('info@achva.ac.il');
+        $mail -> AddAddress('david_s@achva.ac.il');
+//        $mail -> AddAddress('themarianne@gmail.com');
+        $mail -> SetFrom('apache@achva-lnk1.achva.ac.il', 'ליד חדש לדף נחיתה יום פתוח');
+
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = "הקבצים שהגשת בבקשת המלגה לדיקן נמצאו תקינים";
+        $mail->Body = $msg;
+
+
+
+
+        $mail->send();
+
+    } catch (Exception $e) {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
+} else {
+    echo 'Message could not be sent.';
+    echo 'Error: no email address provided';
+}
+
+    }
+
+    public function send_mail_on_return(){
 
     }
     

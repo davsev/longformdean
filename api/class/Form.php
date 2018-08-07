@@ -81,6 +81,7 @@ class Form{
     public $family_harig_file;
     public $explanation;
     public $explanation_file;
+    public $date_submitted;
 
 
 
@@ -92,8 +93,6 @@ class Form{
     public function __construct($db, $tz, $year){
         $this->conn = $db;
 
-        // echo '<br />tz is '.$tz;
-        // echo '<br />year is '. $year;
         $query = "SELECT * FROM " . $this->table_name ." WHERE `tz`=?  AND  `year`=?";
         
         $stmt = $this->conn->prepare($query);
@@ -107,6 +106,7 @@ class Form{
         $this->tz = $row['tz'];
         $this->year = $row['year'];
         $this->submitted= $row['submitted'];
+        $this->date_submitted = $row['date_submitted'];
         $this->isalonefile = $row['isalonefile'];
         $this->tzfile = $row['tzfile'];
         $this->islochemfile = $row['islochemfile'];
@@ -134,46 +134,7 @@ class Form{
         $this->medical_harig_file = $row['medical_harig_file'];
         $this->family_harig_file = $row['family_harig_file'];
         $this->explanation_file = $row['explanation_file'];
-
-        // $this->lname = $row['lname']; 
-        // $this->fname = $row['fname']; 
-        // $this->birth_country = $row['birth_country']; 
-        // $this->gender = $row['gender'];
-        // $this->city = $row['city']; 
-        // $this->cellular = $row['cellular'];
-        // $this->email = $row['email'];
-        // $this->family_state = $row['family_state'];
-        // $this->isalone = $row['isalone']; 
-        // $this->study_field = $row['study_field']; 
-        // $this->asked_schol = $row['asked_schol']; 
-        // $this->is_army = $row['is_army'];
-        // $this->length_army = $row['length_army']; 
-        // $this->is_lochem = $row['is_lochem'];
-        // $this->is_army_ptor = $row['is_army_ptor']; 
-        // $this->is_miluim = $row['is_miluim']; 
-        // $this->mimun_nosaf = $row['mimun_nosaf']; 
-        // $this->taasukati_state = $row['taasukati_state']; 
-        // $this->self_salary_avg = $row['self_salary_avg']; 
-        // $this->self_employ_avg = $row['self_employ_avg']; 
-        // $this->mezonot_state = $row['mezonot_state']; 
-        // $this->mezonot_height = $row['mezonot_height'];
-        // $this->is_siua = $row['is_siua']; 
-        // $this->taasukati_av_state = $row['taasukati_av_state'];
-        // $this->self_av_salary_avg = $row['self_av_salary_avg;']; 
-        // $this->self_av_employ_avg = $row['self_av_employ_avg']; 
-        // $this->taasukati_em_state = $row['taasukati_em_state']; 
-        // $this->self_em_salary_avg = $row['self_em_salary_avg'];
-        // $this->self_em_employ_avg = $xcx['self_em_employ_avg']; 
-        // $this->taasukati_zug_state = $row['taasukati_zug_state']; 
-        // $this->self_zug_salary_avg = $row['self_zug_salary_avg']; 
-        // $this->self_zug_employ_avg = $row['self_zug_employ_avg']; 
-        // $this->self_children = $row['self_children']; 
-        // $this->self_soldier = $row['self_soldier'];
-        // $this->self_student = $row['self_student']; 
-        // $this->social_harig = $row['social_harig'];
-        // $this->medical_harig = $row['medical_harig'];
-        // $this->family_harig = $row['family_harig']; 
-
+        
 
 
         $this->datas = $row['datas'];
@@ -221,35 +182,91 @@ class Form{
         $this->medical_harig = $xcx['medical_harig'];
         $this->family_harig = $xcx['family_harig']; 
         $this->explanation = $xcx['explanation']; 
+        $this->reject_exp = $xcx['reject_exp']; 
+        //checkboxes
+        (isset($this->tzfile_cb) ? $this->tzfile_cb = $xcx['tzfile_cb'] :  $this->tzfile_cb = '');
+        (isset($this->isalonefile_cb) ? $this->isalonefile_cb = $xcx['isalonefile_cb'] :  $this->isalonefile_cb = '');
+        (isset($this->islochemfile_cb) ? $this->islochemfile_cb = $xcx['islochemfile_cb'] :  $this->islochemfile_cb = '');
+        (isset($this->is_army_ptor_file_cb) ? $this->is_army_ptor_file_cb = $xcx['is_army_ptor_file_cb'] :  $this->is_army_ptor_file_cb = '');
+        (isset($this->is_miluim_file_cb) ? $this->is_miluim_file_cb = $xcx['is_miluim_file_cb'] :  $this->is_miluim_file_cb = '');
+        (isset($this->lo_oved_files_cb) ? $this->lo_oved_files_cb = $xcx['lo_oved_files_cb'] :  $this->lo_oved_files_cb = '');
+        (isset($this->self_salary_files_cb) ? $this->self_salary_files_cb = $xcx['self_salary_files_cb'] :  $this->self_salary_files_cb = '');
+        (isset($this->self_employ_files_cb) ? $this->self_employ_files_cb = $xcx['self_employ_files_cb'] :  $this->self_employ_files_cb = '');
+        (isset($this->mezonot_files_cb) ? $this->mezonot_files_cb = $xcx['mezonot_files_cb'] :  $this->mezonot_files_cb = '');
+        (isset($this->mezonot_height_files_cb) ? $this->mezonot_height_files_cb = $xcx['mezonot_height_files_cb'] :  $this->mezonot_height_files_cb = '');
+        (isset($this->is_siua_file_cb) ? $this->is_siua_file_cb = $xcx['is_siua_file_cb'] :  $this->is_siua_file_cb = '');
+        (isset($this->lo_oved_av_files_cb) ? $this->lo_oved_av_files_cb = $xcx['lo_oved_av_files_cb'] :  $this->lo_oved_av_files_cb = '');
+        (isset($this->self_av_salary_files_cb) ? $this->self_av_salary_files_cb = $xcx['self_av_salary_files_cb'] :  $this->self_av_salary_files_cb = '');
+        (isset($this->self_av_employ_files_cb) ? $this->self_av_employ_files_cb = $xcx['self_av_employ_files_cb'] :  $this->self_av_employ_files_cb = '');
+        (isset($this->lo_oved_em_files_cb) ? $this->lo_oved_em_files_cb = $xcx['lo_oved_em_files_cb'] :  $this->lo_oved_em_files_cb = '');
+        (isset($this->self_em_salary_files_cb) ? $this->self_em_salary_files_cb = $xcx['self_em_salary_files_cb'] :  $this->self_em_salary_files_cb = '');
+        (isset($this->self_em_employ_files_cb) ? $this->self_em_employ_files_cb = $xcx['self_em_employ_files_cb'] :  $this->self_em_employ_files_cb = '');
+        (isset($this->lo_oved_zug_files_cb) ? $this->lo_oved_zug_files_cb = $xcx['lo_oved_zug_files_cb'] :  $this->lo_oved_zug_files_cb = '');
+        (isset($this->self_zug_salary_files_cb) ? $this->self_zug_salary_files_cb = $xcx['self_zug_salary_files_cb'] :  $this->self_zug_salary_files_cb = '');
+        (isset($this->self_zug_employ_files_cb) ? $this->self_zug_employ_files_cb = $xcx['self_zug_employ_files_cb'] :  $this->self_zug_employ_files_cb = '');
+        (isset($this->self_children_files_cb) ? $this->self_children_files_cb = $xcx['self_children_files_cb'] :  $this->self_children_files_cb = '');
+        (isset($this->self_soldier_files_cb) ? $this->self_soldier_files_cb = $xcx['self_soldier_files_cb'] :  $this->self_soldier_files_cb = '');
+        (isset($this->self_student_files_cb) ? $this->self_student_files_cb = $xcx['self_student_files_cb'] :  $this->self_student_files_cb = '');
+        (isset($this->social_harig_file_cb) ? $this->social_harig_file_cb = $xcx['social_harig_file_cb'] :  $this->social_harig_file_cb = '');
+        (isset($this->medical_harig_file_cb) ? $this->medical_harig_file_cb = $xcx['medical_harig_file_cb'] :  $this->medical_harig_file_cb = '');
+        (isset($this->family_harig_file_cb) ? $this->family_harig_file_cb = $xcx['family_harig_file_cb'] :  $this->family_harig_file_cb = '');
+        // $this->tzfile_cb = $xcx['tzfile_cb']; 
+        // $this->isalonefile_cb = $xcx['isalonefile_cb'];
+        // $this->islochemfile_cb = $xcx['islochemfile_cb'];
+        // $this->is_army_ptor_file_cb = $xcx['is_army_ptor_file_cb'];
+        // $this->is_miluim_file_cb = $xcx['is_miluim_file_cb'];
+        // $this->lo_oved_files_cb = $xcx['lo_oved_files_cb'];
+        // $this->self_salary_files_cb = $xcx['self_salary_files_cb'];
+        // $this->self_employ_files_cb = $xcx['self_employ_files_cb'];
+        // $this->mezonot_files_cb = $xcx['mezonot_files_cb'];
+        // $this->mezonot_height_files_cb = $xcx['mezonot_height_files_cb'];
+        // $this->is_siua_file_cb = $xcx['is_siua_file_cb'];
+        // $this->lo_oved_av_files_cb = $xcx['lo_oved_av_files_cb'];
+        // $this->self_av_salary_files_cb = $xcx['self_av_salary_files_cb'];
+        // $this->self_av_employ_files_cb = $xcx['self_av_employ_files_cb'];
+        // $this->lo_oved_em_files_cb = $xcx['lo_oved_em_files_cb'];
+        // $this->self_em_salary_files_cb = $xcx['self_em_salary_files_cb'];
+        // $this->self_em_employ_files_cb = $xcx['self_em_employ_files_cb'];
+        // $this->lo_oved_zug_files_cb = $xcx['lo_oved_zug_files_cb'];
+        // $this->self_zug_salary_files_cb = $xcx['self_zug_salary_files_cb'];
+        // $this->self_zug_employ_files_cb = $xcx['self_zug_employ_files_cb'];
+        // $this->self_children_files_cb = $xcx['self_children_files_cb'];
+        // $this->self_soldier_files_cb = $xcx['self_soldier_files_cb'];
+        // $this->self_student_files_cb = $xcx['self_student_files_cb'];
+        // $this->social_harig_file_cb = $xcx['social_harig_file_cb'];
+        // $this->medical_harig_file_cb = $xcx['medical_harig_file_cb'];
+        // $this->family_harig_file_cb = $xcx['family_harig_file_cb'];
+
         };
         
     }
 
 
     public function new_line($tz, $year){
-                    // query to insert record
+        // query to insert record
+        if($tz){
+            $created = time();
+            $query = "INSERT INTO " . $this->table_name . " (tz, year,created) VALUES (?, ?, ?)";
 
-                    $created = time();
-                    $query = "INSERT INTO " . $this->table_name . " (tz, year,created) VALUES (?, ?, ?)";
-        
-                    // prepare query
-                    $stmt = $this->conn->prepare($query);
-                    
-        
-                    // bind values
-                    $stmt->bindParam(1, $tz);
-                    $stmt->bindParam(2, $year);
-                    $stmt->bindParam(3, $created);
+            // prepare query
+            $stmt = $this->conn->prepare($query);
+            
 
+            // bind values
+            $stmt->bindParam(1, $tz);
+            $stmt->bindParam(2, $year);
+            $stmt->bindParam(3, $created);
+
+        
+            // var_dump($stmt);
+            // execute query
+            if($stmt->execute()){
+                return true;
                 
-                    // var_dump($stmt);
-                    // execute query
-                    if($stmt->execute()){
-                        return true;
-                      
-                    }
-                    
-                    return false;
+            }
+        
+        return false;
+        }
     }
     // read products
     public function read(){
@@ -387,58 +404,30 @@ class Form{
         // if(!$submitted){
         //     $submitted == 0;
         // }
-        $query = "UPDATE form SET datas=?, submitted=? WHERE tz = ? AND year = ?";
+        $query = "UPDATE form SET datas=?, submitted=?, date_submitted=? WHERE tz = ? AND year = ?";
         $stmt = $this->conn->prepare($query);
+    
+    
+        $stmt->execute([$this->datas, $this->submitted,  $this->date_submitted, $this->tz, $this->year]);
         
-        // $stmt->bindParam(1, $this->datas);
-        // $stmt->bindParam(2, $this->submitted);
-        // $stmt->bindParam(2, $this->lname']; 
-        // $stmt->bindParam(2, $this->fname']; 
-        // $stmt->bindParam(2, $this->birth_country']; 
-        // $stmt->bindParam(2, $this->gender'];
-        // $stmt->bindParam(2, $this->city']; 
-        // $stmt->bindParam(2, $this->cellular'];
-        // $stmt->bindParam(2, $this->email'];
-        // $stmt->bindParam(2, $this->family_state'];
-        // $stmt->bindParam(2, $this->isalone']; 
-        // $stmt->bindParam(2, $this->study_field']; 
-        // $stmt->bindParam(2, $this->asked_schol']; 
-        // $stmt->bindParam(2, $this->is_army'];
-        // $stmt->bindParam(2, $this->length_army']; 
-        // $stmt->bindParam(2, $this->is_lochem'];
-        // $stmt->bindParam(2, $this->is_army_ptor']; 
-        // $stmt->bindParam(2, $this->is_miluim']; 
-        // $stmt->bindParam(2, $this->mimun_nosaf']; 
-        // $stmt->bindParam(2, $this->taasukati_state']; 
-        // $stmt->bindParam(2, $this->self_salary_avg']; 
-        // $stmt->bindParam(2, $this->self_employ_avg']; 
-        // $stmt->bindParam(2, $this->mezonot_state']; 
-        // $stmt->bindParam(2, $this->mezonot_height'];
-        // $stmt->bindParam(2, $this->is_siua']; 
-        // $stmt->bindParam(2, $this->taasukati_av_state'];
-        // $stmt->bindParam(2, $this->self_av_salary_avg;']; 
-        // $stmt->bindParam(2, $this->self_av_employ_avg']; 
-        // $stmt->bindParam(2, $this->taasukati_em_state']; 
-        // $stmt->bindParam(2, $this->self_em_salary_avg'];
-        // $stmt->bindParam(2, $this->self_em_employ_avg']; 
-        // $stmt->bindParam(2, $this->taasukati_zug_state']; 
-        // $stmt->bindParam(2, $this->self_zug_salary_avg']; 
-        // $stmt->bindParam(2, $this->self_zug_employ_avg']; 
-        // $stmt->bindParam(2, $this->self_children']; 
-        // $stmt->bindParam(2, $this->self_soldier'];
-        // $stmt->bindParam(2, $this->self_student']; 
-        // $stmt->bindParam(2, $this->social_harig'];
-        // $stmt->bindParam(2, $this->medical_harig'];
-        // $stmt->bindParam(2, $this->family_harig']; 
-        // $stmt->bindParam(3, $this->tz);
-        // $stmt->bindParam(4, $this->year);
-        
-        
-        // $stmt->bindParam(9, $this->email);
-        echo '$this->submitted '.$this->submitted .'cc';
-        $stmt->execute([$this->datas, $this->submitted, $this->tz, $this->year]);
-        
+        if($stmt->rowCount() > 0){
+            echo '
+                <div class="row">
+                <div class="col-xs-6 col-xs-pull-3"> 
+                <div class="alert alert-success datasaved animated fadeOut" id="datasaved" role="alert"><h4>המידע נשמר בהצלחה</h4><a class="closex" style=" float: left;
+                border: 2px solid #fff;
+                width: 24px;
+                height: 24px;
+                text-align: center;
+                border-radius: 50%;
+                padding: 0px;
+                color: #fff;
+                margin: 0;">x</a></div>
+                </div>
+                </div>
+                ';
 
+        }
       
     }
    
@@ -695,5 +684,29 @@ class Form{
 }
 
 
+// lo-oved-taasukati_state, lo_oved_files_cont, lo_oved_files
+// public function file_loader($cont_class, $cont_id, $file_cont_id){
+//     echo'<div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden starthidden lo-oved-taasukati_state" id="lo_oved_files_cont">
+//     <div class="custom-file" id="lo_oved_files">
+//         <label class="custom-file-label" for="lo_oved_files">נא לצרף אישור מעמד לא עובד מביטוח לאומי. <span class="red"> *</span></label>
 
-?>
+//         <ul class="file-list">';
+//           if($Form->lo_oved_files != '' || $Form->lo_oved_files != NULL){
+// $thefile = json_decode($Form->lo_oved_files);
+// $i = 0;
+// foreach($thefile as $filename){
+// echo '
+// <li>
+// <a href="./uploads/'.$Form->tz.'/'.$filename.'" target="_blank"> '.$filename.' </a>
+// <span class="item-file" id="'.$Form->year.'-'.$Form->tz.'-'.$Form->id.'-'.$i.'" href="'.$Form->id.'/'.$i.'">הסר קובץ</span>
+// </li>';
+// $i++;
+// }
+// }; 
+//    echo'     </ul>
+//         <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_files" name="lo_oved_files" />
+//     </div>
+// </div>'
+// };
+
+// ?>

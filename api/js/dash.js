@@ -345,7 +345,7 @@ function tas(val) {
             default:
             $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
 
-            console.log('this is default');
+            // console.log('this is default');
 //  יש לבחור ערך
            
             
@@ -632,9 +632,9 @@ $(document).ready(function(){
 $(document).ready(function(){
     $('input[type="checkbox"]').on('click', function(){
         if($(this).is(':checked')){
-            console.log('cheked');
+            // console.log('cheked');
         }else{
-            console.log('not cheked');
+            // console.log('not cheked');
         }
     });
 });
@@ -647,11 +647,11 @@ $(document).ready(function(){
         // console.log($(this).attr('data-url'));
         var filePath = $(this).attr('data-url');
         var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
-        console.log(allowedExtensions.exec(filePath)[0]);
+        // console.log(allowedExtensions.exec(filePath)[0]);
         fileExt = allowedExtensions.exec(filePath)[0];
 
         if(fileExt == '.pdf'){
-            console.log('is a pdf file');
+            // console.log('is a pdf file');
             $('#image-container').empty();
             // $('#image-container>div').addClass('elementToFadeOut')
             // setTimeout(function(){
@@ -661,7 +661,7 @@ $(document).ready(function(){
         
 
         }else{
-            console.log('is a image file');
+            // console.log('is a image file');
             $('#image-container').empty();
             // $('#image-container>div').addClass('elementToFadeOut')
             // setTimeout(function(){
@@ -673,46 +673,6 @@ $(document).ready(function(){
     });
 });
 
-
-/**
- * Army
- */
-// $(document).ready(function(){
-//     $('#is_army').on('change', function(){
-//         const armyVal = $('#is_army').val();
-//         console.log(armyVal);
-       
-//         switch (armyVal) {
-//             case 'צבאי':
-//                 $('.is_army_ptor_tr').addClass('hidden');
-//                 document.getElementById('selectid').value == 
-//                 $('.is_army_ptor_tr .yes').prop('selected', false);
-//                 $('.is_army_ptor_tr .no').prop('selected', true);
-                
-
-//                 break;
-
-//             case 'לאומי':
-//                 $('.is_army_ptor_tr').addClass('hidden');
-//                 $('.is_army_ptor_tr .yes').prop('selected', false);
-//                 $('.is_army_ptor_tr .no').prop('selected', true);
-
-//                 break;
-
-//             case 'ללא':
-//                 $('.is_army_ptor_tr').removeClass('hidden');
-
-
-//                 break;
-
-//             default:
-            
-//                 break;
-//         }
-//      });
-
-//      $('#is_army').trigger('change');
-// });
 
 
 $(document).ready(function(){
@@ -743,3 +703,65 @@ $(document).ready(function() {
     }
 });
 // /iCheck
+
+
+
+// $('input[type="checkbox"]').toggle(
+//     console.log('a')
+// );
+
+
+// var checkedValues = $('input[type="checkbox"]').click(() => $(this).map( () => {$(this).value;
+// }).get()
+// );
+// console.log(checkedValues);
+
+// $.each('input[type="checkbox"]:checked', function(i){
+//     console.log($(this).attr('name'));
+// });
+
+
+var allChecked = [];
+$('input[type="checkbox"]:checked').each(function() {
+    allChecked.push({"name": $(this).attr('name'), "text": $(this).parent().text()});
+}); 
+allChecked.map((checkedItem) => $('#files-denay').append('<li data-id="'+checkedItem.name+'">' + checkedItem.text + '</li>'));
+
+
+// console.log(allChecked);
+
+        // $('#files-denay').append('<li data-id="'+$(this).attr('name')+'">' + $(this).parent().text() + '</li>')
+    
+
+
+$(document).ready(function(){
+    let filesDenay = $('#files-denay');
+    $('input[type="checkbox"]').on('click', function(){
+        if($(this).is(':checked')){
+            filesDenay.append('<li data-id="'+$(this).attr('name')+'">' + $(this).parent().text() + '</li>');
+        }else{
+           $('#files-denay>li[data-id="'+ $(this).attr('name')+'"]').remove();
+        }
+    });   
+    
+//     $('#files-denay-input').val(filesDenay.html());
+//    console.log($('#files-denay-input').val());
+
+
+});
+
+$('input[type="checkbox"]').click(function(){
+   let txt = $(this).parent().text();
+  
+})
+
+$(document).ready(function(){
+    $('#files-denay').on('change', function(){
+        if($('#files-denay').text().empty()){
+            console.log('is empty');
+        }else{
+            console.log('not empty');
+        }
+    })
+
+});
