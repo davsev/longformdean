@@ -1,4 +1,4 @@
-$('#studentForm').parsley();
+//$('#studentForm').parsley();
 
 // close 
 // $('#datasaved').on('click', function () {
@@ -41,11 +41,13 @@ $(document).ready(function () {
             });
         } // End if
     });
+
 });
 
 // $('#explanation').on('click', function(){
 //     $(this).closest('.x_content').slideToggle;
 // })
+
 
 
 

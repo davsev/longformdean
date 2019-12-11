@@ -69,10 +69,16 @@ th {
 }
 
 img.dash-logo {
-    width: 22px;
+    width: 200px;
+	text-align: center;
     margin: 0 10px;
 }
 
+.site_title,
+.nav_title{
+	    height: 118px;
+		text-align: center;
+}
 .menu_section>ul {
     margin-top: 10px;
     -webkit-padding-start: 0;
@@ -175,7 +181,7 @@ a:focus {
 
 #side-datatable {
     overflow: scroll;
-    height: 100vh;
+    height: 76vh;
 }
 
 .cityname {
@@ -211,4 +217,50 @@ ul#city-result li {
 .sd-submit{
     position: sticky;
     bottom: 10px;
+}
+
+.light-pur{
+    background-color: #cdecff;
+}
+
+.light-yellow{
+    background-color: lightyellow;
+}
+
+.light-green{
+    background-color: #ccfdcc;
+}
+
+.edit-td:focus {
+    border: 1px solid #673AB7;
+    animation: fadeIn 0.5s linear;
+}
+
+@media(max-width: 991px){
+    .nav-md .container.body .right_col,
+    .main_container .top_nav {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+
+
+.img-circle.profile_img {
+    width: 70%;
+    background: #fff;
+    margin-left: 15%;
+    z-index: 1000;
+    position: inherit;
+    margin-top: 0;
+    border: 1px solid rgba(52,73,94,.44);
+    padding: 4px;
+}
+
+.btn-primary{
+    background-color: #673AB7; 
+}
+
+
+.sidebar-footer a{
+    width: 100%;
 }

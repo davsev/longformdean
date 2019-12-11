@@ -64,7 +64,7 @@ p, label, file-list>a{
 }
 
 #main-cont{
-    background-image: url('../images/logo.png');
+   
     background-repeat: no-repeat;
     background-position: 5px 50px; 
 }
@@ -92,6 +92,19 @@ input#submitbtn{
     width: 150px;
 }
 
+.green-btn{
+    background-color: #00b0ba;
+
+}
+
+#disconnect{
+    position: fixed;
+    left: 41px;
+    bottom: 121px;
+    width: 150px;
+    text-align: center;
+    color: #fff;
+}
 .closex {
     float: left;
     border: 2px solid #fff;
@@ -161,4 +174,28 @@ font-family: Arial, Helvetica, sans-serif;
 
 #explanation{
     cursor: pointer;
+}
+
+
+#all-calcs{
+    position: fixed;
+    right: 24px;
+    top: 220px;
+    z-index: 9;
+    width: 10%;
+}
+
+.item-value,
+.item-name{
+background-color: transparent;
+border: 0px;
+color: #fff;
+border-bottom: 1px solid;
+}
+
+.item-value>input{
+    background-color: transparent;
+    border: 0px;
+    color: #fff;
+    width: 30px;
 }

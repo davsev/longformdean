@@ -176,6 +176,8 @@ function is_army() {
             $('#army_ptor').addClass('hidden');
             // $('#is-lochem-file').removeClass('hidden');
             $('#miluim_pail').removeClass('hidden');
+            
+            document.getElementById('isArmyPtor_input').value = 0;
 
             break;
 
@@ -183,6 +185,8 @@ function is_army() {
             $('.army').removeClass('hidden');
             $('#is_lochem').addClass('hidden');
             $('#lo_lochem').prop("checked", true);
+            // document.querySelector('#lo_lochem').checked;
+           
             $('#is-lochem-file').addClass('hidden');
 
             $('#army_ptor').addClass('hidden');
@@ -190,6 +194,10 @@ function is_army() {
 
             $('#miluim_pail').addClass('hidden');
             $('#is_army_ptor_file_cont').addClass('hidden');
+
+            document.getElementById('isLochemTomech_input').value = 0;
+            document.getElementById('isArmyPtor_input').value = 0;
+            document.getElementById('isMiluim_input').value = 0;
             break;
 
         case 'ללא':
@@ -202,6 +210,8 @@ function is_army() {
             $('#miluim_pail').addClass('hidden');
             $('#is-miluim-file').addClass('hidden');
 
+            document.getElementById('isLochemTomech_input').value = 0;
+            document.getElementById('isMiluim_input').value = 0;
 
             break;
 
@@ -280,25 +290,7 @@ function tas(val) {
     $('.taas').change(function () {
       
         $(this).closest('.taasuka').find('input').prop('required', false);
-      
-
-        // $(this).closest('.taasuka').find('input[type=file]').text(lastFile);
-       
-        // if ($(this).val()) {
             val = $(this).val();
-        // };
-
-
-    
-
-        // if(val != '1' || val != '2' ||val != '3' ){
-        //     console.log($(this).closest('.taasuka').find('.starthidden'));
-        //     $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
-        //     $(this).prop('required', true);
-
-
-        // };
-
         switch (val) {
            
             case '0':
@@ -313,7 +305,7 @@ function tas(val) {
                 //בןדק אם יש קבצים ברשימת הקבצים לאותו שדה, במידה ואים מוסיף רקוויירד לשדה הקובץ הקרוב
                 var lastFile =  $(this).closest('.taasuka').find('div.salary').find('.file-list li:last-child a').html();
                 if(!lastFile ? $(this).closest('.taasuka').find('div.salary').find('input[type=file]').prop('required', true) : '');
-                // console.log(val, 'xxx');
+              
 
                 
                 break;
@@ -343,12 +335,7 @@ function tas(val) {
                 if(!lastFile ? $(this).closest('.taasuka').find('div.lo-oved').find('input[type=file]').prop('required', true) : '');                
             break;
             default:
-            $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
-
-            // console.log('this is default');
-//  יש לבחור ערך
-           
-            
+            $(this).closest('.taasuka').find('.starthidden').addClass('hidden'); 
         }
     });
 
@@ -365,7 +352,7 @@ function familyState() {
             $('#is_siua_cont').removeClass('hidden');
             $('#mezonot_state_row_cont').addClass('hidden');
             $('.mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[value=0]').attr('selected', 'selected');
+          
             $(".taasuka-zug").addClass("hidden");
             // $(".taasuka-parents").removeClass("hidden");
             
@@ -380,6 +367,8 @@ function familyState() {
             $("#is_siua_cont").removeClass("hidden");
             $('#taasukati_zug_state').prop('required',false);
             // console.log('ravak');
+            document.getElementById('mezonot_state').value = 0
+            document.getElementById('isMezonot_input').value = 0
         break;
 
         //נשוי  
@@ -387,7 +376,9 @@ function familyState() {
             $('#the-family-state').text('נשוי');
             $('#mezonot_state_row_cont').addClass('hidden');
             $('.mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[value=0]').attr('selected', 'selected');
+            // $('#mezonot_state option[value=0]').attr('selected', 'selected');
+
+
             $(".taasuka-zug").removeClass("hidden");
             $(".taasuka-parents").addClass("hidden");
             $("#is_siua_cont").addClass("hidden");
@@ -400,6 +391,8 @@ function familyState() {
             $("#self_soldier_cont_label").text('האם יש לך ילדים בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך ילד הלומד במוסד להשכלה גבוהה בארץ?');
            
+           document.getElementById('isMezonot_input').value = 0
+           document.getElementById('mezonot_state').value = 0
             // console.log('nasui');
         break;
 
@@ -428,7 +421,7 @@ function familyState() {
 
             $('#mezonot_state_row_cont').addClass('hidden');
             $('.mezonot_height_cont').addClass('hidden');
-            $('#mezonot_state option[value=0]').attr('selected', 'selected');
+            
             $('#is_siua_cont').addClass('hidden');
             $(".taasuka-zug").addClass("hidden");
             $('#taasukati_zug_state').prop('required',false);
@@ -441,6 +434,8 @@ function familyState() {
             $("#self_soldier_cont_label").text('האם יש לך ילדים בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך ילד הלומד במוסד להשכלה גבוהה בארץ?');
             $("#is_siua_cont").addClass("hidden");
+            document.getElementById('mezonot_state').value = 0
+            document.getElementById('isMezonot_input').value = 0
             // console.log('else');
         break;
 
@@ -448,36 +443,20 @@ function familyState() {
 };
 
 function mezonotState() {
-    var mezonotState = $('#mezonot_state');
+    var mezonotStates = document.getElementById('mezonot_state').value;
+console.log(mezonotStates);
 
-
-    switch ($('#mezonot_state').val()) {
+    switch (mezonotStates) {
         //יש לבחור ערך
         case '1':
-
-            const input = document.getElementById('mezonot_files_div');
-            const isLi = input.parentElement.querySelectorAll('li').length;
-
             $('#mezonot_files_div').removeClass('hidden');
             $('.mezonot_height_cont').addClass('hidden');
-        
-            if(isLi == 0){
-                $('#mezonot_files').prop('required', true);
-            }
-            
-            break;
+         break;
 
         case '2':
         case '3':
-            const input2 = document.getElementById('mezonot_height_files_div');
-            const isLi2 = input.parentElement.querySelectorAll('li').length;
             $('#mezonot_files_div').addClass('hidden');
             $('.mezonot_height_cont').removeClass('hidden');
-            $('#mezonot_files').prop('required', false);
-
-            if(isLi2 == 0){
-                $('#mezonot_height_files').prop('required', true);
-            }
             break;
 
             //לא עובד
@@ -613,13 +592,13 @@ function isFileInLi(){
 //     subtree: true
 // })
 
-$(document).ready( function () {
-    $('#datatablecheckbox').DataTable({
-        "language": {   
-            "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Hebrew.json"
-        }
-    });
-} );
+// $(document).ready( function () {
+//     $('#datatablecheckbox').DataTable({
+//         "language": {   
+//             "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Hebrew.json"
+//         }
+//     });
+// } );
 
 
 $(document).ready(function(){
@@ -763,5 +742,60 @@ $(document).ready(function(){
             console.log('not empty');
         }
     })
-
 });
+
+$('#reject_files').val(function(){
+    $('#files-denay').text();
+});
+
+
+const rej_files_observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+        let liLength = mutation.target.getElementsByTagName("li").length;
+        console.log('liLength ', liLength);
+        if (mutation.addedNodes.length) {
+            console.log(mutation.target);
+            document.getElementById('reject_files').innerHTML = mutation.target.innerHTML;
+        }
+        if (mutation.removedNodes.length) {
+            console.log(mutation.target);
+            document.getElementById('reject_files').innerHTML = mutation.target.innerHTML;
+        }
+    });
+});
+
+
+const fileList = document.querySelector('#files-denay');
+rej_files_observer.observe(fileList, {
+    childList: true,
+    subtree: true
+})
+
+
+
+//export table to excel
+
+var approvedTableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+    return function(table, name) {
+      if (!table.nodeType) table = document.getElementById(table)
+      var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+      window.location.href = uri + base64(format(template, ctx))
+    }
+  })()
+
+
+  var sentTableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,'
+      , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+    return function(table, name) {
+      if (!table.nodeType) table = document.getElementById(table)
+      var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+      window.location.href = uri + base64(format(template, ctx))
+    }
+  })()

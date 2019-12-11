@@ -206,7 +206,7 @@ function showReceivedSchol() {
     }
 }
 
-
+console.log('dav');
 function is_army() {
     var isArmy = $('#is_army');
 
@@ -223,6 +223,7 @@ function is_army() {
             $('#army_ptor').addClass('hidden');
             $('#is_army_ptor_file_cont').addClass('hidden');
 
+			$('#is-army-file').removeClass('hidden');
             document.getElementsByName('length_army')[0].required = true;
 
             break;
@@ -244,7 +245,7 @@ function is_army() {
             $('#army_ptor').addClass('hidden');
             $('#is_army_ptor_file_cont').addClass('hidden');
 
-
+			$('#is-army-file').removeClass('hidden');
             document.getElementsByName('length_army')[0].required = true;
 
             break;
@@ -261,6 +262,7 @@ function is_army() {
             $('#miluim_pail').addClass('hidden');
             $('#is-miluim-file').addClass('hidden');
 
+			$('#is-army-file').addClass('hidden');
             document.getElementsByName('length_army')[0].required = false;
 
 
@@ -281,6 +283,7 @@ function is_army() {
             $('#army_ptor').addClass('hidden');
             $('#is_army_ptor_file_cont').addClass('hidden');
 
+			$('#is-army-file').addClass('hidden');
             document.getElementsByName('length_army')[0].required = false;
             break;
     }
@@ -350,11 +353,12 @@ function tasu() {
         var selectId = $(this).attr('id');
 
         // var specialAtt = $('option:selected', this).attr('data-name');
-        // console.log(selectId, 'selectId');
+        //console.log(selectId, 'selectIdx');
+		debugger;
         // console.log('specialAtt -' + selectId);
 
         var selectValue = $(this).val();
-        // console.log(selectValue, 'selectValue');
+        console.log(selectValue, 'selectValue');
         switch (selectValue) {
             case '':
                 // $(this).closest('.taasuka').find('.starthidden').addClass('hidden');
@@ -385,6 +389,8 @@ function tasu() {
                 /**text fields */
                 $('#salary_avg-' + selectId).prop('required', true);
                 $('#employ_avg-' + selectId).prop('required', false);
+                $('#lo-oved-self-' + selectId).prop('required', false);
+
 
                 $('#self_employ_files').prop('required', false);
 
@@ -413,7 +419,8 @@ function tasu() {
                 /**text fields */
                 $('#salary_avg-' + selectId).prop('required', false);
                 $('#employ_avg-' + selectId).prop('required', true);
-
+                $('#lo-oved-self-' + selectId).prop('required', false);
+            
                 $('#self_salary_files').prop('required', false);
 
                 var lastFile = $('.employ-' + selectId).find('.file-list li:last-child a').html();
@@ -436,9 +443,17 @@ function tasu() {
                 /**text fields */
                 $('#salary_avg-' + selectId).prop('required', false);
                 $('#employ_avg-' + selectId).prop('required', false);
+                $('#lo-oved-self-' + selectId).prop('required', true);
 
 
-
+                /*hide lo kitsba input field if ravak and unemployed*/
+                var fs = $('#family_state').val();
+                console.log('fs');
+                debugger;
+                if( fs === 1){
+                    $(".lo-oved-taasukati_state").addClass("hidden");
+                // console.log('#lo-oved-self-' + selectId);
+                }
                 var lastFile = $('.lo-oved-' + selectId).find('.file-list li:last-child a').html();
                 if (!lastFile ? $('.lo-oved-' + selectId).find('input[type=file]').prop('required', true) : '');
 
@@ -527,7 +542,8 @@ function familyState() {
             $('.mezonot_height_cont').addClass('hidden');
             $('#mezonot_state option[value=0]').attr('selected', 'selected');
 
-
+                /*hide lo kitsba input field if ravak and unemployed*/
+            $(".lo-oved-taasukati_state").addClass("hidden");
 
             $(".taasuka-zug").addClass("hidden");
             $(".taasuka-zug-select").addClass("hidden");
@@ -552,6 +568,11 @@ function familyState() {
             $("#self_soldier_cont_label").text('האם יש לך אח בשירות צבאי סדיר?');
             $("#self_student_cont_label").text('האם יש לך אח הלומד במוסד להשכלה גבוהה בארץ?');
             $("#is_siua_cont").removeClass("hidden");
+
+
+
+            
+
 
             // console.log('ravak');
             break;
@@ -751,7 +772,7 @@ function showIsSiua() {
 //שילוב של מצב משפחתי ומקבל סיוע
 function familyandSiua() {
     var select = $("#family_state").val();
-
+        // console.log(select);
     if ($("#yes_siua").is(":checked") && select == 1) {
 
 
@@ -783,7 +804,7 @@ function fileRequired(field, target) {
     
     const inputSelfChildren = document.getElementById('self_children_files_cont');
     const isLiSelfChildren = inputSelfChildren.querySelectorAll('li').length;
-    console.log('isLiSelfChildren', isLiSelfChildren);
+    // console.log('isLiSelfChildren', isLiSelfChildren);
     $('#'+field).on('keyup', function () {
         
         if ($(this).val().length > 0 && $(this).val() != 0){
@@ -810,12 +831,12 @@ function fileRequired(field, target) {
  */
 function isFileInLi() {
     var allInputs = document.querySelectorAll('.reqOnLoad');
-    console.log('allInputs ', allInputs[0]);
+    // console.log('allInputs ', allInputs[0]);
     var nameArray = new Array();
     // var nameArray = allInputs.map(InputName =>
     //     nameArray.push(InputName)
     // )
-    console.log(nameArray);
+    // console.log(nameArray);
     
     // $.each(allInputs, function( Input ){
     //     console.log('Input ', Input);
@@ -862,3 +883,4 @@ observer.observe(fileList, {
     childList: true,
     subtree: true
 })
+

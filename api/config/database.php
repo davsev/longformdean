@@ -3,9 +3,9 @@ class Database{
  
     // specify your own database credentials
     private $host = "localhost";
-    private $db_name = "achva_dean";
-    private $username = "root";
-    private $password = "";
+    private $db_name = "melagot_dean";
+    private $username = "achvaforms";
+    private $password = "achvauserforms";
     public $conn;
  
     function __construt(){

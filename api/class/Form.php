@@ -40,12 +40,17 @@ class Form{
     public $is_army_ptor_file;
     public $is_miluim;
     public $is_miluim_file;
+	public $is_army_file;
     public $mimun_nosaf ;
     public $is_siua ;
     public $family_state;
     public $taasukati_state;
     public $self_salary_avg;
     public $self_employ_avg;
+    public $lo_oved_self_avg;
+    public $self_av_lo_oved_avg;
+    public $self_em_lo_oved_avg;
+    public $self_zug_lo_oved_avg;
     public $self_employ_files;
     public $mezonot_state;
     public $mezonot_height;
@@ -91,7 +96,10 @@ class Form{
     
   // constructor with $db as database connection
     public function __construct($db, $tz, $year){
+
         $this->conn = $db;
+
+        // $this->login_idm_session();
 
         $query = "SELECT * FROM " . $this->table_name ." WHERE `tz`=?  AND  `year`=?";
         
@@ -113,6 +121,7 @@ class Form{
         $this->lo_oved_files = $row['lo_oved_files'];
         $this->is_army_ptor_file = $row['is_army_ptor_file'];
         $this->is_miluim_file = $row['is_miluim_file'];
+		$this->is_army_file = $row['is_army_file'];
         $this->self_salary_files = $row['self_salary_files'];
         $this->self_employ_files = $row['self_employ_files'];
         $this->mezonot_files = $row['mezonot_files'];
@@ -163,6 +172,16 @@ class Form{
         $this->taasukati_state = $xcx['taasukati_state']; 
         $this->self_salary_avg = $xcx['self_salary_avg']; 
         $this->self_employ_avg = $xcx['self_employ_avg']; 
+        // $this->lo_oved_self_avg = $xcx['lo_oved_self_avg']; 
+        // $this->self_av_lo_oved_avg = $xcx['self_av_lo_oved_avg']; 
+        // $this->self_em_lo_oved_avg = $xcx['self_em_lo_oved_avg']; 
+        // $this->self_zug_lo_oved_avg = $xcx['self_zug_lo_oved_avg']; 
+
+        (isset($this->lo_oved_self_avg) ? $this->lo_oved_self_avg = $xcx['lo_oved_self_avg'] :  $this->lo_oved_self_avg = '0');
+        (isset($this->self_av_lo_oved_avg) ? $this->self_av_lo_oved_avg = $xcx['self_av_lo_oved_avg'] :  $this->self_av_lo_oved_avg = '0');
+        (isset($this->self_em_lo_oved_avg) ? $this->self_em_lo_oved_avg = $xcx['self_em_lo_oved_avg'] :  $this->self_em_lo_oved_avg = '0');
+        (isset($this->self_zug_lo_oved_avg) ? $this->self_zug_lo_oved_avg = $xcx['self_zug_lo_oved_avg'] :  $this->self_zug_lo_oved_avg = '0');
+
         $this->mezonot_state = $xcx['mezonot_state']; 
         $this->mezonot_height = $xcx['mezonot_height'];
         $this->is_siua = $xcx['is_siua']; 
@@ -182,7 +201,8 @@ class Form{
         $this->medical_harig = $xcx['medical_harig'];
         $this->family_harig = $xcx['family_harig']; 
         $this->explanation = $xcx['explanation']; 
-        $this->reject_exp = $xcx['reject_exp']; 
+        (isset($this->reject_exp) ? $this->reject_exp = $xcx['reject_exp'] :  $this->reject_exp = '');
+
         //checkboxes
         (isset($this->tzfile_cb) ? $this->tzfile_cb = $xcx['tzfile_cb'] :  $this->tzfile_cb = '');
         (isset($this->isalonefile_cb) ? $this->isalonefile_cb = $xcx['isalonefile_cb'] :  $this->isalonefile_cb = '');
@@ -210,36 +230,15 @@ class Form{
         (isset($this->social_harig_file_cb) ? $this->social_harig_file_cb = $xcx['social_harig_file_cb'] :  $this->social_harig_file_cb = '');
         (isset($this->medical_harig_file_cb) ? $this->medical_harig_file_cb = $xcx['medical_harig_file_cb'] :  $this->medical_harig_file_cb = '');
         (isset($this->family_harig_file_cb) ? $this->family_harig_file_cb = $xcx['family_harig_file_cb'] :  $this->family_harig_file_cb = '');
-        // $this->tzfile_cb = $xcx['tzfile_cb']; 
-        // $this->isalonefile_cb = $xcx['isalonefile_cb'];
-        // $this->islochemfile_cb = $xcx['islochemfile_cb'];
-        // $this->is_army_ptor_file_cb = $xcx['is_army_ptor_file_cb'];
-        // $this->is_miluim_file_cb = $xcx['is_miluim_file_cb'];
-        // $this->lo_oved_files_cb = $xcx['lo_oved_files_cb'];
-        // $this->self_salary_files_cb = $xcx['self_salary_files_cb'];
-        // $this->self_employ_files_cb = $xcx['self_employ_files_cb'];
-        // $this->mezonot_files_cb = $xcx['mezonot_files_cb'];
-        // $this->mezonot_height_files_cb = $xcx['mezonot_height_files_cb'];
-        // $this->is_siua_file_cb = $xcx['is_siua_file_cb'];
-        // $this->lo_oved_av_files_cb = $xcx['lo_oved_av_files_cb'];
-        // $this->self_av_salary_files_cb = $xcx['self_av_salary_files_cb'];
-        // $this->self_av_employ_files_cb = $xcx['self_av_employ_files_cb'];
-        // $this->lo_oved_em_files_cb = $xcx['lo_oved_em_files_cb'];
-        // $this->self_em_salary_files_cb = $xcx['self_em_salary_files_cb'];
-        // $this->self_em_employ_files_cb = $xcx['self_em_employ_files_cb'];
-        // $this->lo_oved_zug_files_cb = $xcx['lo_oved_zug_files_cb'];
-        // $this->self_zug_salary_files_cb = $xcx['self_zug_salary_files_cb'];
-        // $this->self_zug_employ_files_cb = $xcx['self_zug_employ_files_cb'];
-        // $this->self_children_files_cb = $xcx['self_children_files_cb'];
-        // $this->self_soldier_files_cb = $xcx['self_soldier_files_cb'];
-        // $this->self_student_files_cb = $xcx['self_student_files_cb'];
-        // $this->social_harig_file_cb = $xcx['social_harig_file_cb'];
-        // $this->medical_harig_file_cb = $xcx['medical_harig_file_cb'];
-        // $this->family_harig_file_cb = $xcx['family_harig_file_cb'];
 
-        };
+
+
+       
+
         
+        }
     }
+
 
 
     public function new_line($tz, $year){
@@ -428,7 +427,10 @@ class Form{
                 ';
 
         }
-      
+
+        if($stmt->rowCount() > 0 && $this->submitted == 1){
+            $this->send_mail_on_submit();
+        }
     }
    
     public function file_update($files_arr, $fieldname){
@@ -456,6 +458,10 @@ class Form{
             $fieldvalue = $this->is_miluim_file;
             break;
 
+			case 'is_army_file': 
+            $fieldvalue = $this->is_army_file;
+            break;
+			
             case 'lo_oved_files': 
             $fieldvalue = $this->lo_oved_files;
             break;
@@ -608,7 +614,7 @@ class Form{
         foreach($files_array as $v){
             array_push($file_arr, $v);
         }
-        echo $itemPos;
+        // echo $itemPos;
         //print_r($file_arr);
         unset($file_arr[$itemPos]);
 
@@ -623,6 +629,8 @@ class Form{
         $stmt->bindParam(3, $this->year);
 
         $stmt->execute();
+
+        // return $stmt;
     }
 
 
@@ -645,7 +653,7 @@ class Form{
     }
 
     public function is_submitted(){
-        if($this->submitted == 1){
+        if($this->submitted == 1 || $this->submitted == 2 ){
             header('Location: was-submitted.php?id='. $this->id);
         }
     }
@@ -654,6 +662,10 @@ class Form{
     /*This set of get feunctions set the*/
     public function getlname(){
         return $this->lname;
+    }
+    
+    public function getid(){
+        return $this->id;
     }
     
     
@@ -681,32 +693,186 @@ class Form{
     public function getemail(){
         return $this->email;
     }
+
+
+
+public function send_mail_on_submit(){
+    $msg = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+    <head>
+    <!-- If you delete this meta tag, Half Life 3 will never be released. -->
+    <meta name="viewport" content="width=device-width">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ZURBemails</title>
+        
+    <style>
+    @media only screen and (max-width: 600px) {
+      a[class="btn"] {
+        display: block!important;
+        margin-bottom: 10px!important;
+        background-image: none!important;
+        margin-right: 0!important;
+      }
+    
+      div[class="column"] {
+        width: auto!important;
+        float: none!important;
+      }
+    
+      table.social div[class="column"] {
+        width: auto!important;
+      }
+    }
+    </style>
+    </head>
+     
+    <body bgcolor="#FFFFFF" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; height: 100%; width: 100%; background-image: url(\'http://www.achva.ac.il/sites/default/files/achvafiles/achvabg.jpg\')">
+    
+    <!-- HEADER -->
+    <table class="head-wrap" bgcolor="#999999" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+        <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+            <td class="header container" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+                    
+                    <div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+                    <table bgcolor="#999999" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+                        <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"><img src="http://www.achva.ac.il/sites/all/themes/ninesixty/logo.png" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; max-width: 100%;"></td>
+                            <td align="right" style="margin: 0; padding: 0; direction: rtl; font-family:\'HelveticaNeue-Light\',\'Helvetica Neue Light\',\'Helvetica Neue\',Helvetica,Arial,\'Lucida Grande\',sans-serif; line-height: 1.1; margin-bottom: 15px; font-weight: 900; font-size: 30px; text-transform: uppercase; color: #444; padding: 0; margin: 0;"><h3>המכללה האקדמית אחוה</h3></td>
+                        </tr>
+                    </table>
+                    </div>
+                    
+            </td>
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+        </tr>
+    </table><!-- /HEADER -->
+    
+    
+    <!-- BODY -->
+    <table class="body-wrap" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+        <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+            <td class="container" bgcolor="#FFFFFF" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+                 '. time() .'
+                <div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+                <table style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%;" width="100%">
+                    <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                        <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                            <h3 style="margin: 0; padding: 0; direction: rtl; font-family: \'HelveticaNeue-Light\', \'Helvetica Neue Light\', \'Helvetica Neue\', Helvetica, Arial, \'Lucida Grande\', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 500; font-size: 27px;"> '. $this->lname .' '. $this->fname .'</h3>
+                            <p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;"> טופס בקשה למלגת דיקן – מלגה סוציו אקונומית לתואר ראשון
+                            <p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;"> הטופס הוגש בהצלחה</p>
+                            <p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;"> מספר האישור הינו  '. $this->id .'</p>
+                            <p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;"> נעדכן אותך ברגע שיהיו פרטים חדשים. </p>
+                            <p class="lead" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; line-height: 1.6; font-size: 17px;"> דיקן הסטודנטים. </p>
+                            <!-- Callout Panel -->
+    
+                             
+                    
+                            <table class="social" width="100%" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; background-color: #ebebeb; width: 100%;" bgcolor="#ebebeb">
+                                <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                                    <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                                        
+                                        <!-- column 1 -->
+                                        <table align="left" class="column" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 280px; min-width: 279px; float: left;" width="280">
+                                            <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                                                <td style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px;">				
+                                                    
+                                                <h4><b>עקבו אחרינו</b></h4>
+                                                    <p class="" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;"><a href="https://www.facebook.com/achvacampus/" class="soc-btn fb" style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 3px 7px; font-size: 12px; margin-bottom: 10px; text-decoration: none; color: #FFF; font-weight: bold; display: block; text-align: center; background-color: #3B5998;">Facebook</a> 
+                            
+                                                    
+                                                </p></td>
+                                            </tr>
+                                        </table><!-- /column 1 -->	
+                                        
+                                        <!-- column 2 -->
+                                        <table align="left" class="column" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 280px; min-width: 279px; float: left;" width="280">
+                                            <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+                                                <td style="margin: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px;">				
+                                                                                
+                                                    <h4><b>צרו איתנו קשר</b></h4>												
+                    דוא"ל: <strong style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"><a href="emailto:melagot@achva.ac.il" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; color: #2BA6CB;">melagot@achva.ac.il</a></strong></p>
+                    
+                                                </td>
+                                            </tr>
+                                        </table><!-- /column 2 -->
+                                        
+                                        <span class="clear" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; clear: both;"></span>	
+                                        
+                                    </td>
+                                </tr>
+                            </table><!-- /social & contact -->
+                            
+                        </td>
+                    </tr>
+                </table>
+                </div><!-- /content -->
+                                        
+            </td>
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+        </tr>
+    </table><!-- /BODY -->
+    
+    <!-- FOOTER -->
+    <table class="footer-wrap" style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; width: 100%; clear: both;" width="100%">
+        <tr style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;">
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+            <td class="container" style="padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; display: block; max-width: 600px; margin: 0 auto; clear: both;">
+                
+                    <!-- content -->
+                    <div class="content" style="direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif; padding: 15px; max-width: 600px; margin: 0 auto; display: block;">
+                    
+                    </div><!-- /content -->
+                    
+            </td>
+            <td style="margin: 0; padding: 0; direction: rtl; font-family: \'Helvetica Neue\', \'Helvetica\', Helvetica, Arial, sans-serif;"></td>
+        </tr>
+    </table><!-- /FOOTER -->
+    
+    </body>
+    </html>';
+
+    // echo $msg;
+    // $headers = "MIME-Version: 1.0" . "\r\n";
+    // $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    // $headers .= "From: melagot@achva.ac.il" . "\r\n" .
+    // "CC: david_s@achva.ac.il";
+    
+
+    // mail($this->email,"טופס מלגת דיקן הוגש בהצלחה",$msg, $headers);
+   
+// if($this->email) {
+	
+	
+	
+	
+	
+        $mail = new PHPMailer(true);
+        try {
+             $mail->SMTPDebug = 2;
+            //$mail->isSMTP();
+            $mail->Host = '10.1.0.61';
+            $mail->Port = 25;
+            $mail->SMTPAuth = flase;
+            $mail->CharSet = 'UTF-8';
+            $mail -> AddAddress('deanmelagot@gmail.com');
+			$mail -> AddAddress($this->email);
+
+            $mail -> SetFrom('do-not-reply@achva.ac.il', 'טופס מלגת דיקן הוגש בהצלחה');
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = "טופס מלגת דיקן הוגש בהצלחה";
+            $mail->Body = $msg;
+            $mail->send();
+
+        } catch (Exception $e) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        }
+       
+
+    }
+
 }
-
-
-// lo-oved-taasukati_state, lo_oved_files_cont, lo_oved_files
-// public function file_loader($cont_class, $cont_id, $file_cont_id){
-//     echo'<div class="col-md-8 col-md-pull-2 col-sm-12 mb-3 hidden starthidden lo-oved-taasukati_state" id="lo_oved_files_cont">
-//     <div class="custom-file" id="lo_oved_files">
-//         <label class="custom-file-label" for="lo_oved_files">נא לצרף אישור מעמד לא עובד מביטוח לאומי. <span class="red"> *</span></label>
-
-//         <ul class="file-list">';
-//           if($Form->lo_oved_files != '' || $Form->lo_oved_files != NULL){
-// $thefile = json_decode($Form->lo_oved_files);
-// $i = 0;
-// foreach($thefile as $filename){
-// echo '
-// <li>
-// <a href="./uploads/'.$Form->tz.'/'.$filename.'" target="_blank"> '.$filename.' </a>
-// <span class="item-file" id="'.$Form->year.'-'.$Form->tz.'-'.$Form->id.'-'.$i.'" href="'.$Form->id.'/'.$i.'">הסר קובץ</span>
-// </li>';
-// $i++;
-// }
-// }; 
-//    echo'     </ul>
-//         <input type="file" class="custom-file-input alwaysRequired" id="lo_oved_files" name="lo_oved_files" />
-//     </div>
-// </div>'
-// };
-
-// ?>
+?>
